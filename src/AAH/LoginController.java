@@ -59,6 +59,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         password = passwordField.getText();
 
         /*SQL logic here*/
+        
         System.out.println("Login clicked \t Username is: " + username + " password is: " + password);
         
         /*Go to different screen here.*/
