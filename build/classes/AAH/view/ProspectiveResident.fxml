@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.ProspectiveResidentController">
+   <top>
+      <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #72CBDB;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="35.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prospective Resident Application" textAlignment="JUSTIFY">
+               <font>
+                  <Font name="Cambria Math" size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="61.0" prefWidth="600.0" style="-fx-background-color: #55134E;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="10.0" layoutY="6.0" text="Name:" />
+            <TextField id="username" fx:id="usernameField" layoutX="14.0" layoutY="23.0" prefHeight="25.0" prefWidth="171.0" />
+            <Label layoutX="10.0" layoutY="56.0" text="DOB: MM/DD/YY" />
+            <ChoiceBox layoutX="14.0" layoutY="73.0" prefHeight="25.0" prefWidth="46.0" />
+            <ChoiceBox layoutX="68.0" layoutY="73.0" prefHeight="25.0" prefWidth="46.0" />
+            <ChoiceBox layoutX="128.0" layoutY="73.0" prefHeight="25.0" prefWidth="46.0" />
+            <Label layoutX="12.0" layoutY="106.0" text="Gender:" />
+            <CheckBox layoutX="9.0" layoutY="122.0" mnemonicParsing="false" text="Male" />
+            <CheckBox layoutX="62.0" layoutY="121.0" mnemonicParsing="false" text="Female" />
+            <CheckBox layoutX="130.0" layoutY="121.0" mnemonicParsing="false" text="N/A" />
+            <Label layoutX="16.0" layoutY="145.0" text="Monthly Income($):" />
+            <TextField id="username" fx:id="usernameField1" layoutX="14.0" layoutY="162.0" prefHeight="25.0" prefWidth="171.0" />
+            <TextField id="username" fx:id="usernameField2" layoutX="17.0" layoutY="211.0" prefHeight="25.0" prefWidth="171.0" />
+            <Label layoutX="16.0" layoutY="194.0" text="Previous Residence:" />
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FEC343;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="17.0" layoutY="121.0" text="Prefered Move In Date::" />
+            <DatePicker layoutX="13.0" layoutY="138.0" prefHeight="25.0" prefWidth="158.0" />
+            <Button id="registerButton" fx:id="register" layoutX="66.0" layoutY="219.0" mnemonicParsing="false" onAction="#loginHandler" text="Apply!" />
+            <ChoiceBox layoutX="15.0" layoutY="23.0" prefWidth="150.0" />
+            <Label layoutX="14.0" layoutY="6.0" text="Category of Apartment:" />
+            <Label layoutX="14.0" layoutY="60.0" text="Monthly Rent($):" />
+            <TextField id="confirmpassword" fx:id="confirmField1" layoutX="38.0" layoutY="83.0" prefHeight="25.0" prefWidth="42.0" />
+            <TextField id="confirmpassword" fx:id="confirmField2" layoutX="117.0" layoutY="83.0" prefHeight="25.0" prefWidth="44.0" />
+            <Label layoutX="13.0" layoutY="83.0" text="MIN:" />
+            <Label layoutX="89.0" layoutY="83.0" text="MAX:" />
+            <ChoiceBox layoutX="17.0" layoutY="183.0" prefWidth="150.0" />
+            <Label layoutX="17.0" layoutY="166.0" text="Lease Term:" />
+         </children></AnchorPane>
+   </right>
+</BorderPane>

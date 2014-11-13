@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.NewUserRegController">
+   <top>
+      <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #72CBDB;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="69.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New User Registration" textAlignment="JUSTIFY">
+               <font>
+                  <Font name="Cambria Math" size="48.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="61.0" prefWidth="600.0" style="-fx-background-color: #55134E;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="25.0" layoutY="32.0" text="Username:" />
+            <TextField id="username" fx:id="usernameField" layoutX="26.0" layoutY="56.0" />
+            <TextField id="password" fx:id="passwordField" layoutX="26.0" layoutY="117.0" />
+            <Label layoutX="27.0" layoutY="93.0" text="Password:" />
+            <Label layoutX="25.0" layoutY="151.0" text="Confirm Password:" />
+            <TextField id="confirmpassword" fx:id="confirmField" layoutX="26.0" layoutY="178.0" />
+            <Button id="registerButton" fx:id="register" layoutX="74.0" layoutY="211.0" mnemonicParsing="false" onAction="#registerHandler" text="Register" />
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FEC343;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EF7351;" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>
