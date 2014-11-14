@@ -38,25 +38,26 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     }
 
     public void requestMaintenanceHandler(ActionEvent e) throws IOException {
-        System.out.println("requestMaintenance clicked");
+        System.out.println("request maintenance clicked");
         controller.setScreen(this.getRequestMaintenance());
     }
 
     public void paymentInformationHandler(ActionEvent e) throws IOException {
-        System.out.println("paymentInformation clicked");
+        System.out.println("payment information clicked");
         controller.setScreen(this.getPaymentInformation());
     }
 
     public void applicationReviewHandler(ActionEvent e) throws IOException {
-        System.out.println("New user clicked");
+        System.out.println("application review clicked");
+        controller.setScreen(this.getApplicationReview());
     }
 
     public void mainRequestsHandler(ActionEvent e) throws IOException {
-        System.out.println("applicationReview clicked");
+        System.out.println("maintenance request clicked");
     }
 
     public void rentReminderHandler(ActionEvent e) throws IOException {
-        System.out.println("rentReminder clicked");
+        System.out.println("rent reminder clicked");
     }
     /**
      * This is the only function that seems like will need SQL.

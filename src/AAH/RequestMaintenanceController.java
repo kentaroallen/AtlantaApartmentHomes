@@ -80,16 +80,15 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
         posIssues.addAll(Arrays.asList(types));
         ObservableList<String> obListIssues = FXCollections.observableArrayList(posIssues);
 
-        Calendar cal = Calendar.getInstance();
-        String date = cal.get(Calendar.DAY_OF_YEAR) + "/" + Calendar.MONTH + "/" + Calendar.DAY_OF_MONTH;
-        System.out.println(date);
-        datelabel.setText(date);
         Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
-        Date currentTime = localCalendar.getTime();
         int currentDay = localCalendar.get(Calendar.DATE);
         int currentMonth = localCalendar.get(Calendar.MONTH) + 1;
         int currentYear = localCalendar.get(Calendar.YEAR);
-        System.out.println(currentDay + " " + currentMonth + " " + currentYear);
+        String date = currentMonth + "/" + currentDay + "/" + currentYear;
+        System.out.println(date);
+
+        datelabel.setText(date);
+
         issuebox.setItems(obListIssues);
         this.setTitleLabel(this.getLogin());
     }

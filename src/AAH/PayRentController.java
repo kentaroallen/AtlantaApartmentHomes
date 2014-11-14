@@ -10,9 +10,10 @@ import AAH.model.SetControlScreen;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -74,13 +75,14 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
      * Card will need to be populated from SQL here. It will be marked
      */
     public void initialize(URL url, ResourceBundle rb) {
-        Date date = new Date();
-        StringBuilder sb = new StringBuilder();
-        sb.append(date.getMonth());
-        sb.append("/");
-        sb.append(date.getDay());
-        sb.append("/2015");
-        datefield.setText(sb.toString());
+        Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
+        int currentDay = localCalendar.get(Calendar.DATE);
+        int currentMonth = localCalendar.get(Calendar.MONTH) + 1;
+        int currentYear = localCalendar.get(Calendar.YEAR);
+        String date = currentMonth + "/" + currentDay + "/" + currentYear;
+        System.out.println(date);
+        
+        datefield.setText(date);
         
         ArrayList<Integer> posMons = new ArrayList<Integer>();
         for(int i = 1 ;i < 13; i++){
