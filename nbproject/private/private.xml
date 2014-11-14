@@ -4,7 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/AtlantaApartmentHomes.java</file>
-            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ScreenController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/HomepageController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/view/PaymentInformation.fxml</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/view/Login.fxml</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/view/NewUserReg.fxml</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ProspectiveResidentController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/PaymentInformationController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/model/ScreenNameContainer.java</file>
         </group>
     </open-files>
 </project-private>
