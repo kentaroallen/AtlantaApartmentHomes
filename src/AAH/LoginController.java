@@ -63,7 +63,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         System.out.println("Login clicked \t Username is: " + username + " password is: " + password);
         
         /*Go to different screen here.*/
-        
+        controller.setScreen(this.getHomepage());
     }
 
     @Override

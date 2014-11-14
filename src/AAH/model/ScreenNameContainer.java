@@ -17,6 +17,9 @@ public class ScreenNameContainer {
         "Login", //0
         "NewUserReg", //1
         "ProspectiveResident", //2
+        "Homepage",
+        "PayRent",
+        "RequestMaintenance"
     };
 
     public String[] getAll() {
@@ -33,5 +36,17 @@ public class ScreenNameContainer {
 
     public String getProspective() {
         return screenNames[2];
+    }
+
+    public String getHomepage() {
+        return screenNames[3];
+    }
+
+    public String getPayRent() {
+        return screenNames[4];
+    }
+
+    public String getRequestMaintenance() {
+        return screenNames[5];
     }
 }

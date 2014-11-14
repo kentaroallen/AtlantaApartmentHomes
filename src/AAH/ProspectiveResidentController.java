@@ -9,6 +9,7 @@ import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -17,7 +18,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -27,6 +29,7 @@ import javafx.scene.control.TextField;
  * @author Kentaro
  */
 public class ProspectiveResidentController extends ScreenTemplate implements Initializable, SetControlScreen {
+
     ScreenController controller;
     /**
      * Initializes the controller class.
@@ -40,16 +43,28 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
     @FXML
     private TextField passwordField;
     @FXML
-    private ChoiceBox months;
+    private ComboBox months;
     @FXML
-    private ChoiceBox days;
+    private ComboBox days;
     @FXML
-    private ChoiceBox years;
+    private ComboBox years;
+    @FXML
+    private ComboBox aptcategory;
     @FXML
     private TextField monthlyIncomeField;
     @FXML
     private TextField prevResField;
-    
+    @FXML
+    private TextField minRent;
+    @FXML
+    private TextField maxRent;
+    @FXML
+    private DatePicker prefdate;
+    @FXML
+    private ComboBox leaseterm;
+    @FXML
+    private ComboBox genderbox;
+
     @FXML
     /**
      * When the user clicks the "New User?" hyperlink.
@@ -66,28 +81,47 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
      * This will take in the username and password for sql retrieval.
      *
      * @param e the click button event that caused this.
+     * 
+     * These params correspond to inputs from the UI.
+     * @param name the name of the resident
+     * @param month the month field for DOB
+     * @param year  the year field for DOB
+     * @param day the day field for DOB
+     * @param monthlyIncome the monthly income for resident
+     * @param prevResidence string of the previous residence
+     * @param apartmentCategory for example "1BR-1B" 1 bedroom 1 bath
+     * @param minimumRent int 
+     * @param maximumRent int
+     * @param prefMoveInDate This is an array. [0] is year [1] is month [2] is day for the preferred move in date
+     * @param lease this is how long the lease is
+     * @param resGender this is the residents gender
      */
     public void loginHandler(ActionEvent e) throws IOException {
-        String name = usernameField.getText();
-        String month = Integer.valueOf(months.getValue().toString()).toString(); 
-        int year = Integer.valueOf(years.getValue().toString());
-        int day = Integer.valueOf(days.getValue().toString());
-        int monthlyIncome = Integer.valueOf(monthlyIncomeField.getText().toString());
-        String prevResidence = prevResField.getText();
-        
-        
-        
-       // username = usernameField.getText();
-        //password = passwordField.getText();
+
+//        LocalDate date = prefdate.getValue();
+//        String name = usernameField.getText();
+//        String month = months.getValue().toString();
+//        int year = (int) years.getValue();
+//        int day = (int) days.getValue();
+//        int monthlyIncome = Integer.valueOf(monthlyIncomeField.getText());
+//        String prevResidence = prevResField.getText();
+//        String apartmentCategory = aptcategory.getValue().toString();
+//        int minimumRent = Integer.valueOf(minRent.getText());
+//        int maximumRent = Integer.valueOf(maxRent.getText());
+//        String[] prefMoveInDate = new String[3];
+//        prefMoveInDate[0] = date.toString().substring(0, 4);    //YEAR
+//        prefMoveInDate[1] = date.toString().substring(5, 7);     //MONTH
+//        prefMoveInDate[2] = date.toString().substring(8, 10);    //DAY
+//        String lease = leaseterm.getValue().toString();
+//        String resGender = genderbox.getValue().toString();
 
         /*SQL logic here*/
-        System.out.println("Name: " + name + " income: " + monthlyIncome +
-                        " prev residence: " + prevResidence);
-        System.out.println("Months: " + month +
-                           " Days" + day + " Years: " + year);
         
+//        System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " " +
+//               prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
+
         /*Go to different screen here.*/
-        
+        controller.setScreen(this.getLogin());
     }
 
     @Override
@@ -95,30 +129,52 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
      * Placeholder method for correct operation.
      */
     public void initialize(URL url, ResourceBundle rb) {
-        ArrayList<String> posMonths = new ArrayList<>();
-        String[] mos = {"January", "February", "March", "April", "May",
-                        "June", "July", "August", "September", "October", "November", "December"};
-        posMonths.addAll(Arrays.asList(mos));
-        ObservableList<String> oblist = FXCollections.observableArrayList(posMonths);
-        ArrayList<Integer> posDays = new ArrayList<>();
-        for(int i = 0; i < 32; i++){
+        ArrayList<Integer> posMonths = new ArrayList<Integer>();
+        for (int i = 1; i < 13; i++) {
+            posMonths.add(i);
+        }
+
+        ObservableList<Integer> oblist = FXCollections.observableArrayList(posMonths);
+        ArrayList<Integer> posDays = new ArrayList<Integer>();
+        for (int i = 0; i < 32; i++) {
             posDays.add(i);
         }
+
         ObservableList<Integer> obListdays = FXCollections.observableArrayList(posDays);
-        ArrayList<Integer> posYears = new ArrayList<>();
-        for(int i = 1900; i < 2015; i++){
+        ArrayList<Integer> posYears = new ArrayList<Integer>();
+        for (int i = 1900; i < 2015; i++) {
             posYears.add(i);
         }
         ObservableList<Integer> obListyears = FXCollections.observableArrayList(posYears);
+
+        ArrayList<String> posCats = new ArrayList<String>();
+        String[] types = {"1BR-1B", "1BR-2B", "2BR-1B", "2BR-1B"};
+        posCats.addAll(Arrays.asList(types));
+        ObservableList<String> obListcats = FXCollections.observableArrayList(posCats);
+
+        ArrayList<String> posLeaseTerm = new ArrayList<String>();
+        String[] leaseTypes = {"6 months", "1 year", "1.5 years", "2 years"};
+        posLeaseTerm.addAll(Arrays.asList(leaseTypes));
+        ObservableList<String> obListLease = FXCollections.observableArrayList(posLeaseTerm);
+
+        ArrayList<String> posGender = new ArrayList<String>();
+        posGender.add("Male");
+        posGender.add("Female");
+        posGender.add("N/A");
+        ObservableList<String> obListGender = FXCollections.observableArrayList(posGender);
+
+        genderbox.setItems(obListGender);
+        leaseterm.setItems(obListLease);
+        aptcategory.setItems(obListcats);
         years.setItems(obListyears);
         days.setItems(obListdays);
         months.setItems(oblist);
-        this.setTitleLabel(this.getLogin());
+        this.setTitleLabel(this.getNewUserReg());
     }
+
     @Override
-    public void setScreenParent(ScreenController screen){
+    public void setScreenParent(ScreenController screen) {
         controller = screen;
     }
 
 }
-
