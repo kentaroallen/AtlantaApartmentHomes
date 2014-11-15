@@ -5,19 +5,21 @@
  */
 package AAH;
 
-import AAH.model.Apartment;
-import AAH.model.Person;
+import AAH.model.Maintenance;
 import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -41,64 +43,79 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
     /**
      * Initializes the controller class.
      */
-//    @FXML
-//    private TableView tablefield;
-//    @FXML
-//    private TableColumn namecol;
-//
-//    @FXML
-//    private TableColumn dobcol;
-//    @FXML
-//    private TableColumn gendercol;
-//    @FXML
-//    private TableColumn incomecol;
-//    @FXML
-//    private TableColumn aptcol;
-//    @FXML
-//    private TableColumn datecol;
-//    @FXML
-//    private TableColumn leasecol;
-//    @FXML
-//    private TableColumn approvalcol;
-//
-//    @FXML
-//    private TableView availtable;
-//    @FXML
-//    private TableColumn aptnocol;
-//    @FXML
-//    private TableColumn catcol;
-//    @FXML
-//    private TableColumn rentcol;
-//    @FXML
-//    private TableColumn sqftcol;
-//    @FXML
-//    private TableColumn availcol;
-//
-//    public static String[] chosenPerson;
+    @FXML
+    private TableView availtable;
+    @FXML
+    private TableColumn datereqcol;
+    @FXML
+    private TableColumn aptnocol;
+    @FXML
+    private TableColumn issuecol;
 
     @FXML
+    private TableView resolvedtable;
+    @FXML
+    private TableColumn datereqrescol;
+    @FXML
+    private TableColumn aptnorescol;
+    @FXML
+    private TableColumn issuerescol;
+    @FXML
+    private TableColumn daterescol;
+    @FXML
+    private Label currentdate;
+
+    ArrayList<Maintenance> tablePopulatoravail = new ArrayList<Maintenance>();
+    ArrayList<Maintenance> tablePopulatorres = new ArrayList<Maintenance>();
+    Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
+    int currentDay = localCalendar.get(Calendar.DATE);
+    int currentMonth = localCalendar.get(Calendar.MONTH) + 1;
+    int currentYear = localCalendar.get(Calendar.YEAR);
+    String date = currentMonth + "/" + currentDay + "/" + currentYear;
+
     /**
-     * This should save what information you clicked for the next screen.
-     * chosenPerson contains the data from the selectedrow
+     * This takes from the available table and puts things into the resolved
+     * table Chosenperson[] holds the values from the avail table.
      *
      * @param e the click button event that caused this.
      */
-    public void nextHandler(ActionEvent e) throws IOException {
-//        String rowValues = tablefield.getSelectionModel().getSelectedItems().toString();
-//        rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
-//
-//        chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
-//        /*[0]=name,[1]=dob,[2]=gender,[3]=income,[4]=apt type,
-//         [5]=pref move in date,[6]=lease time,[7]=approval*/
-//
-//        for (int i = 0; i < chosenPerson.length; i++) {
-//            System.out.print(chosenPerson[i] + " ");
-//
-//        }
-//        System.out.println();
-//
-//        controller.setScreen(this.getAllotment());
+    public void resolvedHandler(ActionEvent e) throws IOException {
+        String[] chosenPerson;
+        String[] resolvedPerson = new String[4];
+        int removeIndex;
+
+        System.out.println("Resolved handler clicked");
+        String rowValues = availtable.getSelectionModel().getSelectedItems().toString();
+        rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
+
+        chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
+        /*[0] = date of request, [1] = apt no, [2] = issue*/
+
+        for (int i = 0; i < chosenPerson.length; i++) {
+            System.out.print(chosenPerson[i] + " ");
+
+        }
+        removeIndex = availtable.getSelectionModel().getSelectedIndex();
+        tablePopulatoravail.remove(removeIndex);
+        ObservableList<Maintenance> obListavail = FXCollections.observableArrayList(tablePopulatoravail);
+        availtable.setItems(obListavail);
+        System.out.println();
+
+        /*This populates the resolved table*/
+        tablePopulatorres.add(new Maintenance(chosenPerson[0], chosenPerson[1], chosenPerson[2], date));
+        ObservableList<Maintenance> obListres = FXCollections.observableArrayList(tablePopulatorres);
+        resolvedtable.setItems(obListres);
+        resolvedPerson[0] = chosenPerson[0];
+        resolvedPerson[1] = chosenPerson[1];
+        resolvedPerson[2] = chosenPerson[2];
+        resolvedPerson[3] = date;
+        for (int i = 0; i < resolvedPerson.length; i++) {
+            System.out.print(resolvedPerson[i] + " ");
+        }
+        System.out.println();
+
     }
+
     public void homeHandler(ActionEvent e) throws IOException {
         controller.setScreen(this.getHomepage());
         System.out.println("Home button clicked.");
@@ -109,25 +126,33 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
      * This should populate the table with each application needed to review.
      */
     public void initialize(URL url, ResourceBundle rb) {
-//        namecol.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
-//        dobcol.setCellValueFactory(new PropertyValueFactory<Person, String>("dob"));
-//        gendercol.setCellValueFactory(new PropertyValueFactory<Person, String>("gender"));
-//        incomecol.setCellValueFactory(new PropertyValueFactory<Person, String>("income"));
-//        aptcol.setCellValueFactory(new PropertyValueFactory<Person, String>("typeApt"));
-//        datecol.setCellValueFactory(new PropertyValueFactory<Person, String>("prefdate"));
-//        leasecol.setCellValueFactory(new PropertyValueFactory<Person, String>("leaseterm"));
-//        approvalcol.setCellValueFactory(new PropertyValueFactory<Person, String>("approval"));
-//
-//        /*This populates the table.*/
-//        /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
-//        ArrayList<Person> tablePopulator = new ArrayList<Person>();
-//        tablePopulator.add(new Person("Kentaro Allen", "1/18/1993", "Male", "1200", "1BR-1B", "11/25/2014", "1 year", "Approved"));
-//        tablePopulator.add(new Person("Homeless Joe", "2/24/1956", "Male", "40", "1BR-1B", "11/29/2014", "2 year", "Declined"));
-//        tablePopulator.add(new Person("Bro Dude", "1/1/2316", "Male", "4000", "2BR-1B", "12/29/2314", "1 year", "Declined"));
-//        ObservableList<Person> obList = FXCollections.observableArrayList(tablePopulator);
-//        tablefield.setItems(obList);
-//        /*End of populating the table.*/
+        datereqcol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("date"));
+        aptnocol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("apartment"));
+        issuecol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("issue"));
 
+        /*This populates the table.*/
+        /*Date, Apartment Num, Issue*/
+        tablePopulatoravail.add(new Maintenance("01/01/1900", "1321", "Just come now", ""));
+        tablePopulatoravail.add(new Maintenance("10/21/2000", "1511", "Broken Appliances", ""));
+        tablePopulatoravail.add(new Maintenance("05/30/2014", "1634", "Leak", ""));
+        ObservableList<Maintenance> obListavail = FXCollections.observableArrayList(tablePopulatoravail);
+        availtable.setItems(obListavail);
+        /*End of populating the table.*/
+
+        datereqrescol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("date"));
+        aptnorescol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("apartment"));
+        issuerescol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("issue"));
+        daterescol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("resolvedDate"));
+
+        /*This populates the table.*/
+        /*Date, Apartment Num, Issue*/
+        tablePopulatorres.add(new Maintenance("01/01/1900", "1321", "Just come now", "01/02/1900"));
+        tablePopulatorres.add(new Maintenance("10/21/2000", "1511", "Broken Appliances", "12/22/2000"));
+        ObservableList<Maintenance> obListres = FXCollections.observableArrayList(tablePopulatorres);
+        resolvedtable.setItems(obListres);
+        /*End of populating the table.*/
+
+        currentdate.setText(date);
         this.setTitleLabel(this.getLogin());
     }
 

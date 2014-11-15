@@ -4,12 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/AtlantaApartmentHomes.java</file>
-            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/model/Apartment.java</file>
-            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/view/ApplicationReview.fxml</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/HomepageController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/LoginController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/RequestMaintenanceController.java</file>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/AllotmentController.java</file>
-            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/model/Person.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/NewUserRegController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ReminderController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ViewRequestsController.java</file>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ApplicationReviewController.java</file>
-            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/view/Allotment.fxml</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ScreenController.java</file>
         </group>
     </open-files>
 </project-private>

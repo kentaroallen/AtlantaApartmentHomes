@@ -28,23 +28,25 @@
          <children>
             <TableView fx:id="availtable" layoutX="35.0" layoutY="22.0" prefHeight="98.0" prefWidth="436.0">
               <columns>
-                <TableColumn fx:id="aptnocol" prefWidth="108.0" text="Date of Request" />
-                  <TableColumn fx:id="catcol" prefWidth="108.0" text="Apt No" />
-                  <TableColumn fx:id="rentcol" prefWidth="108.0" text="Issue" />
+                <TableColumn fx:id="datereqcol" prefWidth="108.0" text="Date of Request" />
+                  <TableColumn fx:id="aptnocol" prefWidth="108.0" text="Apt No" />
+                  <TableColumn fx:id="issuecol" prefWidth="108.0" text="Issue" />
               </columns>
             </TableView>
-            <Button fx:id="assignbutton" layoutX="496.0" layoutY="117.0" mnemonicParsing="false" onAction="#nextHandler" text="Resolved" />
-            <TableView fx:id="availtable1" layoutX="33.0" layoutY="142.0" prefHeight="109.0" prefWidth="439.0">
+            <Button fx:id="assignbutton" layoutX="497.0" layoutY="172.0" mnemonicParsing="false" onAction="#resolvedHandler" text="Resolved" />
+            <TableView fx:id="resolvedtable" layoutX="33.0" layoutY="142.0" prefHeight="109.0" prefWidth="439.0">
                <columns>
-                  <TableColumn fx:id="aptnocol1" prefWidth="108.0" text="Date of Request" />
-                  <TableColumn fx:id="catcol1" prefWidth="108.0" text="Apt No" />
-                  <TableColumn fx:id="rentcol1" prefWidth="108.0" text="Issue" />
-                  <TableColumn fx:id="sqftcol1" prefWidth="108.0" text="Resolved Date" />
+                  <TableColumn fx:id="datereqrescol" prefWidth="108.0" text="Date of Request" />
+                  <TableColumn fx:id="aptnorescol" prefWidth="108.0" text="Apt No" />
+                  <TableColumn fx:id="issuerescol" prefWidth="108.0" text="Issue" />
+                  <TableColumn fx:id="daterescol" prefWidth="108.0" text="Resolved Date" />
                </columns>
             </TableView>
             <Text layoutX="34.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Requests:" />
             <Text layoutX="34.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Resolved:" />
-            <Button fx:id="homebutton" layoutX="496.0" layoutY="154.0" mnemonicParsing="false" onAction="#homeHandler" prefHeight="25.0" prefWidth="65.0" text="Home" />
+            <Button fx:id="homebutton" layoutX="496.0" layoutY="210.0" mnemonicParsing="false" onAction="#homeHandler" prefHeight="25.0" prefWidth="65.0" text="Home" />
+            <Text layoutX="518.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+            <Label fx:id="currentdate" layoutX="515.0" layoutY="40.0" text="Label" />
          </children>
       </AnchorPane>
    </center>
