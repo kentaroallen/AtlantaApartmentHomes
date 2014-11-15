@@ -31,7 +31,7 @@
             <Label layoutX="27.0" layoutY="93.0" text="Password:" />
             <Label layoutX="25.0" layoutY="151.0" text="Confirm Password:" />
             <Button id="registerButton" fx:id="register" layoutX="74.0" layoutY="211.0" mnemonicParsing="false" onAction="#registerHandler" text="Register" />
-            <PasswordField fx:id="passwordfield" layoutX="26.0" layoutY="117.0" />
+            <PasswordField fx:id="passwordField" layoutX="26.0" layoutY="117.0" />
             <PasswordField fx:id="confirmField" layoutX="26.0" layoutY="177.0" />
          </children>
       </AnchorPane>

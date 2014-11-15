@@ -31,7 +31,7 @@
             <Label layoutX="27.0" layoutY="93.0" text="Password:" />
             <Button fx:id="loginButton" layoutX="70.0" layoutY="152.0" mnemonicParsing="false" onAction="#loginHandler" text="Login" />
             <Hyperlink fx:id="newuser" layoutX="116.0" layoutY="222.0" onAction="#newUserHandler" text="New User?" />
-            <PasswordField fx:id="passwordfield" layoutX="26.0" layoutY="117.0" />
+            <PasswordField fx:id="passwordField" layoutX="26.0" layoutY="117.0" />
          </children>
       </AnchorPane>
    </center>
