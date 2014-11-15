@@ -11,11 +11,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
+ * This main class.
  * @author Kentaro
  */
 public class AtlantaApartmentHomes extends Application {
-
+    public static String aptNameSql = "Harry Potter";
     private ScreenNameContainer snc = new ScreenNameContainer();
     /**
      * 

@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
  * @author Kentaro
  */
 public class LoginController extends ScreenTemplate implements Initializable, SetControlScreen {
+
     ScreenController controller;
     /**
      * Initializes the controller class.
@@ -59,9 +60,8 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         password = passwordField.getText();
 
         /*SQL logic here*/
-        
         System.out.println("Login clicked \t Username is: " + username + " password is: " + password);
-        
+
         /*Go to different screen here.*/
         controller.setScreen(this.getHomepage());
     }
@@ -73,8 +73,9 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
     public void initialize(URL url, ResourceBundle rb) {
         this.setTitleLabel(this.getLogin());
     }
+
     @Override
-    public void setScreenParent(ScreenController screen){
+    public void setScreenParent(ScreenController screen) {
         controller = screen;
     }
 

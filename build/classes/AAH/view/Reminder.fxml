@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.ReminderController">
+   <top>
+      <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #72CBDB;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="198.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reminder" textAlignment="CENTER">
+               <font>
+                  <Font name="Cambria Math" size="48.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="61.0" prefWidth="600.0" style="-fx-background-color: #55134E;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="10.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apartment Number:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="aptnobox" layoutX="13.0" layoutY="49.0" prefHeight="25.0" prefWidth="108.0" />
+            <Label layoutX="13.0" layoutY="113.0" text="Message:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="134.0" text="Your payment is overdue. " />
+            <Label layoutX="13.0" layoutY="151.0" text="Please pay immediately." />
+            <Label layoutX="13.0" layoutY="180.0" text="Management" />
+            <Button fx:id="sendbutton" layoutX="127.0" layoutY="213.0" mnemonicParsing="false" onAction="#sendHandler" text="Send" />
+            <Label fx:id="datelabel" layoutX="107.0" layoutY="6.0" text="Date" />
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FEC343;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EF7351;" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

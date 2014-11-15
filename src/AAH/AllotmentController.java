@@ -6,7 +6,6 @@
 package AAH;
 
 import AAH.model.Apartment;
-import AAH.model.ScreenNameContainer;
 import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
@@ -18,17 +17,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 /**
- * FXML Controller class Everything about the application review is a straight
- * hack.
+ * FXML Controller class This controls the allotment screen after the
+ * application review screen.
  *
  * @author Kentaro
  */
@@ -51,23 +47,31 @@ public class AllotmentController extends ScreenTemplate implements Initializable
     private TableColumn sqftcol;
     @FXML
     private TableColumn availcol;
-    
+    @FXML
+    public static Label applicantname;
+
     public static String[] chosenPerson;
 
     @FXML
+
     /**
-     * This should save what information you clicked for the next screen.
-     * chosenPerson contains the data from the selectedrow
-     *
+     * This retrieves the data values comma seperated value style of the highlighted
+     * row. 
+     *  [0]=name,[1]=dob,[2]=gender,[3]=income,[4]=apt type,
+     *  [5]=pref move in date,[6]=lease time,[7]=approval
+     * 
+     *  seperatedData[] holds these values.
+     * 
+     * SQL specific comments in implementation.
      * @param e the click button event that caused this.
      */
     public void assignHandler(ActionEvent e) throws IOException {
         String rowValues = availtable.getSelectionModel().getSelectedItems().toString();
-        rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
+        /*Removes the [ ] around the string*/
+        rowValues = rowValues.substring(1, rowValues.length() - 1);
+        /*Comma seperated value retrieval*/
+        String[] seperatedData = rowValues.split(",");
 
-        String[] seperatedData = rowValues.split(","); /*Comma seperated value retrieval*/
-        /*[0]=name,[1]=dob,[2]=gender,[3]=income,[4]=apt type,
-         [5]=pref move in date,[6]=lease time,[7]=approval*/
 
         for (int i = 0; i < seperatedData.length; i++) {
             System.out.print(seperatedData[i] + " ");
@@ -75,12 +79,20 @@ public class AllotmentController extends ScreenTemplate implements Initializable
         }
         System.out.println();
 
-        // controller.setScreen(this.getHomepage());
+        /**
+         * Call AtlantaApartmentHomes.aptNameSql (String) to insert the selected
+         * data into the assocated aptNameSql key aptNameSql refers to the Name
+         * of the applicant in the applicant review screen.
+         *
+         *
+         *
+         */
+        controller.setScreen(this.getHomepage());
     }
-        
+
     @Override
     /**
-     * This should populate the table with each application needed to review.
+     * This is where sql data must get preloaded.
      */
     public void initialize(URL url, ResourceBundle rb) {
         aptnocol.setCellValueFactory(new PropertyValueFactory<Apartment, String>("aptno"));
@@ -98,9 +110,6 @@ public class AllotmentController extends ScreenTemplate implements Initializable
         ObservableList<Apartment> obList = FXCollections.observableArrayList(tablePopulator);
         availtable.setItems(obList);
         /*End of populating the table.*/
-
-        
-
 
 //        applicantname.setText(chosenPerson[0]); //ApplicationReviewController.chosenPerson[0]
         this.setTitleLabel(this.getLogin());

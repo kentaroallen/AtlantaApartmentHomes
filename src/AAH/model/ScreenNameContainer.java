@@ -22,7 +22,9 @@ public class ScreenNameContainer {
         "RequestMaintenance",
         "PaymentInformation",
         "ApplicationReview",
-        "Allotment"
+        "Allotment",
+        "ViewRequests",
+        "Reminder"
     };
 
     public String[] getAll() {
@@ -52,13 +54,23 @@ public class ScreenNameContainer {
     public String getRequestMaintenance() {
         return screenNames[5];
     }
+
     public String getPaymentInformation() {
         return screenNames[6];
     }
+
     public String getApplicationReview() {
         return screenNames[7];
     }
-    public String getAllotment(){
+
+    public String getAllotment() {
         return screenNames[8];
+    }
+
+    public String getViewRequests() {
+        return screenNames[9];
+    }
+    public String getReminder(){
+        return screenNames[10];
     }
 }

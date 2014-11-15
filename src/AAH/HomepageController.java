@@ -53,25 +53,23 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     }
 
     public void mainRequestsHandler(ActionEvent e) throws IOException {
+        controller.setScreen(this.getViewRequests());
         System.out.println("maintenance request clicked");
     }
 
     public void rentReminderHandler(ActionEvent e) throws IOException {
+        controller.setScreen(this.getReminder());
         System.out.println("rent reminder clicked");
     }
-    /**
-     * This is the only function that seems like will need SQL.
-     * THIS IS NOT IMPLEMENTED YET.
-     * @param e
-     * @throws IOException 
-     */
+
     public void reportHandler(ActionEvent e) throws IOException {
         String sb = "";
         sb = reportbox.getValue().toString();
         System.out.println(sb);
         System.out.println("Report handler clicked");
-        
+
     }
+
     @Override
     /**
      * Placeholder method for correct operation.
@@ -82,7 +80,7 @@ public class HomepageController extends ScreenTemplate implements Initializable,
         repType.add("ServiceRequestReport");
         repType.add("RentDefaulterReport");
         ObservableList<String> obListReport = FXCollections.observableArrayList(repType);
-        
+
         reportbox.setItems(obListReport);
         this.setTitleLabel(this.getHomepage());
     }
