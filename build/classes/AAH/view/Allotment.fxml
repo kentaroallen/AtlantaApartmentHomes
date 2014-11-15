@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.AllotmentController">
+   <top>
+      <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #72CBDB;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="67.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apartment Availability" textAlignment="CENTER">
+               <font>
+                  <Font name="Cambria Math" size="48.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="61.0" prefWidth="600.0" style="-fx-background-color: #55134E;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="availtable" layoutX="34.0" layoutY="82.0" prefHeight="122.0" prefWidth="533.0">
+              <columns>
+                <TableColumn fx:id="aptnocol" prefWidth="108.0" text="Apt No" />
+                  <TableColumn fx:id="catcol" prefWidth="108.0" text="Category" />
+                  <TableColumn fx:id="rentcol" prefWidth="108.0" text="Monthly Rent" />
+                  <TableColumn fx:id="sqftcol" prefWidth="108.0" text="Sq Ft." />
+                  <TableColumn fx:id="availcol" prefWidth="108.0" text="Avail. Date" />
+              </columns>
+            </TableView>
+            <Button fx:id="assignbutton" layoutX="464.0" layoutY="220.0" mnemonicParsing="false" onAction="#assignHandler" text="Assign Apartment" />
+            <Text layoutX="226.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apartment Availability" underline="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Applicant Name: ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+            <Label fx:id="applicantname" layoutX="112.0" layoutY="14.0" text="Name" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

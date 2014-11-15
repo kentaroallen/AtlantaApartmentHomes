@@ -8,7 +8,7 @@ package AAH.model;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- *
+ * This is created for the javafx tableview so it can properly set and retrieve data.
  * @author Kentaro
  */
 public class Person {

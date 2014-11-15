@@ -80,7 +80,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         int currentMonth = localCalendar.get(Calendar.MONTH) + 1;
         int currentYear = localCalendar.get(Calendar.YEAR);
         String date = currentMonth + "/" + currentDay + "/" + currentYear;
-        System.out.println(date);
+       // System.out.println(date);
         
         datefield.setText(date);
         
