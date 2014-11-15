@@ -1,4 +1,4 @@
-Maintenance requests, rent reminder, and reports are only either partial implementations or incomplete.
+Rent reminder, and reports are only either partial implementations or incomplete.
 
 Kentaro<br>
 Bhavya<br>
