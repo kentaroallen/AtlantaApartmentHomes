@@ -5,14 +5,15 @@
         <group>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/AtlantaApartmentHomes.java</file>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/HomepageController.java</file>
-            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/LoginController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/model/Person.java</file>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/RequestMaintenanceController.java</file>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/AllotmentController.java</file>
-            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/NewUserRegController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/model/Maintenance.java</file>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ReminderController.java</file>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ViewRequestsController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ProspectiveResidentController.java</file>
             <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ApplicationReviewController.java</file>
-            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/ScreenController.java</file>
+            <file>file:/C:/AAH/Atlanta%20Apartment%20Homes/src/AAH/model/ScreenNameContainer.java</file>
         </group>
     </open-files>
 </project-private>

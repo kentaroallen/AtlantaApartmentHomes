@@ -12,7 +12,7 @@
    <top>
       <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #72CBDB;" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="198.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reminder" textAlignment="CENTER">
+            <Text layoutX="145.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent Reminder" textAlignment="CENTER">
                <font>
                   <Font name="Cambria Math" size="48.0" />
                </font>
@@ -32,16 +32,14 @@
                </font>
             </Text>
             <ComboBox fx:id="aptnobox" layoutX="13.0" layoutY="49.0" prefHeight="25.0" prefWidth="108.0" />
-            <Label layoutX="13.0" layoutY="113.0" text="Message:">
+            <Label layoutX="14.0" layoutY="90.0" text="Message:">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="15.0" layoutY="134.0" text="Your payment is overdue. " />
-            <Label layoutX="13.0" layoutY="151.0" text="Please pay immediately." />
-            <Label layoutX="13.0" layoutY="180.0" text="Management" />
-            <Button fx:id="sendbutton" layoutX="127.0" layoutY="213.0" mnemonicParsing="false" onAction="#sendHandler" text="Send" />
+            <Button fx:id="sendbutton" layoutX="149.0" layoutY="222.0" mnemonicParsing="false" onAction="#sendHandler" text="Send" />
             <Label fx:id="datelabel" layoutX="107.0" layoutY="6.0" text="Date" />
+            <TextArea layoutX="17.0" layoutY="107.0" prefHeight="102.0" prefWidth="166.0" />
          </children>
       </AnchorPane>
    </center>

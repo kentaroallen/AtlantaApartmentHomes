@@ -28,11 +28,11 @@
          <children>
             <Label layoutX="25.0" layoutY="32.0" text="Username:" />
             <TextField id="username" fx:id="usernameField" layoutX="26.0" layoutY="56.0" />
-            <TextField id="password" fx:id="passwordField" layoutX="26.0" layoutY="117.0" />
             <Label layoutX="27.0" layoutY="93.0" text="Password:" />
             <Label layoutX="25.0" layoutY="151.0" text="Confirm Password:" />
-            <TextField id="confirmpassword" fx:id="confirmField" layoutX="26.0" layoutY="178.0" />
             <Button id="registerButton" fx:id="register" layoutX="74.0" layoutY="211.0" mnemonicParsing="false" onAction="#registerHandler" text="Register" />
+            <PasswordField fx:id="passwordfield" layoutX="26.0" layoutY="117.0" />
+            <PasswordField fx:id="confirmField" layoutX="26.0" layoutY="177.0" />
          </children>
       </AnchorPane>
    </center>
