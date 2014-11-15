@@ -1,6 +1,6 @@
-This is it.
+Maintenance requests, rent reminder, and reports are only either partial implementations or incomplete.
 
-Kentaro
-Bhavya
-Amier
-Clarence
+Kentaro<br>
+Bhavya<br>
+Amier<br>
+Clarence<br>
