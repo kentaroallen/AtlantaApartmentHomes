@@ -19,7 +19,7 @@ import javafx.scene.layout.StackPane;
  */
 public class ScreenController extends StackPane {
 
-    private final HashMap<String, Node> theScreens = new HashMap<>();
+    private final HashMap<String, Node> theScreens = new HashMap<String, Node>();
 
     public ScreenController() {
         super();
