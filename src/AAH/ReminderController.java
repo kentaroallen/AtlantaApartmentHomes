@@ -5,22 +5,22 @@
  */
 package AAH;
 
-import AAH.model.Apartment;
-import AAH.model.Person;
 import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class Everything about the application review is a straight
@@ -32,6 +32,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class ReminderController extends ScreenTemplate implements Initializable, SetControlScreen {
 
     ScreenController controller;
+    @FXML
+    private Label datelabel;
+    @FXML
+    private ComboBox aptnobox;
+    @FXML
+    private TextArea messagearea;
 
     /**
      * Initializes the controller class.
@@ -45,6 +51,22 @@ public class ReminderController extends ScreenTemplate implements Initializable,
      */
     public void sendHandler(ActionEvent e) throws IOException {
         System.out.println("Things were hit.");
+        String aptnum = "";
+        aptnum = aptnobox.getValue().toString();
+        String outputMessage = "";
+        outputMessage = outputMessage = messagearea.getText().toString();
+        System.out.println("Message to: " + aptnum + "\nContaining: \n" + outputMessage);
+        controller.setScreen(this.getHomepage());
+    }
+
+    /**
+     * This is a cancel button to return to the homepage.
+     *
+     * @param e
+     * @throws IOException
+     */
+    public void cancelHandler(ActionEvent e) throws IOException {
+        System.out.println("Cancel hit");
         controller.setScreen(this.getHomepage());
     }
 
@@ -53,6 +75,19 @@ public class ReminderController extends ScreenTemplate implements Initializable,
      * This should populate the table with each application needed to review.
      */
     public void initialize(URL url, ResourceBundle rb) {
+        ArrayList<String> delinquentApts = new ArrayList<String>();
+        delinquentApts.add("1544");
+        delinquentApts.add("1206");
+        delinquentApts.add("5623");
+        ObservableList<String> obListDelinquents = FXCollections.observableArrayList(delinquentApts);
+        aptnobox.setItems(obListDelinquents);
+
+        Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
+        int currentDay = localCalendar.get(Calendar.DATE);
+        int currentMonth = localCalendar.get(Calendar.MONTH) + 1;
+        int currentYear = localCalendar.get(Calendar.YEAR);
+        String date = currentMonth + "/" + currentDay + "/" + currentYear;
+        datelabel.setText(date);
 
         this.setTitleLabel(this.getLogin());
     }

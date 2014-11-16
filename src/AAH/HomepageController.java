@@ -15,8 +15,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -63,10 +68,21 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     }
 
     public void reportHandler(ActionEvent e) throws IOException {
-        String sb = "";
-        sb = reportbox.getValue().toString();
-        System.out.println(sb);
         System.out.println("Report handler clicked");
+        String selectedReport = reportbox.getValue().toString().toLowerCase();
+        if (selectedReport.contains("leasing")) {
+            /*The real way involves opening a new stage up
+            I will get to that later.
+            */
+
+            controller.setScreen(this.getThreeMonthReport());
+        } else if (selectedReport.contains("service")) {
+            System.out.println("Service request report");
+            controller.setScreen(this.getServiceReport());
+        } else {
+            System.out.println("rent defaulter report");
+            controller.setScreen(this.getDefaulterReport());
+        }
 
     }
 

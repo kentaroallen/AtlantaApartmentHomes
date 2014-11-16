@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.DefaulterReportController">
+   <top>
+      <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #72CBDB;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="140.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent Defaulters" textAlignment="CENTER">
+               <font>
+                  <Font name="Cambria Math" size="48.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="61.0" prefWidth="600.0" style="-fx-background-color: #55134E;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tablefield" layoutY="31.0" prefHeight="197.0" prefWidth="230.0">
+              <columns>
+                <TableColumn fx:id="aptcol" prefWidth="74.0" text="Apartment" />
+                <TableColumn fx:id="paidcol" prefWidth="83.0" text="Extra Paid" />
+                  <TableColumn fx:id="defaultcol" prefWidth="78.0" text="Default By" />
+              </columns>
+            </TableView>
+            <Button fx:id="closebutton" layoutX="178.0" layoutY="233.0" mnemonicParsing="false" onAction="#closeHandler" text="Close" />
+            <ComboBox fx:id="monthchose" layoutX="40.0" layoutY="2.0" onAction="#monthHandler" prefWidth="150.0" />
+            
+         </children>
+      </AnchorPane>
+   </center>
+   <right>
+      <AnchorPane prefHeight="259.0" prefWidth="191.0" style="-fx-background-color: #EF7351;" BorderPane.alignment="CENTER" />
+   </right>
+   <left>
+      <AnchorPane prefHeight="259.0" prefWidth="181.0" style="-fx-background-color: #FEC343;" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>

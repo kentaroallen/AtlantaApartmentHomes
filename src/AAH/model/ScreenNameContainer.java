@@ -24,7 +24,10 @@ public class ScreenNameContainer {
         "ApplicationReview",
         "Allotment",
         "ViewRequests",
-        "Reminder"
+        "Reminder",
+        "ThreeMonthReport",
+        "ServiceReport",
+        "DefaulterReport"
     };
 
     public String[] getAll() {
@@ -72,5 +75,14 @@ public class ScreenNameContainer {
     }
     public String getReminder(){
         return screenNames[10];
+    }
+    public String getThreeMonthReport(){
+        return screenNames[11];
+    }
+    public String getServiceReport(){
+        return screenNames[12];
+    }
+    public String getDefaulterReport(){
+        return screenNames[13];
     }
 }
