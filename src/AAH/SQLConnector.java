@@ -37,6 +37,8 @@ public class SQLConnector {
         return conn;
     }
 
+    //Test comment by Clarence
+
     public static void closeConnection(Connection c) throws SQLException {
 
         conn.close();
