@@ -54,13 +54,23 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
      *
      * @param e the click button event that caused this.
      */
-    public void loginHandler(ActionEvent e) throws IOException {
+    public void loginHandler(ActionEvent e) throws Exception {
         String username;
         String password;
         username = usernameField.getText();
         password = passwordField.getText();
 
         /*SQL logic here*/
+        int errorCode = (LoginObject.validateLogin(username, password)) ? 0 : 1;
+
+        switch (errorCode) {
+
+            case 1:
+                System.out.println("Invalid Login!");
+                break;
+        }
+
+
         System.out.println("Login clicked \t Username is: " + username + " password is: " + password);
 
         /*Go to different screen here.*/

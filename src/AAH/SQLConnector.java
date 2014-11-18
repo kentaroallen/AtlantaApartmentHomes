@@ -1,6 +1,7 @@
 package AAH; /**
  * Created by AmierNaji on 11/13/14.
  */
+import javax.xml.transform.Result;
 import java.sql.*;
 
 public class SQLConnector {
@@ -31,6 +32,16 @@ public class SQLConnector {
         return sqc;
     }
 
+    public static Connection getConnection() throws SQLException{
+
+        if (conn == null) {
+
+            conn = connectToDB();
+        }
+
+        return conn;
+    }
+
     public static Connection connectToDB() throws SQLException {
 
         Connection conn = DriverManager.getConnection(dbLocation , user, pass);
@@ -47,6 +58,12 @@ public class SQLConnector {
 
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(s);
+    }
+
+    public static ResultSet runQuery(String s) throws SQLException {
+
+        Statement stmt = conn.createStatement();
+        return stmt.executeQuery(s);
     }
 
     public static void testQuery() throws SQLException {

@@ -7,7 +7,7 @@ package AAH;
 
 import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -46,7 +46,7 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
      *
      * @param e the click button event that caused this.
      */
-    public void registerHandler(ActionEvent e) throws IOException {
+    public void registerHandler(ActionEvent e) throws Exception {
         String username;
         String password;
         String confirm;
@@ -55,6 +55,18 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         confirm = confirmField.getText();
 
         /*SQL logic here*/
+        int errorCode = (password.equals(confirm)) ? ((RegistrationObject.insertUser(username, password)) ? 0 : 2) : 1;
+
+        switch (errorCode) {
+
+            case 1:
+                System.out.println("Password and Confirm Password Do Not Match!");
+                break;
+            case 2:
+                System.out.println("Database Error!");
+                break;
+        }
+
         
         
         System.out.println("Register clicked \t Username is: " + username 
