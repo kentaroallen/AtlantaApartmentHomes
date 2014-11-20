@@ -1,9 +1,9 @@
 package AAH;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
+import java.sql.ResultSet;
 /**
  * Created by AmierNaji on 11/17/14.
  */
@@ -14,6 +14,39 @@ public class ApplicationObject {
         String out = (insertProspectiveResident("ye", new Date(), "amier", "m", new Date(), 9, 500, "1b", "north avenue", 10, 30, "open")) ? "SUCCESS!" : "FAILURE";
         System.out.println(out);
     }
+
+    public static ArrayList<String> getAvailableApartmentCategories() throws Exception {
+
+        ArrayList<String> out = new ArrayList<String>();
+        SQLConnector sqc = SQLConnector.getInstance();
+        String categoryStatement = "SELECT DISTINCT A.Category FROM APARTMENT A";
+
+        ResultSet rs = sqc.runQuery(categoryStatement);
+
+        while (rs.next()) {
+
+            out.add(rs.getString("Category"));
+        }
+
+        return out;
+    }
+
+    public static ArrayList<String> getAvailableApartmentLeaseTerms() throws Exception {
+
+        ArrayList<String> out = new ArrayList<String>();
+        SQLConnector sqc = SQLConnector.getInstance();
+        String categoryStatement = "SELECT DISTINCT A.Lease_Term FROM APARTMENT A";
+
+        ResultSet rs = sqc.runQuery(categoryStatement);
+
+        while (rs.next()) {
+
+            out.add(rs.getString("Lease_Term"));
+        }
+
+        return out;
+    }
+
 
     public static boolean insertProspectiveResident(String username, Date dob, String name, String gender, Date moveIn, int leaseTerm,  int monthlyIncome, String category, String prevAddress, int minRent, int maxRent, String apartmentStatus) throws Exception {
 

@@ -9,6 +9,7 @@ import AAH.model.Person;
 import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -107,9 +108,27 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
         /*This populates the table.*/
         /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
         ArrayList<Person> tablePopulator = new ArrayList<Person>();
+
+        ApplicationReviewObject aro = new ApplicationReviewObject();
+
+        try {
+
+            for (String[] s : (ArrayList<String[]>) aro.getApplications()) {
+
+                tablePopulator.add(new Person(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]));
+            }
+
+        }
+
+        catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
         tablePopulator.add(new Person("Kentaro Allen", "1/18/1993", "Male", "1200", "1BR-1B", "11/25/2014", "1 year", "Approved"));
         tablePopulator.add(new Person("Homeless Joe", "2/24/1956", "Male", "40", "1BR-1B", "11/29/2014", "2 year", "Declined"));
         tablePopulator.add(new Person("Bro Dude", "1/1/2316", "Male", "4000", "2BR-1B", "12/29/2314", "1 year", "Declined"));
+
         ObservableList<Person> obList = FXCollections.observableArrayList(tablePopulator);
         tablefield.setItems(obList);
         /*End of populating the table.*/

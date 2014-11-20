@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -147,13 +149,53 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         }
         ObservableList<Integer> obListyears = FXCollections.observableArrayList(posYears);
 
+        // HERE, WE GRAB OUR APARTMENT INFO
+        String[] apartmentCat = {};
+        ArrayList<String> ac = null;
+        try {
+            ac = ApplicationObject.getAvailableApartmentCategories();
+            apartmentCat = new String[ac.size()];
+
+            int iterator = 0;
+            for (String s : ac) {
+
+                apartmentCat[iterator++] = s;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String[] apartmentLease = {};
+        ArrayList<String> al = null;
+        try {
+            al = ApplicationObject.getAvailableApartmentLeaseTerms();
+            apartmentLease = new String[al.size()];
+
+            int iterator = 0;
+            for (String s : al) {
+
+                apartmentLease[iterator++] = s;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (apartmentCat.length == 0 || apartmentLease.length == 0) {
+
+            System.out.println("No Apartments Available!");
+        }
+
+        //WEEEEEEEEEEEE
+
         ArrayList<String> posCats = new ArrayList<String>();
-        String[] types = {"1BR-1B", "1BR-2B", "2BR-1B", "2BR-1B"};
+        String[] types = apartmentCat;//{"1BR-1B", "1BR-2B", "2BR-1B", "2BR-1B"};
         posCats.addAll(Arrays.asList(types));
         ObservableList<String> obListcats = FXCollections.observableArrayList(posCats);
 
         ArrayList<String> posLeaseTerm = new ArrayList<String>();
-        String[] leaseTypes = {"6 months", "1 year", "1.5 years", "2 years"};
+        String[] leaseTypes = apartmentLease;//{"6 months", "1 year", "1.5 years", "2 years"};
         posLeaseTerm.addAll(Arrays.asList(leaseTypes));
         ObservableList<String> obListLease = FXCollections.observableArrayList(posLeaseTerm);
 
