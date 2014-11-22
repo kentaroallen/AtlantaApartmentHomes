@@ -65,6 +65,10 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
             case 2:
                 System.out.println("Database Error!");
                 break;
+            case 0:
+                LoginObject.getUser(username);
+                controller.setScreen(this.getProspective());
+                break;
         }
 
         
@@ -74,7 +78,7 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
                + " confirm is: " + confirm);
         
         /*Go to different screen here.*/
-        controller.setScreen(this.getProspective());
+
     }
     @Override
     /**

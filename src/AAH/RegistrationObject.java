@@ -25,7 +25,6 @@ public class RegistrationObject {
             sqc.runUpdate(registerStatement);//run our statement and return if something janky happens
         }
         catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
 

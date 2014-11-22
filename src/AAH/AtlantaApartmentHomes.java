@@ -6,6 +6,7 @@
 package AAH;
 import AAH.model.ScreenNameContainer;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -47,5 +48,6 @@ public class AtlantaApartmentHomes extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 
 }

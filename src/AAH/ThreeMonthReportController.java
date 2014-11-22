@@ -5,7 +5,6 @@
  */
 package AAH;
 
-import AAH.model.Person;
 import AAH.model.Report;
 import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
@@ -56,9 +55,9 @@ public class ThreeMonthReportController extends ScreenTemplate implements Initia
      */
     public void initialize(URL url, ResourceBundle rb) {
 
-        monthcol.setCellValueFactory(new PropertyValueFactory<Person, String>("month"));
-        categorycol.setCellValueFactory(new PropertyValueFactory<Person, String>("category"));
-        aptscol.setCellValueFactory(new PropertyValueFactory<Person, String>("apts"));
+        monthcol.setCellValueFactory(new PropertyValueFactory<AAH.model.Person, String>("month"));
+        categorycol.setCellValueFactory(new PropertyValueFactory<AAH.model.Person, String>("category"));
+        aptscol.setCellValueFactory(new PropertyValueFactory<AAH.model.Person, String>("apts"));
 
 
         /*This populates the table.*/

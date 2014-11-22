@@ -1,5 +1,7 @@
 package AAH;
 
+import org.omg.CORBA.Current;
+
 import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.Date;
@@ -69,6 +71,41 @@ public class LoginObject {
         }
 
         return false;
+    }
+
+    public static CurrentUser getUser(String user) throws Exception{
+
+
+        int userType = userType(user);
+
+        if (userType == 2 || userType == 0) {
+
+            CurrentUser.setUserInfo(user, -1 , userType);
+            return CurrentUser.getInstance();
+        }
+        //we know that this is management, so we go ahead and take care of this case.
+
+        SQLConnector sqc = SQLConnector.getInstance();//get our connector
+        String retrieveUserStatement = "SELECT * FROM RESIDENT WHERE U.Username = '"+user+"';";
+
+        try {
+
+            ResultSet rs = sqc.runQuery(retrieveUserStatement);//run our statement and return if something janky happens
+
+            while (rs.next()) {
+
+                CurrentUser.setUserInfo(user, Integer.parseInt(rs.getString("Apt_Number")), userType);
+
+                //String name, String dob, String gender, String income, String typeApt, String prefdate, String leaseterm, String approval
+            }
+        }
+        catch (Exception e) {
+
+            return null;
+        }
+
+
+        return CurrentUser.getInstance();
     }
 
 }

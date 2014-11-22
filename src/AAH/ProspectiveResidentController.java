@@ -24,6 +24,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import java.util.Date;
 
 /**
  * FXML Controller class
@@ -98,32 +99,43 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
      * @param lease this is how long the lease is
      * @param resGender this is the residents gender
      */
-    public void loginHandler(ActionEvent e) throws IOException {
+    public void loginHandler(ActionEvent e) throws Exception {
 
-//        LocalDate date = prefdate.getValue();
-//        String name = usernameField.getText();
-//        String month = months.getValue().toString();
-//        int year = (int) years.getValue();
-//        int day = (int) days.getValue();
-//        int monthlyIncome = Integer.valueOf(monthlyIncomeField.getText());
-//        String prevResidence = prevResField.getText();
-//        String apartmentCategory = aptcategory.getValue().toString();
-//        int minimumRent = Integer.valueOf(minRent.getText());
-//        int maximumRent = Integer.valueOf(maxRent.getText());
-//        String[] prefMoveInDate = new String[3];
-//        prefMoveInDate[0] = date.toString().substring(0, 4);    //YEAR
-//        prefMoveInDate[1] = date.toString().substring(5, 7);     //MONTH
-//        prefMoveInDate[2] = date.toString().substring(8, 10);    //DAY
-//        String lease = leaseterm.getValue().toString();
-//        String resGender = genderbox.getValue().toString();
+        LocalDate date = prefdate.getValue();
+        String name = usernameField.getText();
+        String month = months.getValue().toString();
+        int year = Integer.parseInt(years.getValue().toString());
+        int day = Integer.parseInt(days.getValue().toString());
+        int monthlyIncome = Integer.valueOf(monthlyIncomeField.getText());
+        String prevResidence = prevResField.getText();
+        String apartmentCategory = aptcategory.getValue().toString();
+        int minimumRent = Integer.valueOf(minRent.getText());
+        int maximumRent = Integer.valueOf(maxRent.getText());
+        String[] prefMoveInDate = new String[3];
+        prefMoveInDate[0] = date.toString().substring(0, 4);    //YEAR
+        prefMoveInDate[1] = date.toString().substring(5, 7);     //MONTH
+        prefMoveInDate[2] = date.toString().substring(8, 10);    //DAY
+        String lease = leaseterm.getValue().toString();
+        String resGender = genderbox.getValue().toString();
 
         /*SQL logic here*/
-        
-//        System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " " +
-//               prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
 
+
+        System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " " +
+               prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
+
+
+        CurrentUser cu = CurrentUser.getInstance();
+        int leaseValue = Integer.parseInt(lease);
+        Date dob = new Date(year, Integer.parseInt(month), day);
+        Date moveInDate = new Date(Integer.parseInt(prefMoveInDate[0]), Integer.parseInt(prefMoveInDate[1]), Integer.parseInt(prefMoveInDate[2]));
+        String gender = (resGender.equals("Male")) ? "M" : (resGender.equals("Female")) ? "F" : "N";
         /*Go to different screen here.*/
+
+        boolean x = ApplicationObject.insertProspectiveResident(cu.getUsername(), dob, name, gender, moveInDate ,leaseValue, monthlyIncome, apartmentCategory, prevResidence, minimumRent, maximumRent, "Accepted" );
+        System.out.println(x);
         controller.setScreen(this.getLogin());
+        //String username, Date dob, String name, String gender, Date moveIn, int leaseTerm,  int monthlyIncome, String category, String prevAddress, int minRent, int maxRent, String apartmentStatus
     }
 
     @Override
@@ -150,37 +162,9 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         ObservableList<Integer> obListyears = FXCollections.observableArrayList(posYears);
 
         // HERE, WE GRAB OUR APARTMENT INFO
-        String[] apartmentCat = {};
-        ArrayList<String> ac = null;
-        try {
-            ac = ApplicationObject.getAvailableApartmentCategories();
-            apartmentCat = new String[ac.size()];
 
-            int iterator = 0;
-            for (String s : ac) {
-
-                apartmentCat[iterator++] = s;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        String[] apartmentLease = {};
-        ArrayList<String> al = null;
-        try {
-            al = ApplicationObject.getAvailableApartmentLeaseTerms();
-            apartmentLease = new String[al.size()];
-
-            int iterator = 0;
-            for (String s : al) {
-
-                apartmentLease[iterator++] = s;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String[] apartmentCat = availableApartmentCategories();
+        String[] apartmentLease = availableApartmentLeaseTerms();
 
         if (apartmentCat.length == 0 || apartmentLease.length == 0) {
 
@@ -212,6 +196,48 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         days.setItems(obListdays);
         months.setItems(oblist);
         this.setTitleLabel(this.getNewUserReg());
+    }
+
+    public String[] availableApartmentCategories() {
+
+        String[] apartmentCat = {};
+        ArrayList<String> ac = null;
+        try {
+            ac = ApplicationObject.getAvailableApartmentCategories();
+            apartmentCat = new String[ac.size()];
+
+            int iterator = 0;
+            for (String s : ac) {
+
+                apartmentCat[iterator++] = s;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return apartmentCat;
+    }
+
+    public String[] availableApartmentLeaseTerms() {
+
+        String[] apartmentLease = {};
+        ArrayList<String> al = null;
+        try {
+            al = ApplicationObject.getAvailableApartmentLeaseTerms();
+            apartmentLease = new String[al.size()];
+
+            int iterator = 0;
+            for (String s : al) {
+
+                apartmentLease[iterator++] = s;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return apartmentLease;
     }
 
     @Override
