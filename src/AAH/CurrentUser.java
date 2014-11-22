@@ -7,30 +7,23 @@ import org.omg.CORBA.Current;
  */
 public class CurrentUser {
 
-    private static CurrentUser curr = null;
-    private String username;
-    private int apartment;
-    private int type;
+    private static boolean set;
+    private static String username;
+    private static int apartment;
+    private static int type;
 
-    public CurrentUser(String username, int apartment, int type) {
 
-        this.apartment = apartment;
-        this.type = type;
-        this.username = username;
+    public static void setUserInfo(String u, int a, int t) {// all relevant user information.
+
+        set = true;
+        username = u;
+        apartment = a;
+        type = t;
+
     }
 
-    public static CurrentUser getInstance() {
+    public static String getUsername() { return username; }
+    public static int getApartmentNumber() { return apartment; }
+    public static int getApartmentType() { return type; }
 
-        return curr;
-    }
-
-    public static void setUserInfo(String username, int apartment, int type) {// all relevant user information.
-
-        curr = new CurrentUser(username, apartment, type);
-    }
-
-    public String getUsername() {
-
-        return username;
-    }
 }

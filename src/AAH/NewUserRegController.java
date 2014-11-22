@@ -55,23 +55,34 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         confirm = confirmField.getText();
 
         /*SQL logic here*/
-        int errorCode = (password.equals(confirm)) ? ((RegistrationObject.insertUser(username, password)) ? 0 : 2) : 1;
 
-        switch (errorCode) {
+        if (!password.equals(confirm)) {
 
-            case 1:
-                System.out.println("Password and Confirm Password Do Not Match!");
-                break;
-            case 2:
-                System.out.println("Database Error!");
-                break;
-            case 0:
-                LoginObject.getUser(username);
-                controller.setScreen(this.getProspective());
-                break;
+            ErrorCode.setCode(2);
+            System.out.println(ErrorCode.errorMessage());
+            return;
         }
 
-        
+        if (NewUserRegSQLObject.userExists(username)) {
+
+            ErrorCode.setCode(1);
+            System.out.println(ErrorCode.errorMessage());
+            return;
+        }
+
+
+        NewUserRegSQLObject.insertUser(username, password);
+
+        if (ErrorCode.getCurrentError() == 0) {
+
+            controller.setScreen(this.getProspective());
+        }
+
+        else {
+
+            System.out.println(ErrorCode.errorMessage());
+
+        }
         
         System.out.println("Register clicked \t Username is: " + username 
                + " password is: " + password
@@ -80,6 +91,8 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         /*Go to different screen here.*/
 
     }
+
+
     @Override
     /**
      * Placeholder method for correct operation.

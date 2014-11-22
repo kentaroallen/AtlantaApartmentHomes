@@ -13,33 +13,12 @@ public class SQLConnector {
     private static final String pass = "Q73RJrl6";
 
 
-
-
-    public static SQLConnector getInstance() throws SQLException {//make sure this follows proper singleton design
-
-            if (sqc == null) {
-
-                sqc = new SQLConnector();
-                System.out.println("hit");
-            }
-
-            if (conn == null) {
-
-                conn = connectToDB();
-                System.out.println("hit2");
-            }
-
-        return sqc;
-    }
-
-    public static Connection getConnection() throws SQLException{
+    public static void getConnection() throws SQLException{//no singleton design. Static class is sufficient
 
         if (conn == null) {
 
             conn = connectToDB();
         }
-
-        return conn;
     }
 
     public static Connection connectToDB() throws SQLException {
@@ -58,12 +37,14 @@ public class SQLConnector {
 
     public static void runUpdate(String s) throws SQLException {
 
+        getConnection();
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(s);
     }
 
     public static ResultSet runQuery(String s) throws SQLException {
 
+        getConnection();
         Statement stmt = conn.createStatement();
         return stmt.executeQuery(s);
     }
@@ -80,6 +61,23 @@ public class SQLConnector {
             System.out.println(x+s+f);
         }
     }
+
+        /*public static SQLConnector getInstance() throws SQLException {
+
+            if (sqc == null) {
+
+                sqc = new SQLConnector();
+                System.out.println("hit");
+            }
+
+            if (conn == null) {
+
+                conn = connectToDB();
+                System.out.println("hit2");
+            }
+
+        return sqc;
+    }*/
 
 
 }

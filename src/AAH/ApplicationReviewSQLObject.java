@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by AmierNaji on 11/19/14.
  */
-public class ApplicationReviewObject {
+public class ApplicationReviewSQLObject {
 
     public static void main(String[] args) throws Exception {
 
@@ -16,12 +16,12 @@ public class ApplicationReviewObject {
 
     public static ArrayList<String[]> getApplications() throws Exception {
 
-        SQLConnector sqc = SQLConnector.getInstance();
+
         ArrayList<String[]> out = new ArrayList<String[]>();
 
         /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
         String applicationReviewStatement = "SELECT PR.Username, PR.DOB, PR.Gender, PR.Monthly_Income, PR.Category, PR.Preferred_Move_In_Date, PR.Preferred_Lease_Term, PR.App_Status FROM PROSPECTIVE_RESIDENT PR;";
-        ResultSet rs = sqc.runQuery(applicationReviewStatement);
+        ResultSet rs = SQLConnector.runQuery(applicationReviewStatement);
 
         String[] temp;
 
@@ -43,13 +43,13 @@ public class ApplicationReviewObject {
 
     public static boolean acceptResident(String user, int apartmentNumber) throws Exception{
 
-        SQLConnector sqc = SQLConnector.getInstance();
+
         String acceptStatement = "UPDATE PROSPECTIVE_RESIDENT SET App_Status = 'Accepted' WHERE Username = '"+user+"';";
         String makeResident = "INSERT INTO RESIDENT VALUES('"+apartmentNumber+"', '"+user+"');";
 
         try {
-            sqc.runUpdate(acceptStatement);
-            sqc.runUpdate(makeResident);
+            SQLConnector.runUpdate(acceptStatement);
+            SQLConnector.runUpdate(makeResident);
 
         }
 
@@ -63,12 +63,11 @@ public class ApplicationReviewObject {
 
     public static boolean rejectResident(String user) throws Exception{
 
-        SQLConnector sqc = SQLConnector.getInstance();
         String rejectStatement = "UPDATE PROSPECTIVE_RESIDENT SET App_Status = 'Rejected' WHERE Username = '"+user+"';";
 
         try {
 
-            sqc.runUpdate(rejectStatement);
+            SQLConnector.runUpdate(rejectStatement);
         }
 
         catch (Exception e) {

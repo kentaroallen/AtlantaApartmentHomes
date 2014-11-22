@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
 import java.util.Date;
 
 /**
@@ -99,7 +99,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
      * @param lease this is how long the lease is
      * @param resGender this is the residents gender
      */
-    public void loginHandler(ActionEvent e) throws Exception {
+    public void loginHandler(ActionEvent e) throws Exception { // change this name to registration handler
 
         LocalDate date = prefdate.getValue();
         String name = usernameField.getText();
@@ -125,18 +125,33 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
                prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
 
 
-        CurrentUser cu = CurrentUser.getInstance();
+        /*
+            if (any of the inputs are null) {
+
+                ErrorCode.setCode(10);
+                System.out.println(ErrorCode.getMessage());
+            }
+
+             */
+
         int leaseValue = Integer.parseInt(lease);
         Date dob = new Date(year, Integer.parseInt(month), day);
         Date moveInDate = new Date(Integer.parseInt(prefMoveInDate[0]), Integer.parseInt(prefMoveInDate[1]), Integer.parseInt(prefMoveInDate[2]));
         String gender = (resGender.equals("Male")) ? "M" : (resGender.equals("Female")) ? "F" : "N";
         /*Go to different screen here.*/
 
-        boolean x = ApplicationObject.insertProspectiveResident(cu.getUsername(), dob, name, gender, moveInDate ,leaseValue, monthlyIncome, apartmentCategory, prevResidence, minimumRent, maximumRent, "Accepted" );
-        System.out.println(x);
-        controller.setScreen(this.getLogin());
+        ProspectiveResidentSQLObject.insertProspectiveResident(CurrentUser.getUsername(), dob, name, gender, moveInDate, leaseValue, monthlyIncome, apartmentCategory, prevResidence, minimumRent, maximumRent, "Accepted");
+
+        if (ErrorCode.getCurrentError() == 0) {
+            controller.setScreen(this.getLogin());
+        }
+        else {
+
+            System.out.println(ErrorCode.errorMessage());
+        }
         //String username, Date dob, String name, String gender, Date moveIn, int leaseTerm,  int monthlyIncome, String category, String prevAddress, int minRent, int maxRent, String apartmentStatus
     }
+
 
     @Override
     /**
@@ -203,7 +218,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         String[] apartmentCat = {};
         ArrayList<String> ac = null;
         try {
-            ac = ApplicationObject.getAvailableApartmentCategories();
+            ac = ProspectiveResidentSQLObject.getAvailableApartmentCategories();
             apartmentCat = new String[ac.size()];
 
             int iterator = 0;
@@ -224,7 +239,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         String[] apartmentLease = {};
         ArrayList<String> al = null;
         try {
-            al = ApplicationObject.getAvailableApartmentLeaseTerms();
+            al = ProspectiveResidentSQLObject.getAvailableApartmentLeaseTerms();
             apartmentLease = new String[al.size()];
 
             int iterator = 0;

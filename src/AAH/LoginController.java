@@ -61,7 +61,15 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         password = passwordField.getText();
 
         /*SQL logic here*/
-        int errorCode = (LoginObject.validateLogin(username, password)) ? 0 : 1;
+        int errorCode = (LoginSQLObject.validateLogin(username, password)) ? 0 : 1;
+        errorHandler(errorCode);
+        System.out.println("Login clicked \t Username is: " + username + " password is: " + password);
+
+        /*Go to different screen here.*/
+
+    }
+
+    public void errorHandler(int errorCode) {
 
         switch (errorCode) {
 
@@ -72,11 +80,6 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
                 controller.setScreen(this.getHomepage());
                 break;
         }
-
-        System.out.println("Login clicked \t Username is: " + username + " password is: " + password);
-
-        /*Go to different screen here.*/
-
     }
 
     @Override

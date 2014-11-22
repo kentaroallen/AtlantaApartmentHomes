@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by AmierNaji on 11/17/14.
  */
-public class LoginObject {
+public class LoginSQLObject {
 
     public static void main(String[] args) throws Exception {
 
@@ -21,10 +21,10 @@ public class LoginObject {
 
     public static int userType(String user) throws Exception {//return 0 if prospective resident, 1 if resident, 2 if management
 
-        SQLConnector sqc = SQLConnector.getInstance();
+
         String typeStatement = "SELECT COUNT(*) FROM USER JOIN MANAGEMENT ON USER.Username = MANAGEMENT.Username";
 
-        ResultSet rs = sqc.runQuery(typeStatement);
+        ResultSet rs = SQLConnector.runQuery(typeStatement);
 
         while (rs.next()) {
 
@@ -36,7 +36,7 @@ public class LoginObject {
 
         String typeStatement2 = "SELECT COUNT(*) FROM USER JOIN RESIDENT ON USER.Username = RESIDENT.Username";
 
-        rs = sqc.runQuery(typeStatement2);
+        rs = SQLConnector.runQuery(typeStatement2);
 
         while (rs.next()) {
 
@@ -51,14 +51,14 @@ public class LoginObject {
 
     public static boolean validateLogin(String user, String pass) throws Exception {
 
-        SQLConnector sqc = SQLConnector.getInstance();//get our connector
+
         String loginStatement = "SELECT * FROM USER U WHERE U.Username = '"+user+"';";
         System.out.println(loginStatement);
         //build our SQL statement
 
         try {
 
-            ResultSet rs = sqc.runQuery(loginStatement);//run our statement and return if something janky happens
+            ResultSet rs = SQLConnector.runQuery(loginStatement);//run our statement and return if something janky happens
 
             while (rs.next()) {
 
@@ -73,7 +73,7 @@ public class LoginObject {
         return false;
     }
 
-    public static CurrentUser getUser(String user) throws Exception{
+    public static void getUser(String user) throws Exception{
 
 
         int userType = userType(user);
@@ -81,16 +81,15 @@ public class LoginObject {
         if (userType == 2 || userType == 0) {
 
             CurrentUser.setUserInfo(user, -1 , userType);
-            return CurrentUser.getInstance();
         }
         //we know that this is management, so we go ahead and take care of this case.
 
-        SQLConnector sqc = SQLConnector.getInstance();//get our connector
+
         String retrieveUserStatement = "SELECT * FROM RESIDENT WHERE U.Username = '"+user+"';";
 
         try {
 
-            ResultSet rs = sqc.runQuery(retrieveUserStatement);//run our statement and return if something janky happens
+            ResultSet rs = SQLConnector.runQuery(retrieveUserStatement);//run our statement and return if something janky happens
 
             while (rs.next()) {
 
@@ -101,11 +100,9 @@ public class LoginObject {
         }
         catch (Exception e) {
 
-            return null;
+
         }
 
-
-        return CurrentUser.getInstance();
     }
 
 }

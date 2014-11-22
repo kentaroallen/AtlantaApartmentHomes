@@ -20,7 +20,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.util.Date;
 
 /**
  * FXML Controller class Everything about the application review is a straight
@@ -133,7 +132,7 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
 
     public static void populateTable(ArrayList<Person> table) throws Exception {
 
-        for (String[] s : ApplicationReviewObject.getApplications()) {
+        for (String[] s : ApplicationReviewSQLObject.getApplications()) {
 
             table.add( new Person(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]) );
         }
