@@ -101,6 +101,10 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
      */
     public void loginHandler(ActionEvent e) throws Exception { // change this name to registration handler
 
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         LocalDate date = prefdate.getValue();
         String name = usernameField.getText();
         String month = months.getValue().toString();

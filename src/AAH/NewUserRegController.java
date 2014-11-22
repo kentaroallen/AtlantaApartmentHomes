@@ -47,6 +47,11 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
      * @param e the click button event that caused this.
      */
     public void registerHandler(ActionEvent e) throws Exception {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         String username;
         String password;
         String confirm;

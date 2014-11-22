@@ -15,15 +15,13 @@ public class NewUserRegSQLObject {
 
     public static boolean userExists(String user) {
 
-        String existenceStatement = "SELECT COUNT(*) FROM USER WHERE Username = '"+user+"';";
+        String existenceStatement = "SELECT * FROM USER WHERE Username = '"+user+"';";
 
         try {
 
             ResultSet rs = SQLConnector.runQuery(existenceStatement);//run our statement and return if something janky happens
-            while(rs.next()) {
+            return (rs.next()) ? true : false;
 
-                return (rs.getInt("COUNT(*)") == 0) ? false : true;
-            }
         }
         catch (Exception e) {
 
@@ -33,7 +31,6 @@ public class NewUserRegSQLObject {
             return true;
         }
 
-        return false;
     }
 
     public static void insertUser(String user, String pass) throws Exception {
@@ -43,7 +40,7 @@ public class NewUserRegSQLObject {
         try {
 
             SQLConnector.runUpdate(registerStatement);//run our statement and return if something janky happens
-            ErrorCode.setCode(0);
+            CurrentUser.setUserInfo(user, -1, 0);// sets default CU values
         }
         catch (Exception e) {
             ErrorCode.setCode(4);

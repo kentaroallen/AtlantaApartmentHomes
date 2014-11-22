@@ -79,7 +79,6 @@ public class ProspectiveResidentSQLObject {
         try {
 
             SQLConnector.runUpdate(applicationStatement);//run our statement and return if something janky happens
-            ErrorCode.setCode(0);
         }
         catch (Exception e) {
 

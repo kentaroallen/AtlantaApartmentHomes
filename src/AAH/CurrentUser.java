@@ -22,8 +22,13 @@ public class CurrentUser {
 
     }
 
+    public void setUserType(int t) {
+
+        type = t;
+    }
+
     public static String getUsername() { return username; }
     public static int getApartmentNumber() { return apartment; }
-    public static int getApartmentType() { return type; }
+    public static int getUserType() { return type; }
 
 }

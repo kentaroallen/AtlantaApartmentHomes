@@ -13,37 +13,45 @@ public class LoginSQLObject {
 
     public static void main(String[] args) throws Exception {
 
-        //String out = (validateLogin("back", "group_34"))? "SUCCESS!" : "FAILURE";
-        //System.out.println(out);
         System.out.println(userType("New001"));
-
     }
 
     public static int userType(String user) throws Exception {//return 0 if prospective resident, 1 if resident, 2 if management
 
 
-        String typeStatement = "SELECT COUNT(*) FROM USER JOIN MANAGEMENT ON USER.Username = MANAGEMENT.Username";
+        String typeStatement = "SELECT * FROM (USER NATURAL JOIN MANAGEMENT) WHERE USER.Username = '"+user+"';";
 
-        ResultSet rs = SQLConnector.runQuery(typeStatement);
+        try {
+            ResultSet rs = SQLConnector.runQuery(typeStatement);
 
-        while (rs.next()) {
-
-            if (rs.getInt("COUNT(*)") == 1) {
+            if (rs.next()) {
 
                 return 2;
             }
         }
+        catch (Exception e) {
 
-        String typeStatement2 = "SELECT COUNT(*) FROM USER JOIN RESIDENT ON USER.Username = RESIDENT.Username";
+            e.printStackTrace();
+            ErrorCode.setCode(18);
+            System.out.println(ErrorCode.errorMessage());
 
-        rs = SQLConnector.runQuery(typeStatement2);
+        }
 
-        while (rs.next()) {
+        String typeStatement2 = "SELECT * FROM (USER NATURAL JOIN RESIDENT) WHERE USER.Username = '"+user+"';";
 
-            if (rs.getInt("COUNT(*)") == 1) {
+        try {
+            ResultSet rs2 = SQLConnector.runQuery(typeStatement2);
+
+            if (rs2.next()) {
 
                 return 1;
             }
+        }
+        catch (Exception e) {
+
+            e.printStackTrace();
+            ErrorCode.setCode(18);
+            System.out.println(ErrorCode.errorMessage());
         }
 
         return 0;
@@ -60,30 +68,47 @@ public class LoginSQLObject {
 
             ResultSet rs = SQLConnector.runQuery(loginStatement);//run our statement and return if something janky happens
 
+            if (!rs.next()) {// if no user exists with this name
+
+                ErrorCode.setCode(16);
+                System.out.println(ErrorCode.errorMessage());
+                return false;
+            }
+
             while (rs.next()) {
 
-                if (rs.getString("Password").equals(pass)) { return true; }
+                if (rs.getString("Password").equals(pass)) {
+
+                    return true;
+                }
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+
+            ErrorCode.setCode(19);
+            System.out.println(ErrorCode.errorMessage());
             return false;
         }
 
         return false;
     }
 
-    public static void getUser(String user) throws Exception{
+    public static void setCurrentUser(String user) throws Exception{
 
 
         int userType = userType(user);
 
+        if (ErrorCode.currentError != 0) { // we've encountered an error, so abandon ship.
+
+            return;
+        }
+
         if (userType == 2 || userType == 0) {
 
             CurrentUser.setUserInfo(user, -1 , userType);
+            return;
         }
         //we know that this is management, so we go ahead and take care of this case.
-
 
         String retrieveUserStatement = "SELECT * FROM RESIDENT WHERE U.Username = '"+user+"';";
 
@@ -100,9 +125,29 @@ public class LoginSQLObject {
         }
         catch (Exception e) {
 
+            ErrorCode.setCode(18);
+            System.out.println(ErrorCode.errorMessage());
 
         }
 
+    }
+
+    public static boolean filledOutApplication(String user) {
+
+        String filledApplicationStatement = "SELECT * FROM PROSPECTIVE_RESIDENT PR WHERE PR.Username =  '"+user+"';";
+
+        try {
+
+            ResultSet rs = SQLConnector.runQuery(filledApplicationStatement);//run our statement and return if something janky happens
+            return (rs.next()) ? true : false;
+
+        }
+        catch (Exception e) {
+
+            ErrorCode.setCode(20);
+            System.out.println(ErrorCode.errorMessage());
+            return true;
+        }
     }
 
 }

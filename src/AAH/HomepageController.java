@@ -38,36 +38,50 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     private ComboBox reportbox;
 
     public void payRentHandler(ActionEvent e) throws IOException {
+
+        if (CurrentUser.getUserType() != 1) { return; }
         System.out.println("pay rent clicked");
         controller.setScreen(this.getPayRent());
     }
 
     public void requestMaintenanceHandler(ActionEvent e) throws IOException {
+
+        if (CurrentUser.getUserType() != 1) { return; }
         System.out.println("request maintenance clicked");
         controller.setScreen(this.getRequestMaintenance());
     }
 
     public void paymentInformationHandler(ActionEvent e) throws IOException {
+
+        if (CurrentUser.getUserType() != 1) { return; }
         System.out.println("payment information clicked");
         controller.setScreen(this.getPaymentInformation());
     }
 
     public void applicationReviewHandler(ActionEvent e) throws IOException {
+
+        if (CurrentUser.getUserType() != 2) { return; }
         System.out.println("application review clicked");
         controller.setScreen(this.getApplicationReview());
     }
 
     public void mainRequestsHandler(ActionEvent e) throws IOException {
+
+        if (CurrentUser.getUserType() != 2) { return; }
         controller.setScreen(this.getViewRequests());
         System.out.println("maintenance request clicked");
     }
 
     public void rentReminderHandler(ActionEvent e) throws IOException {
+
+        if (CurrentUser.getUserType() != 2) { return; }
         controller.setScreen(this.getReminder());
         System.out.println("rent reminder clicked");
     }
 
     public void reportHandler(ActionEvent e) throws IOException {
+
+        if (CurrentUser.getUserType() != 2) { return; }
         System.out.println("Report handler clicked");
         String selectedReport = reportbox.getValue().toString().toLowerCase();
         if (selectedReport.contains("leasing")) {

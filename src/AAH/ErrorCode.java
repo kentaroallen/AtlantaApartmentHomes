@@ -28,8 +28,20 @@ public class ErrorCode {
     10 : Not all Fields Have Values
     11 : SQL error inputting application
     12 : Move In Date not more than 2 months after current date
+    13 :
+    14 :
+    15 :
 
-    Login Errors
+    Login Errors :
+    16 : No Such Username
+    17 : Incorrect Password
+    18 : SQL Error getting User Type
+    19 : SQL Error Validating Password
+    20 : SQL Error Checking if Application is Filled Out
+    21 :
+    22 :
+    23 :
+
 
 
 
@@ -68,6 +80,26 @@ public class ErrorCode {
                 return "Prospective Application Error: Database Error Inserting PR!";
             case 12:
                 return "Prospective Application Error: Invalid Move In Date (Must be after 2 months from today)";
+            case 13:
+                return "-";
+            case 14:
+                return "-";
+            case 15:
+                return "-";
+            case 16:
+                return "Login Error: No Such Username!";
+            case 17:
+                return "Login Error: Incorrect Password!";
+            case 18:
+                return "Login Error: Database Error Getting User Type!";
+            case 19:
+                return "Login Error: Database Error Validating Password!";
+            case 20:
+                return "Login Error: Database Error Checking if Application is Filled Out!";
+            case 21:
+                return "-";
+            case 22:
+                return "-";
         }
 
         return null;
