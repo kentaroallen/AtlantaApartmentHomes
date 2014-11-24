@@ -16,6 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.*;
+import javafx.scene.*;
+import javafx.scene.layout.*;
 import org.omg.CORBA.Current;
 
 /**
@@ -57,6 +60,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
      */
     public void loginHandler(ActionEvent e) throws Exception {
 
+
         /////////////////////
         ErrorCode.setCode(0);
         ////////////////////
@@ -80,7 +84,14 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         if (ErrorCode.currentError == 0) {
 
             System.out.println(CurrentUser.getUserType());
-            controller.setScreen(this.getHomepage());
+
+            if (CurrentUser.getUserType() != 0) {
+                controller.setScreen(this.getHomepage());
+            }
+            else {
+
+                System.out.println("Application Under Review.");
+            }
             return;
         }
         else {

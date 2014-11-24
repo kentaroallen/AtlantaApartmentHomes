@@ -10,6 +10,7 @@ import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
@@ -23,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.util.Date;
 
 /**
  * FXML Controller class Everything about the application review is a straight
@@ -101,6 +103,15 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
         availtable.setItems(obListavail);
         System.out.println();
 
+        //UPDATE CHOSEN PERSON IN THE DATABASE HERE//
+
+
+
+        ViewRequestsSQLObject.resolveRequest(Integer.parseInt(chosenPerson[1]), java.sql.Date.valueOf(chosenPerson[0]), chosenPerson[2]);
+
+
+        ////////////////////////////////////////////
+
         /*This populates the resolved table*/
         tablePopulatorres.add(new Maintenance(chosenPerson[0], chosenPerson[1], chosenPerson[2], date));
         ObservableList<Maintenance> obListres = FXCollections.observableArrayList(tablePopulatorres);
@@ -132,9 +143,16 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
 
         /*This populates the table.*/
         /*Date, Apartment Num, Issue*/
-        tablePopulatoravail.add(new Maintenance("01/01/1900", "1321", "Just come now", ""));
-        tablePopulatoravail.add(new Maintenance("10/21/2000", "1511", "Broken Appliances", ""));
-        tablePopulatoravail.add(new Maintenance("05/30/2014", "1634", "Leak", ""));
+        //tablePopulatoravail.add(new Maintenance("01/01/1900", "1321", "Just come now", ""));
+        //tablePopulatoravail.add(new Maintenance("10/21/2000", "1511", "Broken Appliances", ""));
+        //tablePopulatoravail.add(new Maintenance("05/30/2014", "1634", "Leak", ""));
+
+        for(String[] s : ViewRequestsSQLObject.getUnresolvedRequests()) {
+
+            tablePopulatoravail.add(new Maintenance(s[1], s[0], s[2], ""));
+        }
+
+
         ObservableList<Maintenance> obListavail = FXCollections.observableArrayList(tablePopulatoravail);
         availtable.setItems(obListavail);
         /*End of populating the table.*/
@@ -146,8 +164,14 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
 
         /*This populates the table.*/
         /*Date, Apartment Num, Issue*/
-        tablePopulatorres.add(new Maintenance("01/01/1900", "1321", "Just come now", "01/02/1900"));
-        tablePopulatorres.add(new Maintenance("10/21/2000", "1511", "Broken Appliances", "12/22/2000"));
+        //tablePopulatorres.add(new Maintenance("01/01/1900", "1321", "Just come now", "01/02/1900"));
+        //tablePopulatorres.add(new Maintenance("10/21/2000", "1511", "Broken Appliances", "12/22/2000"));
+
+        for(String[] s : ViewRequestsSQLObject.getResolvedRequests()) {
+
+            tablePopulatorres.add(new Maintenance(s[1], s[0], s[2], ""));
+        }
+
         ObservableList<Maintenance> obListres = FXCollections.observableArrayList(tablePopulatorres);
         resolvedtable.setItems(obListres);
         /*End of populating the table.*/

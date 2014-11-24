@@ -42,6 +42,28 @@ public class ErrorCode {
     22 :
     23 :
 
+    Application Review Errors:
+    24 :
+    25 :
+    26 :
+    27 :
+    28 :
+    29 :
+    30 :
+
+    Apartment Allotment Errors:
+    31 : SQL Error Getting Apartment Values
+    32 :
+    33 :
+    34 :
+    35 :
+    36 :
+    37 :
+
+    View Requests Errors:
+    38 : SQL Error Getting Unresolved Maintenance Requests
+    39 : SQL Error Getting Resolved Maintenance Requests
+    40 : SQL Error Updating a request from Unresolved to Resolved
 
 
 
@@ -99,6 +121,48 @@ public class ErrorCode {
             case 21:
                 return "-";
             case 22:
+                return "-";
+            case 23:
+                return "-";
+            case 24:
+                return "-";
+            case 25:
+                return "-";
+            case 26:
+                return "-";
+            case 27:
+                return "-";
+            case 28:
+                return "-";
+            case 29:
+                return "-";
+            case 30:
+                return "-";
+            case 31:
+                return "Apartment Allotment Error: Database Error Getting Available Apartment Values!";
+            case 32:
+                return "-";
+            case 33:
+                return "-";
+            case 34:
+                return "-";
+            case 35:
+                return "-";
+            case 36:
+                return "-";
+            case 37:
+                return "-";
+            case 38:
+                return "View Maintenance Requests Error: Database Error Getting Unresolved Requests!";
+            case 39:
+                return "View Maintenance Requests Error: Database Error Getting Resolved Requests!";
+            case 40:
+                return "View Maintenance Requests Error: Database Error Updating Unresolved Requests to Resolved!";
+            case 41:
+                return "-";
+            case 42:
+                return "-";
+            case 43:
                 return "-";
         }
 
