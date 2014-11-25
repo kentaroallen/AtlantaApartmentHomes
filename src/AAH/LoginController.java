@@ -71,7 +71,11 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         password = passwordField.getText();
 
         /*SQL logic here*/
-        LoginSQLObject.validateLogin(username, password);
+        if (!LoginSQLObject.validateLogin(username, password)) {//don't log in if we can't.
+
+            return;
+        }
+
         LoginSQLObject.setCurrentUser(username);
 
         if ((CurrentUser.getUserType() == 0) && !LoginSQLObject.filledOutApplication(username)) { // if our user is prospective and hasn't completed their prospective resident application, we will make them finish it before loggin in to the good stuff

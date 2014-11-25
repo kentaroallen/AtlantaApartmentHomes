@@ -79,6 +79,12 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         controller.setScreen(this.getNewUserReg());
     }
 
+
+    public boolean allSet() {
+
+        return (!( (prefdate.getValue() == null) || (usernameField.getText() == null) || (usernameField.getText() == "") ));
+    }
+
     @FXML
     /**
      * This will take in the username and password for sql retrieval.
@@ -104,6 +110,13 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         /////////////////////
         ErrorCode.setCode(0);
         ////////////////////
+
+        if (!allSet()) {
+
+            ErrorCode.setCode(10);
+            System.out.println(ErrorCode.errorMessage());
+            return;
+        }
 
         LocalDate date = prefdate.getValue();
         String name = usernameField.getText();
