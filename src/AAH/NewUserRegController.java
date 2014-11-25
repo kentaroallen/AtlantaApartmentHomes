@@ -12,13 +12,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -43,17 +43,15 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
 
     @FXML
     private PasswordField confirmField;
-    @FXML
-    private Label errorcodelabel;
 
     @FXML
     /**
-     * This will take in the username,password, and confirmation for SQL
-     * retrieval.
+     * This will take in the username,password, and confirmation for SQL retrieval.
      *
      * @param e the click button event that caused this.
      */
     public void registerHandler(ActionEvent e) throws Exception {
+
         /////////////////////
         ErrorCode.setCode(0);
         ////////////////////
@@ -66,11 +64,26 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         confirm = confirmField.getText();
 
         /*SQL logic here*/
+
         if (!password.equals(confirm)) {
 
             ErrorCode.setCode(2);
+            Stage popup = new Stage();
+            HBox popup_hbox = new HBox();
+            Scene popup_scene = new Scene(popup_hbox, 300, 100);
+            popup.setTitle("Save File");
+            popup.setWidth(300);
+            popup.setHeight(100);
+            popup.setScene(popup_scene);
+            popup_hbox.setStyle("-fx-background-color: #6599FF;");
+            popup.show();
+            popup_hbox.setAlignment(Pos.CENTER);
+            popup_hbox.setSpacing(10);
+            Label savelab = new Label(ErrorCode.errorMessage());
+            savelab.setStyle("-fx-font: 12px Stencil;");
+            popup_hbox.getChildren().addAll(savelab);
             
-            
+            System.out.println(ErrorCode.errorMessage());
             return;
         }
 
@@ -78,33 +91,44 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
 
             ErrorCode.setCode(1);
             Stage popup = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("view/Errorcode.fxml"));
-            Scene popup_scene = new Scene(root);
+            HBox popup_hbox = new HBox();
+            Scene popup_scene = new Scene(popup_hbox, 300, 100);
             popup.setTitle("Errorcode");
+            popup.setWidth(500);
+            popup.setHeight(150);
             popup.setScene(popup_scene);
-            errorcodelabel.setText("errorrr");
             popup.show();
-            //System.out.println(ErrorCode.errorMessage());
+            popup_hbox.setAlignment(Pos.CENTER);
+            popup_hbox.setSpacing(10);
+            Label savelab = new Label(ErrorCode.errorMessage());
+            savelab.setStyle("-fx-font: 12px Stencil;");
+            popup_hbox.getChildren().addAll(savelab);
+            System.out.println(ErrorCode.errorMessage());
             return;
         }
+
 
         NewUserRegSQLObject.insertUser(username, password);
 
         if (ErrorCode.getCurrentError() == 0) {
 
             controller.setScreen(this.getProspective());
-        } else {
+        }
+
+        else {
 
             System.out.println(ErrorCode.errorMessage());
 
         }
-
-        System.out.println("Register clicked \t Username is: " + username
-                + " password is: " + password
-                + " confirm is: " + confirm);
-
+        
+        System.out.println("Register clicked \t Username is: " + username 
+               + " password is: " + password
+               + " confirm is: " + confirm);
+        
         /*Go to different screen here.*/
+
     }
+
 
     @Override
     /**
