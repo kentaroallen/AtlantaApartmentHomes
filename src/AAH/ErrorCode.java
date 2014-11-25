@@ -64,6 +64,14 @@ public class ErrorCode {
     38 : SQL Error Getting Unresolved Maintenance Requests
     39 : SQL Error Getting Resolved Maintenance Requests
     40 : SQL Error Updating a request from Unresolved to Resolved
+    41 :
+    42 :
+    43 :
+
+    Payment Info Errors:
+    44 : SQL Error Inputting Card Info
+    45 : SQL Error Retrieving Payment Info
+    46 :
 
 
 
@@ -163,6 +171,20 @@ public class ErrorCode {
             case 42:
                 return "-";
             case 43:
+                return "-";
+            case 44:
+                return "Payment Info Error: Database Error Inserting Payment Info!";
+            case 45:
+                return "Payment Info Error: Database Error Retrieving Payment Info!";
+            case 46:
+                return "-";
+            case 47:
+                return "-";
+            case 48:
+                return "-";
+            case 49:
+                return "-";
+            case 50:
                 return "-";
         }
 

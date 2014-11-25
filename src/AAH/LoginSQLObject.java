@@ -111,7 +111,7 @@ public class LoginSQLObject {
         }
         //we know that this is management, so we go ahead and take care of this case.
 
-        String retrieveUserStatement = "SELECT * FROM RESIDENT WHERE U.Username = '"+user+"';";
+        String retrieveUserStatement = "SELECT * FROM RESIDENT WHERE Username = '"+user+"';";
 
         try {
 
@@ -126,6 +126,7 @@ public class LoginSQLObject {
         }
         catch (Exception e) {
 
+            //e.printStackTrace();
             ErrorCode.setCode(18);
             System.out.println(ErrorCode.errorMessage());
 
