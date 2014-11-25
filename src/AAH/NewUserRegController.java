@@ -68,32 +68,19 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         if (!password.equals(confirm)) {
 
             ErrorCode.setCode(2);
-            Stage popup = new Stage();
-            HBox popup_hbox = new HBox();
-            Scene popup_scene = new Scene(popup_hbox, 300, 100);
-            popup.setTitle("Save File");
-            popup.setWidth(300);
-            popup.setHeight(100);
-            popup.setScene(popup_scene);
-            popup_hbox.setStyle("-fx-background-color: #6599FF;");
-            popup.show();
-            popup_hbox.setAlignment(Pos.CENTER);
-            popup_hbox.setSpacing(10);
-            Label savelab = new Label(ErrorCode.errorMessage());
-            savelab.setStyle("-fx-font: 12px Stencil;");
-            popup_hbox.getChildren().addAll(savelab);
+            ErrorCode.errorPopUp();
             
             System.out.println(ErrorCode.errorMessage());
             return;
         }
 
-        /*if (NewUserRegSQLObject.userExists(username)) {
+        if (NewUserRegSQLObject.userExists(username)) {
 
             ErrorCode.setCode(1);
-            
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return;
-        }*/
+        }
 
 
         NewUserRegSQLObject.insertUser(username, password);

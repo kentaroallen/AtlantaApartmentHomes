@@ -166,7 +166,7 @@ public class ErrorCode {
         popup_hbox.setAlignment(Pos.CENTER);
         popup_hbox.setSpacing(10);
         Label errorlabel = new Label();
-        errorlabel.setStyle("-fx-font: 12px Stencil;");
+       // errorlabel.setStyle("-fx-font: 12px Stencil;");
         popup_hbox.getChildren().addAll(errorlabel);
         
         errorlabel.setText(errorMessage());
