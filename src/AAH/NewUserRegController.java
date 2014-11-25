@@ -74,7 +74,7 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
             return;
         }
 
-        if (NewUserRegSQLObject.userExists(username)) {
+        /*if (NewUserRegSQLObject.userExists(username)) {
 
             ErrorCode.setCode(1);
             Stage popup = new Stage();
@@ -86,7 +86,7 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
             popup.show();
             //System.out.println(ErrorCode.errorMessage());
             return;
-        }
+        }*/
 
         NewUserRegSQLObject.insertUser(username, password);
 

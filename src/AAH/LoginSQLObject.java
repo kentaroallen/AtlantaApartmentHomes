@@ -76,14 +76,14 @@ public class LoginSQLObject {
                 return false;
             }
 
-
-            while (rs.next()) {
+            else {
 
                 if (rs.getString("Password").equals(pass)) {
 
                     return true;
                 }
             }
+
         }
         catch (Exception e) {
 
