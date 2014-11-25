@@ -12,10 +12,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -39,15 +43,17 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
 
     @FXML
     private PasswordField confirmField;
+    @FXML
+    private Label errorcodelabel;
 
     @FXML
     /**
-     * This will take in the username,password, and confirmation for SQL retrieval.
+     * This will take in the username,password, and confirmation for SQL
+     * retrieval.
      *
      * @param e the click button event that caused this.
      */
     public void registerHandler(ActionEvent e) throws Exception {
-
         /////////////////////
         ErrorCode.setCode(0);
         ////////////////////
@@ -60,43 +66,45 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         confirm = confirmField.getText();
 
         /*SQL logic here*/
-
         if (!password.equals(confirm)) {
 
             ErrorCode.setCode(2);
-            System.out.println(ErrorCode.errorMessage());
+            
+            
             return;
         }
 
         if (NewUserRegSQLObject.userExists(username)) {
 
             ErrorCode.setCode(1);
-            System.out.println(ErrorCode.errorMessage());
+            Stage popup = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("view/Errorcode.fxml"));
+            Scene popup_scene = new Scene(root);
+            popup.setTitle("Errorcode");
+            popup.setScene(popup_scene);
+            errorcodelabel.setText("errorrr");
+            popup.show();
+            //System.out.println(ErrorCode.errorMessage());
             return;
         }
-
 
         NewUserRegSQLObject.insertUser(username, password);
 
         if (ErrorCode.getCurrentError() == 0) {
 
             controller.setScreen(this.getProspective());
-        }
-
-        else {
+        } else {
 
             System.out.println(ErrorCode.errorMessage());
 
         }
-        
-        System.out.println("Register clicked \t Username is: " + username 
-               + " password is: " + password
-               + " confirm is: " + confirm);
-        
+
+        System.out.println("Register clicked \t Username is: " + username
+                + " password is: " + password
+                + " confirm is: " + confirm);
+
         /*Go to different screen here.*/
-
     }
-
 
     @Override
     /**
