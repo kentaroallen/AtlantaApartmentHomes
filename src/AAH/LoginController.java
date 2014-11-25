@@ -73,7 +73,11 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         password = passwordField.getText();
 
         /*SQL logic here*/
-        LoginSQLObject.validateLogin(username, password);
+        if (!LoginSQLObject.validateLogin(username, password)) {//don't log in if we can't.
+
+            return;
+        }
+
         LoginSQLObject.setCurrentUser(username);
 
 

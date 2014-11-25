@@ -107,7 +107,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
 
         LocalDate date = prefdate.getValue();
         String name = usernameField.getText();
-        String month = months.getValue().toString();
+        String month = (months.getValue() == null) ? null : months.getValue().toString();
         int year = Integer.parseInt(years.getValue().toString());
         int day = Integer.parseInt(days.getValue().toString());
         int monthlyIncome = Integer.valueOf(monthlyIncomeField.getText());

@@ -28,7 +28,7 @@ public class ErrorCode {
     10 : Not all Fields Have Values
     11 : SQL error inputting application
     12 : Move In Date not more than 2 months after current date
-    13 :
+    13 : Some Values are Null
     14 :
     15 :
 
@@ -111,7 +111,7 @@ public class ErrorCode {
             case 12:
                 return "Prospective Application Error: Invalid Move In Date (Must be after 2 months from today)";
             case 13:
-                return "-";
+                return "Prospective Application Error: Some Fields are null!";
             case 14:
                 return "-";
             case 15:

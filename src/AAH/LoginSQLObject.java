@@ -76,6 +76,7 @@ public class LoginSQLObject {
                 return false;
             }
 
+
             while (rs.next()) {
 
                 if (rs.getString("Password").equals(pass)) {
@@ -91,6 +92,8 @@ public class LoginSQLObject {
             return false;
         }
 
+        ErrorCode.setCode(17);
+        System.out.println(ErrorCode.errorMessage());
         return false;
     }
 
