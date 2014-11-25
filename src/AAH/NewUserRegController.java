@@ -90,19 +90,7 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         if (NewUserRegSQLObject.userExists(username)) {
 
             ErrorCode.setCode(1);
-            Stage popup = new Stage();
-            HBox popup_hbox = new HBox();
-            Scene popup_scene = new Scene(popup_hbox, 300, 100);
-            popup.setTitle("Errorcode");
-            popup.setWidth(500);
-            popup.setHeight(150);
-            popup.setScene(popup_scene);
-            popup.show();
-            popup_hbox.setAlignment(Pos.CENTER);
-            popup_hbox.setSpacing(10);
-            Label savelab = new Label(ErrorCode.errorMessage());
-            savelab.setStyle("-fx-font: 12px Stencil;");
-            popup_hbox.getChildren().addAll(savelab);
+            
             System.out.println(ErrorCode.errorMessage());
             return;
         }

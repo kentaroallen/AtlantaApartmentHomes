@@ -12,15 +12,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
-import org.omg.CORBA.Current;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -53,7 +52,6 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         controller.setScreen(this.getNewUserReg());
     }
 
-
     @FXML
     /**
      * This will take in the username and password for sql retrieval.
@@ -61,7 +59,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
      * @param e the click button event that caused this.
      */
     public void loginHandler(ActionEvent e) throws Exception {
-
+    
 
         /////////////////////
         ErrorCode.setCode(0);
@@ -76,11 +74,10 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         LoginSQLObject.validateLogin(username, password);
         LoginSQLObject.setCurrentUser(username);
 
-
         if ((CurrentUser.getUserType() == 0) && !LoginSQLObject.filledOutApplication(username)) { // if our user is prospective and hasn't completed their prospective resident application, we will make them finish it before loggin in to the good stuff
 
-                controller.setScreen(getProspective());
-                return;
+            controller.setScreen(getProspective());
+            return;
         }
 
         if (ErrorCode.currentError == 0) {
@@ -89,22 +86,18 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
 
             if (CurrentUser.getUserType() != 0) {
                 controller.setScreen(this.getHomepage());
-            }
-            else {
+            } else {
 
                 System.out.println("Application Under Review.");
             }
             return;
-        }
-        else {
+        } else {
 
             return;
         }
 
         /*Go to different screen here.*/
-
     }
-
 
     @Override
     /**
