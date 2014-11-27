@@ -82,25 +82,19 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
             return;
         }
 
-
-        NewUserRegSQLObject.insertUser(username, password);
-
-        if (ErrorCode.getCurrentError() == 0) {
-
+        if(ErrorCode.getCurrentError() == 0 && (username != null || username != "" || password != null || password != "")){
+            NewUserRegSQLObject.insertUser(username, password);
             controller.setScreen(this.getProspective());
-        }
-
-        else {
-
+        }else{
             System.out.println(ErrorCode.errorMessage());
-
+            ErrorCode.errorPopUp();
         }
+        
         
         System.out.println("Register clicked \t Username is: " + username 
                + " password is: " + password
                + " confirm is: " + confirm);
-        
-        /*Go to different screen here.*/
+       
 
     }
 

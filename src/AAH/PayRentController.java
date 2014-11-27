@@ -59,15 +59,25 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
      * @param cc card to use
      */
     public void payHandler(ActionEvent e) throws IOException {
-//        String aptNum = aptfield.getText().toString();
-//        String mos = monthfield.getValue().toString();
-//        String year = yearfield.getValue().toString();
-//        String cc = cardfield.getValue().toString();
-//        
-//        System.out.println("pay clicked");
-//        System.out.println(aptNum + mos + year+ cc);
+        try{
+        String aptNum = aptfield.getText().toString();
+        String mosRent = monthfield.getValue().toString();
+        String yearRent = yearfield.getValue().toString();
+        String creditCard = cardfield.getValue().toString();
+        String todaysDate = datefield.getText().toString();
+        
+        
+        System.out.println("pay clicked");
+        System.out.println("apt number: " + aptNum + " monthRent: " + mosRent + " yearRent: " + yearRent +  
+                " credit card num: " + creditCard + " todaysDate: " +  todaysDate);
         /*Go to different screen here.*/
         controller.setScreen(this.getHomepage());
+        }
+        catch(Exception nullInput){
+            ErrorCode.setCode(10);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
+        }
     }
 
     @Override
