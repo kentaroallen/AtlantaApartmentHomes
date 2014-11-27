@@ -86,6 +86,7 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
             NewUserRegSQLObject.insertUser(username, password);
             controller.setScreen(this.getProspective());
         }else{
+            ErrorCode.setCode(10);
             System.out.println(ErrorCode.errorMessage());
             ErrorCode.errorPopUp();
         }
