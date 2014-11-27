@@ -55,14 +55,14 @@ public class AllotmentController extends ScreenTemplate implements Initializable
     @FXML
 
     /**
-     * This retrieves the data values comma seperated value style of the highlighted
-     * row. 
-     *  [0]=name,[1]=dob,[2]=gender,[3]=income,[4]=apt type,
-     *  [5]=pref move in date,[6]=lease time,[7]=approval
-     * 
-     *  seperatedData[] holds these values.
-     * 
+     * This retrieves the data values comma seperated value style of the
+     * highlighted row. [0]=name,[1]=dob,[2]=gender,[3]=income,[4]=apt type,
+     * [5]=pref move in date,[6]=lease time,[7]=approval
+     *
+     * seperatedData[] holds these values.
+     *
      * SQL specific comments in implementation.
+     *
      * @param e the click button event that caused this.
      */
     public void assignHandler(ActionEvent e) throws IOException {
@@ -72,27 +72,25 @@ public class AllotmentController extends ScreenTemplate implements Initializable
         /*Comma seperated value retrieval*/
         String[] seperatedData = rowValues.split(",");
 
-
-        for (int i = 0; i < seperatedData.length; i++) {
-            System.out.print(seperatedData[i] + " ");
-
+        /*If no selection is actually made then error otherwise continue*/
+        if (seperatedData.length < 2) {
+            ErrorCode.setCode(24);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
+        } else {
+            for (int i = 0; i < seperatedData.length; i++) {
+                System.out.print(seperatedData[i] + " ");
+            }
+            System.out.println();
+            controller.setScreen(this.getHomepage());
         }
-        System.out.println();
 
-        /**
-         * Call AtlantaApartmentHomes.aptNameSql (String) to insert the selected
-         * data into the assocated aptNameSql key aptNameSql refers to the Name
-         * of the applicant in the applicant review screen.
-         *
-         *
-         *
-         */
-        controller.setScreen(this.getHomepage());
     }
+
     public void cancelHandler(ActionEvent e) throws IOException {
         System.out.println("Cancel button clicked");
         controller.setScreen(this.getHomepage());
-        
+
     }
 
     @Override

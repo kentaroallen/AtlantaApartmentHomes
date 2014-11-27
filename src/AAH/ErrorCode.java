@@ -50,7 +50,7 @@ public class ErrorCode {
      23 :
 
      Application Review Errors:
-     24 :
+     24 : Selection Error: No selection highlighted.
      25 :
      26 :
      27 :
@@ -114,7 +114,7 @@ public class ErrorCode {
      23 :
 
      Application Review Errors:
-     24 :
+     24 : Selection Error: No selection highlighted.
      25 :
      26 :
      27 :
@@ -239,7 +239,7 @@ public class ErrorCode {
             case 23:
                 return "-";
             case 24:
-                return "-";
+                return "Selection Error: No selection highlighted.";
             case 25:
                 return "-";
             case 26:
