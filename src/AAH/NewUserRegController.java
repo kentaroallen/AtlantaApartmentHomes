@@ -83,10 +83,11 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         }
 
 
-        NewUserRegSQLObject.insertUser(username, password);
+       //NewUserRegSQLObject.insertUser(username, password);
 
         if (ErrorCode.getCurrentError() == 0) {
 
+            CurrentUser.setUserInfo(username, password, -1, 0);
             controller.setScreen(this.getProspective());
         }
 

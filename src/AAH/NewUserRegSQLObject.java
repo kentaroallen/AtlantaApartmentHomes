@@ -40,7 +40,7 @@ public class NewUserRegSQLObject {
         try {
 
             SQLConnector.runUpdate(registerStatement);//run our statement and return if something janky happens
-            CurrentUser.setUserInfo(user, -1, 0);// sets default CU values
+            CurrentUser.setUserInfo(user, pass, -1, 0);// sets default CU values
         }
         catch (Exception e) {
             ErrorCode.setCode(4);

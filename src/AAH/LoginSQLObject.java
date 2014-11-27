@@ -102,7 +102,7 @@ public class LoginSQLObject {
         return false;
     }
 
-    public static void setCurrentUser(String user) throws Exception{
+    public static void setCurrentUser(String user, String pass) throws Exception{
 
 
         int userType = userType(user);
@@ -114,7 +114,7 @@ public class LoginSQLObject {
 
         if (userType == 2 || userType == 0) {
 
-            CurrentUser.setUserInfo(user, -1 , userType);
+            CurrentUser.setUserInfo(user, pass, -1 , userType);
             return;
         }
         //we know that this is management, so we go ahead and take care of this case.
@@ -127,9 +127,7 @@ public class LoginSQLObject {
 
             while (rs.next()) {
 
-                CurrentUser.setUserInfo(user, Integer.parseInt(rs.getString("Apt_Number")), userType);
-
-                //String name, String dob, String gender, String income, String typeApt, String prefdate, String leaseterm, String approval
+                CurrentUser.setUserInfo(user, pass, Integer.parseInt(rs.getString("Apt_Number")), userType);
             }
         }
         catch (Exception e) {

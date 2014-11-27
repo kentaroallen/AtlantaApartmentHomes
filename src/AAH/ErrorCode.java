@@ -166,6 +166,7 @@ public class ErrorCode {
     public static int getCurrentError() {
         return currentError;
     }
+
     public static void errorPopUp(){
         Stage popup = new Stage();
         HBox popup_hbox = new HBox();
