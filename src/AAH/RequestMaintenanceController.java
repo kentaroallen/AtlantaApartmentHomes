@@ -63,11 +63,19 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
      */
     public void requestHandler(ActionEvent e) throws IOException {
 
+        ////////////////////
+        ErrorCode.setCode(0);
+        ///////////////////
         //String apartmentNum = aptfield.getText().toString();
 
         /*SQL logic here*/
         /*Go to different screen here.*/
-        controller.setScreen(this.getHomepage());
+
+        //RequestMaintenanceSQLObject.insertMaintenanceRequest(CurrentUser.getApartmentNumber(), issuebox.get);
+
+        if (ErrorCode.currentError == 0) {
+            controller.setScreen(this.getHomepage());
+        }
     }
 
     @Override
@@ -75,8 +83,13 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
      * Placeholder method for correct operation.
      */
     public void initialize(URL url, ResourceBundle rb) {
+        ////////////////////
+        ErrorCode.setCode(0);
+        ///////////////////
         ArrayList<String> posIssues = new ArrayList<String>();
-        String[] types = {"Roaches", "Broken Appliances", "Just come now"};
+
+        String[] types = getIssueTypes();
+
         posIssues.addAll(Arrays.asList(types));
         ObservableList<String> obListIssues = FXCollections.observableArrayList(posIssues);
 
@@ -91,6 +104,21 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
 
         issuebox.setItems(obListIssues);
         this.setTitleLabel(this.getLogin());
+    }
+
+    public String[] getIssueTypes() {
+
+        ArrayList<String[]> as = RequestMaintenanceSQLObject.getIssues();
+
+        String[] out = new String[as.size()];
+        int i = 0;
+
+        for (String[] s : as) {
+
+            out[i++] = s[0];
+        }
+
+        return out;
     }
 
     @Override

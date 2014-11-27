@@ -142,6 +142,18 @@ public class ErrorCode {
     44 : SQL Error Inputting Card Info
     45 : SQL Error Retrieving Payment Info
     46 :
+    47 :
+    48 :
+    49 :
+    50 :
+
+    Maintenance Request Errors:
+    51 : SQL Error Getting Issue Types
+    52 : SQL Error Inserting Maintenance Request
+    53 :
+    54 :
+    55 :
+    56 :
 >>>>>>> ee58a9b63607107a01d9947795a361efb12e4d47
 
 
@@ -278,6 +290,14 @@ public class ErrorCode {
             case 49:
                 return "-";
             case 50:
+                return "Maintenance Request Error: Database Error Retrieving Issue Types!";
+            case 51:
+                return "Maintenance Request Error: Database Error Inputting Maintenance Request!";
+            case 52:
+                return "-";
+            case 53:
+                return "-";
+            case 54:
                 return "-";
         }
         
