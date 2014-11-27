@@ -82,7 +82,7 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
             return;
         }
 
-        if(ErrorCode.getCurrentError() == 0 && (username != null || username != "" || password != null || password != "")){
+        if(ErrorCode.getCurrentError() == 0 && (username != null && !username.equals("") && password != null && !password.equals(""))){
             NewUserRegSQLObject.insertUser(username, password);
             controller.setScreen(this.getProspective());
         }else{
