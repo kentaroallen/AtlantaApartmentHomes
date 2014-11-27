@@ -33,6 +33,7 @@ public class LoginSQLObject {
 
             e.printStackTrace();
             ErrorCode.setCode(18);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
 
         }
@@ -51,6 +52,7 @@ public class LoginSQLObject {
 
             e.printStackTrace();
             ErrorCode.setCode(18);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
@@ -72,6 +74,7 @@ public class LoginSQLObject {
             if (!rs.next()) {// if no user exists with this name
 
                 ErrorCode.setCode(16);
+                ErrorCode.errorPopUp();
                 System.out.println(ErrorCode.errorMessage());
                 return false;
             }
@@ -88,11 +91,13 @@ public class LoginSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(19);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return false;
         }
 
         ErrorCode.setCode(17);
+        ErrorCode.errorPopUp();
         System.out.println(ErrorCode.errorMessage());
         return false;
     }
@@ -131,6 +136,7 @@ public class LoginSQLObject {
 
             //e.printStackTrace();
             ErrorCode.setCode(18);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
 
         }
@@ -150,6 +156,7 @@ public class LoginSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(20);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return true;
         }
