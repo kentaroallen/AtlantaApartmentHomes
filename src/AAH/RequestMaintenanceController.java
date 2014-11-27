@@ -66,16 +66,31 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
         ////////////////////
         ErrorCode.setCode(0);
         ///////////////////
-        //String apartmentNum = aptfield.getText().toString();
+        try {
+            String apartmentNum = aptfield.getText().toString();
+            String issueType = issuebox.getValue().toString();
+            System.out.println("Apartment number: " + apartmentNum + " issueType: " + issueType);
 
+            
+            if (ErrorCode.currentError == 0 && !apartmentNum.equals("") && apartmentNum != null) {
+                /*From here this is guranteed to have correct sql input.*/
+                
+                /*Ends the area of where SQL input is guranteed.*/
+                controller.setScreen(this.getHomepage());
+            }else{
+                ErrorCode.setCode(10);
+                ErrorCode.errorPopUp();
+                //This handles the case where if you left apartment num blank
+            }
+        } catch (Exception nullInput) {
+            ErrorCode.setCode(10);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
+        }
         /*SQL logic here*/
         /*Go to different screen here.*/
 
         //RequestMaintenanceSQLObject.insertMaintenanceRequest(CurrentUser.getApartmentNumber(), issuebox.get);
-
-        if (ErrorCode.currentError == 0) {
-            controller.setScreen(this.getHomepage());
-        }
     }
 
     @Override
