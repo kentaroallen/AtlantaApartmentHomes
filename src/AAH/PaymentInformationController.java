@@ -34,17 +34,18 @@ public class PaymentInformationController extends ScreenTemplate implements Init
     /**
      * Initializes the controller class.
      */
-
     @FXML
-    /**
-     * When the user clicks the "New User?" hyperlink.
-     *
-     * @param e the click event.
-     */
-    public void newUserHandler(ActionEvent e) throws IOException {
-        System.out.println("New user clicked");
-        controller.setScreen(this.getNewUserReg());
-    }
+    private TextField namefield;
+    @FXML
+    private TextField cardfield;
+    @FXML
+    private TextField monthfield;
+    @FXML
+    private TextField yearfield;
+    @FXML
+    private TextField cwfield;
+    @FXML
+    private ComboBox cardbox;
 
     @FXML
     /**
@@ -55,23 +56,56 @@ public class PaymentInformationController extends ScreenTemplate implements Init
      * These params correspond to inputs from the UI.
      */
     public void deleteHandler(ActionEvent e) throws IOException {
-        System.out.println("delete was clicked");
-        controller.setScreen(this.getHomepage());
+        System.out.println("Delete was clicked");
+        try{
+            String cardInfo = cardbox.getValue().toString();
+            System.out.println("card info is: " + cardInfo);
+            controller.setScreen(this.getHomepage());
+        }catch(Exception nullInput){
+            ErrorCode.setCode(46);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
+        }
     }
+
     @FXML
     /**
      * Saves card information button
      */
     public void saveHandler(ActionEvent e) throws IOException {
         System.out.println("Save was clicked");
-        controller.setScreen(this.getHomepage());
+        String name = namefield.getText();
+        String card = cardfield.getText();
+        String month = monthfield.getText();
+        String year = yearfield.getText();
+        String cw = cwfield.getText();
+        System.out.println(name + " " + card + " " + month + " "
+                + year + " " + cw);
+
+        if (name.equals("") || card.equals("") || month.equals("") || year.equals("") || cw.equals("")) {
+            ErrorCode.setCode(47);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
+        } else {
+            controller.setScreen(this.getHomepage());
+        }
+
     }
+
     @Override
     /**
      * Placeholder method for correct operation.
      */
     public void initialize(URL url, ResourceBundle rb) {
         /*Need to load cardbox with sql statements into an observable list*/
+        ArrayList<String> posCards = new ArrayList<String>();
+        posCards.add("1234567890");
+        posCards.add("0987654321");
+        posCards.add("1122334455");
+        ObservableList<String> obListCards = FXCollections.observableArrayList(posCards);
+        cardbox.setItems(obListCards);
+        
+        
         this.setTitleLabel(this.getNewUserReg());
     }
 
