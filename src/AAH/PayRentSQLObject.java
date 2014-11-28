@@ -155,4 +155,9 @@ public class PayRentSQLObject {
         return false;
     }
 
+    public ArrayList<String> getCreditCardInfo() {
+
+        return null;
+    }
+
 }

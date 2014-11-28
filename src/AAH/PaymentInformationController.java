@@ -57,6 +57,11 @@ public class PaymentInformationController extends ScreenTemplate implements Init
      * These params correspond to inputs from the UI.
      */
     public void deleteHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("Delete was clicked");
         try{
             String cardInfo = cardbox.getValue().toString();
@@ -74,6 +79,11 @@ public class PaymentInformationController extends ScreenTemplate implements Init
      * Saves card information button
      */
     public void saveHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("Save was clicked");
         String name = namefield.getText();
         String card = cardfield.getText();

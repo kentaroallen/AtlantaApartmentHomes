@@ -27,9 +27,9 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="25.0" layoutY="32.0" text="Apartment Number:" />
-            <TextField fx:id="aptfield" layoutX="26.0" layoutY="56.0" onMouseClicked="#autoPopulate" />
+            <TextField fx:id="aptfield" layoutX="26.0" layoutY="56.0" onMouseClicked="#autoPopulate"  />
             <Label layoutX="27.0" layoutY="93.0" text="Issue:" />
-            <Button fx:id="loginButton" layoutX="132.0" layoutY="220.0" mnemonicParsing="false" onAction="#requestHandler" text="Submit" />
+            <Button fx:id="loginButton" layoutX="132.0" layoutY="220.0" mnemonicParsing="false" onAction="#requestHandler" onMouseMoved="#autoPopulate" text="Submit " />
             <ComboBox fx:id="issuebox" layoutX="25.0" layoutY="117.0" prefWidth="150.0" />
             <Label layoutX="13.0" layoutY="196.0" text="Date of Request:">
                <font>

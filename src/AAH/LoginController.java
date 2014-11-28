@@ -72,7 +72,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         
         /*This is where you should probably
         set the aptfield problem*/
-        /*if(username != "donutresidentman"){
+      /*  if(username != "donutresidentman"){
             PayRentController.aptfield.setText("1112");
         }*/
 

@@ -118,6 +118,11 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         this.setTitleLabel(this.getLogin());
     }
 
+    public void populateCreditCards() {
+
+        //creditcard field = String[];
+    }
+
     @Override
     public void setScreenParent(ScreenController screen) {
         controller = screen;
