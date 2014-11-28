@@ -82,6 +82,7 @@ public class ProspectiveResidentSQLObject {
         }
         catch (Exception e) {
 
+            e.printStackTrace();
             ErrorCode.setCode(11);
             System.out.println(ErrorCode.errorMessage());
             return;

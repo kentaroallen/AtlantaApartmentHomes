@@ -118,37 +118,52 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
             return;
         }
 
-        LocalDate date = prefdate.getValue();
-        String name = usernameField.getText();
-        String month = months.getValue().toString();
-        int year = Integer.parseInt(years.getValue().toString());
-        int day = Integer.parseInt(days.getValue().toString());
-        int monthlyIncome = Integer.valueOf(monthlyIncomeField.getText());
-        String prevResidence = prevResField.getText();
-        String apartmentCategory = aptcategory.getValue().toString();
-        int minimumRent = Integer.valueOf(minRent.getText());
-        int maximumRent = Integer.valueOf(maxRent.getText());
-        String[] prefMoveInDate = new String[3];
-        prefMoveInDate[0] = date.toString().substring(0, 4);    //YEAR
-        prefMoveInDate[1] = date.toString().substring(5, 7);     //MONTH
-        prefMoveInDate[2] = date.toString().substring(8, 10);    //DAY
-        String lease = leaseterm.getValue().toString();
-        String resGender = genderbox.getValue().toString();
+        try {
+            LocalDate date = prefdate.getValue();
+            String name = usernameField.getText();
+            String month = months.getValue().toString();
+            int year = Integer.parseInt(years.getValue().toString());
+            int day = Integer.parseInt(days.getValue().toString());
+            int monthlyIncome = Integer.valueOf(monthlyIncomeField.getText());
+            String prevResidence = prevResField.getText();
+            String apartmentCategory = aptcategory.getValue().toString();
+            int minimumRent = Integer.valueOf(minRent.getText());
+            int maximumRent = Integer.valueOf(maxRent.getText());
+            String[] prefMoveInDate = new String[3];
+            prefMoveInDate[0] = date.toString().substring(0, 4);    //YEAR
+            prefMoveInDate[1] = date.toString().substring(5, 7);     //MONTH
+            prefMoveInDate[2] = date.toString().substring(8, 10);    //DAY
+            String lease = leaseterm.getValue().toString();
+            String resGender = genderbox.getValue().toString();
 
-        /*SQL logic here*/
+            if (maximumRent <= minimumRent) {
 
+                ErrorCode.setCode(14);
+                ErrorCode.errorPopUp();
+                System.out.println(ErrorCode.errorMessage());
+                return;
+            }
 
-        System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " " +
-               prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
+            System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " " +
+                    prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
 
-        int leaseValue = Integer.parseInt(lease);
-        Date dob = new Date(year, Integer.parseInt(month), day);
-        Date moveInDate = new Date(Integer.parseInt(prefMoveInDate[0]), Integer.parseInt(prefMoveInDate[1]), Integer.parseInt(prefMoveInDate[2]));
-        String gender = (resGender.equals("Male")) ? "M" : (resGender.equals("Female")) ? "F" : "N";
+            int leaseValue = Integer.parseInt(lease);
+            Date dob = new Date(year, Integer.parseInt(month), day);
+            Date moveInDate = new Date(Integer.parseInt(prefMoveInDate[0]), Integer.parseInt(prefMoveInDate[1]), Integer.parseInt(prefMoveInDate[2]));
+            String gender = (resGender.equals("Male")) ? "M" : (resGender.equals("Female")) ? "F" : "N";
         /*Go to different screen here.*/
 
-        ProspectiveResidentSQLObject.insertProspectiveResident(CurrentUser.getUsername(), dob, name, gender, moveInDate, leaseValue, monthlyIncome, apartmentCategory, prevResidence, minimumRent, maximumRent, "Accepted");
-        NewUserRegSQLObject.insertUser(CurrentUser.getUsername(), CurrentUser.getPassword());
+            ProspectiveResidentSQLObject.insertProspectiveResident(CurrentUser.getUsername(), dob, name, gender, moveInDate, leaseValue, monthlyIncome, apartmentCategory, prevResidence, minimumRent, maximumRent, "Accepted");
+            NewUserRegSQLObject.insertUser(CurrentUser.getUsername(), CurrentUser.getPassword());
+        }
+
+        catch (Exception x) {
+
+            ErrorCode.setCode(10);
+            System.out.println(ErrorCode.errorMessage());
+            ErrorCode.errorPopUp();
+            return;
+        }
 
         if (ErrorCode.getCurrentError() == 0) {
             controller.setScreen(this.getLogin());

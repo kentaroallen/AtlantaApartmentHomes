@@ -34,6 +34,7 @@ public class CurrentUser {
         type = t;
     }
 
+
     public static String getUsername() { return username; }
     public static String getPassword() { return password; }
     public static int getApartmentNumber() { return apartment; }

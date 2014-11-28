@@ -74,7 +74,7 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
             
             if (ErrorCode.currentError == 0 && !apartmentNum.equals("") && apartmentNum != null) {
                 /*From here this is guranteed to have correct sql input.*/
-                
+                RequestMaintenanceSQLObject.insertMaintenanceRequest(CurrentUser.getApartmentNumber(), issueType);
                 /*Ends the area of where SQL input is guranteed.*/
                 controller.setScreen(this.getHomepage());
             }else{
@@ -90,9 +90,13 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
         /*SQL logic here*/
         /*Go to different screen here.*/
 
-        //RequestMaintenanceSQLObject.insertMaintenanceRequest(CurrentUser.getApartmentNumber(), issuebox.get);
+        //
     }
 
+    public static void autoPopulate() {
+
+       // aptfield.setText(CurrentUser.getApartmentNumber()+"");
+    }
     @Override
     /**
      * Placeholder method for correct operation.
@@ -116,6 +120,10 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
         //    System.out.println(date);
 
         datelabel.setText(date);
+
+        System.out.println(CurrentUser.getApartmentNumber());
+
+        aptfield.setEditable(false);
 
         issuebox.setItems(obListIssues);
         this.setTitleLabel(this.getLogin());
