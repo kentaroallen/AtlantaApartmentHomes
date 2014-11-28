@@ -84,7 +84,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
             return;
         }
 
-        LoginSQLObject.setCurrentUser(username);
+        LoginSQLObject.setCurrentUser(username, password);
 
         if ((CurrentUser.getUserType() == 0) && !LoginSQLObject.filledOutApplication(username)) { // if our user is prospective and hasn't completed their prospective resident application, we will make them finish it before loggin in to the good stuff
 
@@ -98,8 +98,12 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
 
             if (CurrentUser.getUserType() != 0) {
                 controller.setScreen(this.getHomepage());
-            } else {
 
+            }
+
+            else {
+
+                prospectivePopUp();
                 System.out.println("Application Under Review.");
             }
             return;
@@ -109,6 +113,24 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         }
 
         /*Go to different screen here.*/
+    }
+
+    public static void prospectivePopUp(){
+        Stage popup = new Stage();
+        HBox popup_hbox = new HBox();
+        Scene popup_scene = new Scene(popup_hbox, 300, 100);
+        popup.setTitle("Prospective Resident");
+        popup.setWidth(500);
+        popup.setHeight(150);
+        popup.setScene(popup_scene);
+        popup.show();
+        popup_hbox.setAlignment(Pos.CENTER);
+        popup_hbox.setSpacing(10);
+        Label errorlabel = new Label();
+        // errorlabel.setStyle("-fx-font: 12px Stencil;");
+        popup_hbox.getChildren().addAll(errorlabel);
+
+        errorlabel.setText("Application Under Review.");
     }
 
     @Override

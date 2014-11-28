@@ -74,7 +74,7 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
 
         /*This holds the saved value of the persons name. This is useful for SQL in comparison on screen change.*/
         AtlantaApartmentHomes.aptNameSql = chosenPerson[0];
-        AllotmentController.applicantname.setText(AtlantaApartmentHomes.aptNameSql);
+        AllotmentController.applicantname.setText(" ");
         /*As above ^*/
         System.out.println(AtlantaApartmentHomes.aptNameSql);
         

@@ -16,7 +16,7 @@ public class ProspectiveResidentSQLObject {
     public static ArrayList<String> getAvailableApartmentCategories() {
 
         ArrayList<String> out = new ArrayList<String>();
-        String categoryStatement = "SELECT DISTINCT A.Category FROM APARTMENT A";
+        String categoryStatement = "SELECT DISTINCT A.Category FROM APARTMENT A WHERE A.Available_On >= CURDATE()";
 
         try {
             ResultSet rs = SQLConnector.runQuery(categoryStatement);
@@ -39,7 +39,7 @@ public class ProspectiveResidentSQLObject {
     public static ArrayList<String> getAvailableApartmentLeaseTerms() throws Exception {
 
         ArrayList<String> out = new ArrayList<String>();
-        String categoryStatement = "SELECT DISTINCT A.Lease_Term FROM APARTMENT A";
+        String categoryStatement = "SELECT DISTINCT A.Lease_Term FROM APARTMENT A WHERE A.Available_On >= CURDATE()";
 
         try {
             ResultSet rs = SQLConnector.runQuery(categoryStatement);
@@ -82,6 +82,7 @@ public class ProspectiveResidentSQLObject {
         }
         catch (Exception e) {
 
+            e.printStackTrace();
             ErrorCode.setCode(11);
             System.out.println(ErrorCode.errorMessage());
             return;

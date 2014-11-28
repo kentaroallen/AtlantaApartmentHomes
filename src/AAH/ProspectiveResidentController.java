@@ -78,14 +78,11 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         System.out.println("New user clicked");
         controller.setScreen(this.getNewUserReg());
     }
-    /**
-     * Deprecated method that was supposed to check input NULL's
-     * New version uses the try/catch pokemon method.
-     * @return 
-     */
+
+
     public boolean allSet() {
 
-        return (!((prefdate.getValue() == null) || (usernameField.getText() == null) || (usernameField.getText() == "")));
+        return (!( (prefdate.getValue() == null) || (usernameField.getText() == null) || (usernameField.getText() == "") ));
     }
 
     @FXML
@@ -93,19 +90,18 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
      * This will take in the username and password for sql retrieval.
      *
      * @param e the click button event that caused this.
-     *
+     * 
      * These params correspond to inputs from the UI.
      * @param name the name of the resident
      * @param month the month field for DOB
-     * @param year the year field for DOB
+     * @param year  the year field for DOB
      * @param day the day field for DOB
      * @param monthlyIncome the monthly income for resident
      * @param prevResidence string of the previous residence
      * @param apartmentCategory for example "1BR-1B" 1 bedroom 1 bath
-     * @param minimumRent int
+     * @param minimumRent int 
      * @param maximumRent int
-     * @param prefMoveInDate This is an array. [0] is year [1] is month [2] is
-     * day for the preferred move in date
+     * @param prefMoveInDate This is an array. [0] is year [1] is month [2] is day for the preferred move in date
      * @param lease this is how long the lease is
      * @param resGender this is the residents gender
      */
@@ -114,6 +110,13 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         /////////////////////
         ErrorCode.setCode(0);
         ////////////////////
+
+        if (!allSet()) {
+
+            ErrorCode.setCode(10);
+            System.out.println(ErrorCode.errorMessage());
+            return;
+        }
 
         try {
             LocalDate date = prefdate.getValue();
@@ -133,33 +136,45 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
             String lease = leaseterm.getValue().toString();
             String resGender = genderbox.getValue().toString();
 
-            System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " "
-                    + prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
+            if (maximumRent <= minimumRent) {
+
+                ErrorCode.setCode(14);
+                ErrorCode.errorPopUp();
+                System.out.println(ErrorCode.errorMessage());
+                return;
+            }
+
+            System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " " +
+                    prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
 
             int leaseValue = Integer.parseInt(lease);
             Date dob = new Date(year, Integer.parseInt(month), day);
             Date moveInDate = new Date(Integer.parseInt(prefMoveInDate[0]), Integer.parseInt(prefMoveInDate[1]), Integer.parseInt(prefMoveInDate[2]));
             String gender = (resGender.equals("Male")) ? "M" : (resGender.equals("Female")) ? "F" : "N";
-            /*Go to different screen here.*/
+        /*Go to different screen here.*/
 
             ProspectiveResidentSQLObject.insertProspectiveResident(CurrentUser.getUsername(), dob, name, gender, moveInDate, leaseValue, monthlyIncome, apartmentCategory, prevResidence, minimumRent, maximumRent, "Accepted");
-
-            if (ErrorCode.getCurrentError() == 0) {
-                controller.setScreen(this.getLogin());
-            } else {
-                ErrorCode.errorPopUp();
-                System.out.println(ErrorCode.errorMessage());
-            }
-        } catch (Exception nullInput) {
-            /*This will catch exception if input fields left blank/null*/
-            ErrorCode.setCode(10);
-            ErrorCode.errorPopUp();
-            System.out.println(ErrorCode.errorMessage());
-            return;
-
+            NewUserRegSQLObject.insertUser(CurrentUser.getUsername(), CurrentUser.getPassword());
         }
-        /*SQL logic here*/
+
+        catch (Exception x) {
+
+            ErrorCode.setCode(10);
+            System.out.println(ErrorCode.errorMessage());
+            ErrorCode.errorPopUp();
+            return;
+        }
+
+        if (ErrorCode.getCurrentError() == 0) {
+            controller.setScreen(this.getLogin());
+        }
+        else {
+
+            System.out.println(ErrorCode.errorMessage());
+        }
+        //String username, Date dob, String name, String gender, Date moveIn, int leaseTerm,  int monthlyIncome, String category, String prevAddress, int minRent, int maxRent, String apartmentStatus
     }
+
 
     @Override
     /**
@@ -185,6 +200,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         ObservableList<Integer> obListyears = FXCollections.observableArrayList(posYears);
 
         // HERE, WE GRAB OUR APARTMENT INFO
+
         String[] apartmentCat = availableApartmentCategories();
         String[] apartmentLease = availableApartmentLeaseTerms();
 
@@ -194,6 +210,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         }
 
         //WEEEEEEEEEEEE
+
         ArrayList<String> posCats = new ArrayList<String>();
         String[] types = apartmentCat;//{"1BR-1B", "1BR-2B", "2BR-1B", "2BR-1B"};
         posCats.addAll(Arrays.asList(types));

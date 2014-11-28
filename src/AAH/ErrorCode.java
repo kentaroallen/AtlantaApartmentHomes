@@ -10,13 +10,13 @@ import javafx.stage.Stage;
  * Created by AmierNaji on 11/22/14.
  */
 public class ErrorCode {
-
+    
     public static int currentError = 0;
 
 
     /*
 
-     <<<<<<< HEAD
+<<<<<<< HEAD
      No Error:
      0
 
@@ -155,6 +155,14 @@ public class ErrorCode {
      54 :
      55 :
      56 :
+     57 :
+     58 :
+
+     Pay Rent Errors:
+     59 : Error Inserting Values into Rent Payment
+     60 :
+     61 :
+     62 :
      >>>>>>> ee58a9b63607107a01d9947795a361efb12e4d47
 
 
@@ -167,8 +175,7 @@ public class ErrorCode {
     public static int getCurrentError() {
         return currentError;
     }
-
-    public static void errorPopUp() {
+    public static void errorPopUp(){
         Stage popup = new Stage();
         HBox popup_hbox = new HBox();
         Scene popup_scene = new Scene(popup_hbox, 300, 100);
@@ -300,8 +307,26 @@ public class ErrorCode {
                 return "-";
             case 54:
                 return "-";
+            case 55:
+                return "-";
+            case 56:
+                return "-";
+            case 57:
+                return "-";
+            case 58:
+                return "-";
+            case 59:
+                return "Rent Payment Error: Database Error Inputting Rent Payment!";
+            case 60:
+                return "Rent Payment Error: Database Error Retrieving Previous Rent Payment Information!";
+            case 61:
+                return "-";
+            case 62:
+                return "-";
+            case 63:
+                return "-";
         }
-
+        
         return null;
     }
 }
