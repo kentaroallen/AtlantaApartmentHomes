@@ -69,6 +69,14 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         String password;
         username = usernameField.getText();
         password = passwordField.getText();
+        
+        /*This is where you should probably
+        set the aptfield problem*/
+        if(username != "donutresidentman"){
+            PayRentController.aptfield.setText("1112");
+        }
+        
+        
 
         /*SQL logic here*/
         if (!LoginSQLObject.validateLogin(username, password)) {//don't log in if we can't.

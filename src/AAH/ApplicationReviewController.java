@@ -77,7 +77,7 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
         AllotmentController.applicantname.setText(AtlantaApartmentHomes.aptNameSql);
         /*As above ^*/
         System.out.println(AtlantaApartmentHomes.aptNameSql);
-
+        
         /*If the length of the selection was empty set error, otherwise continue*/
         if (chosenPerson.length < 2) {
             ErrorCode.setCode(24);

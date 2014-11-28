@@ -117,7 +117,7 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
             }
             System.out.println();
         } else {
-            ErrorCode.setCode(10); //placeholde
+            ErrorCode.setCode(24); //placeholde
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
 

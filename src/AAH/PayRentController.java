@@ -39,7 +39,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
     @FXML
     private TextField datefield;
     @FXML
-    private TextField aptfield;
+    public static Label aptfield;
     @FXML
     private ComboBox monthfield;
     @FXML
