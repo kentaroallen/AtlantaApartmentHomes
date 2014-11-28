@@ -23,6 +23,10 @@ public class PayRentSQLObject {
     public static void payRent(String user, int apt_number, int baseRent, String card_num, Date paymentDate, int pay_month, int pay_year) {
 
 
+        if (alreadyPaid(user, apt_number, pay_month, pay_year) || ErrorCode.getCurrentError() != 0) {
+
+            return;
+        }
 
         int rent = baseRent;
 
@@ -55,6 +59,7 @@ public class PayRentSQLObject {
             }
         }
         catch (Exception e) {
+
 
             ErrorCode.setCode(9);
             System.out.println(ErrorCode.errorMessage());
@@ -98,6 +103,7 @@ public class PayRentSQLObject {
         }
         catch (Exception e) {
 
+            e.printStackTrace();
             ErrorCode.setCode(59);
             System.out.println(ErrorCode.errorMessage());
         }
@@ -120,6 +126,33 @@ public class PayRentSQLObject {
 
         int x = d2.getDate() - d1.getDate();
         return (x > 0) ? x : 1;
+    }
+
+    public static boolean alreadyPaid(String user, int apt_number, int month, int year) {
+
+        String alreadyPaidStatement = "SELECT * FROM PAYS_RENT PR NATURAL JOIN RESIDENT R WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"' AND PR.MONTH = '"+month+"' AND PR.YEAR = '"+year+"';";
+        System.out.println(alreadyPaidStatement);
+
+        try {
+
+            ResultSet rs = SQLConnector.runQuery(alreadyPaidStatement);
+
+            if (rs.next()) {
+
+                ErrorCode.setCode(62);
+                System.out.println(ErrorCode.errorMessage());
+                return true;
+            }
+
+        }
+        catch (Exception e) {
+
+            ErrorCode.setCode(61);
+            System.out.println(ErrorCode.errorMessage());
+
+        }
+
+        return false;
     }
 
 }

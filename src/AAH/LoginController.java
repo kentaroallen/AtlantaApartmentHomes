@@ -72,9 +72,10 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         
         /*This is where you should probably
         set the aptfield problem*/
-        if(username != "donutresidentman"){
+        /*if(username != "donutresidentman"){
             PayRentController.aptfield.setText("1112");
-        }
+        }*/
+
         
         
 
@@ -86,7 +87,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
 
         LoginSQLObject.setCurrentUser(username, password);
 
-        if ((CurrentUser.getUserType() == 0) && !LoginSQLObject.filledOutApplication(username)) { // if our user is prospective and hasn't completed their prospective resident application, we will make them finish it before loggin in to the good stuff
+        if ((CurrentUser.getUserType() == 0) && !LoginSQLObject.filledOutApplication(username)) {
 
             controller.setScreen(getProspective());
             return;

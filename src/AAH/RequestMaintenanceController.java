@@ -93,9 +93,9 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
         //
     }
 
-    public static void autoPopulate() {
+    public void autoPopulate() {
 
-       // aptfield.setText(CurrentUser.getApartmentNumber()+"");
+       aptfield.setText(CurrentUser.getApartmentNumber()+"");
     }
     @Override
     /**

@@ -13,7 +13,7 @@ public class PaymentInformationSQLObject {
     public static void main(String[] args)  {
 
 
-        insertPaymentInfo(594203, 2334, "ABBCMSV", new Date(), "Bhavs");
+        insertPaymentInfo("594203", "2334", "ABBCMSV", new Date(), "Bhavs");
 
         for (String[] s : getPaymentInfo("Bhavs")) {
 
@@ -54,7 +54,7 @@ public class PaymentInformationSQLObject {
         return out;
     }
 
-    public static void insertPaymentInfo(int card_num, int cvv, String name_on_card, Date exp, String user) {
+    public static void insertPaymentInfo(String card_num, String cvv, String name_on_card, Date exp, String user) {
 
         java.sql.Date expSQL = new java.sql.Date(exp.getTime());
         String payInfoStatement = "INSERT INTO PAYMENT_INFO VALUES ('"+card_num+"', '"+cvv+"', '"+name_on_card+"', '"+expSQL.toString()+"', '"+user+"') ";

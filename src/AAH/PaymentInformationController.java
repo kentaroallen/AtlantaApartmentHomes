@@ -22,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import java.util.Date;
 
 /**
  * FXML Controller class
@@ -77,7 +78,7 @@ public class PaymentInformationController extends ScreenTemplate implements Init
         String name = namefield.getText();
         String card = cardfield.getText();
         String month = monthfield.getText();
-        String year = yearfield.getText();
+        String year = "20"+yearfield.getText();
         String cw = cwfield.getText();
         System.out.println(name + " " + card + " " + month + " "
                 + year + " " + cw);
@@ -87,6 +88,16 @@ public class PaymentInformationController extends ScreenTemplate implements Init
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         } else {
+
+            int expyear = Integer.parseInt(year)-1900;
+            int expmonth = Integer.parseInt(month)-1;
+            Date exp = new Date(expyear, expmonth, 1);
+            PaymentInformationSQLObject.insertPaymentInfo(card, cw, name, exp , CurrentUser.getUsername() );
+
+            if (ErrorCode.getCurrentError() != 0) {
+
+                return;
+            }
             controller.setScreen(this.getHomepage());
         }
 

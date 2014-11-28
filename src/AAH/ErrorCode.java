@@ -151,8 +151,8 @@ public class ErrorCode {
      Maintenance Request Errors:
      51 : SQL Error Getting Issue Types
      52 : SQL Error Inserting Maintenance Request
-     53 :
-     54 :
+     53 : SQL Error Checking if payment has been made already
+     54 : Payment has been made already
      55 :
      56 :
      57 :
@@ -160,9 +160,10 @@ public class ErrorCode {
 
      Pay Rent Errors:
      59 : Error Inserting Values into Rent Payment
-     60 :
+     60 : Error Getting Previous Info
      61 :
      62 :
+     63 :
      >>>>>>> ee58a9b63607107a01d9947795a361efb12e4d47
 
 
@@ -320,9 +321,9 @@ public class ErrorCode {
             case 60:
                 return "Rent Payment Error: Database Error Retrieving Previous Rent Payment Information!";
             case 61:
-                return "-";
+                return "Rent Payment Error: Database Error Checking for Previous Payments!";
             case 62:
-                return "-";
+                return "Rent Payment Error: User has already paid for this month and year!";
             case 63:
                 return "-";
         }
