@@ -36,7 +36,7 @@ public class AllotmentController extends ScreenTemplate implements Initializable
      * Initializes the controller class.
      */
     @FXML
-    public static TableView availtable;
+    public TableView availtable;
     @FXML
     private TableColumn aptnocol;
     @FXML
@@ -50,7 +50,7 @@ public class AllotmentController extends ScreenTemplate implements Initializable
     @FXML
     private Label applicantname;
 
-    public static String[] chosenPerson;
+    //public static String[] chosenPerson;
 
     private boolean populateOnceAL = true;
 

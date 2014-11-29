@@ -20,6 +20,22 @@ public class ApartmentAllotmentSQLObject {
         }
     }
 
+    public static void allotToResident(String user, int apt_number) {
+
+        String makeResidentStatement = "INSERT INTO RESIDENT VALUES ('"+apt_number+"', '"+user+"';";
+
+        try {
+
+            SQLConnector.runUpdate(makeResidentStatement);
+        }
+        catch(Exception e) {
+
+            ErrorCode.setCode(32);
+            System.out.println(ErrorCode.errorMessage());
+        }
+
+    }
+
     public static ArrayList<String[]> getMatchingApartments(String category, int monthly_income, Date move_in_date ) {
 
 
@@ -27,7 +43,7 @@ public class ApartmentAllotmentSQLObject {
 
         /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
         java.sql.Date move_in_date_sql = new java.sql.Date(move_in_date.getTime());
-        String matchingApartmentsStatement = "SELECT * FROM APARTMENT WHERE Category = '"+category+"' AND "+monthly_income+" >= Rent AND '"+move_in_date_sql+"' >  Available_On;";
+        String matchingApartmentsStatement = "SELECT * FROM APARTMENT A WHERE A.Rent < "+(3*monthly_income)+" AND A.Available_On  <= '"+move_in_date_sql.toString()+"' AND A.Category = '"+category+"';";
         ResultSet rs = null;
 
         try {

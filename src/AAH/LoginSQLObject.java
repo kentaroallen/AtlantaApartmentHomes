@@ -114,12 +114,12 @@ public class LoginSQLObject {
 
         if (userType == 2 || userType == 0) {
 
-            CurrentUser.setUserInfo(user, pass, -1 , userType);
+            CurrentUser.setUserInfo(user, pass, -1 , userType, 0);
             return;
         }
         //we know that this is management, so we go ahead and take care of this case.
 
-        String retrieveUserStatement = "SELECT * FROM RESIDENT WHERE Username = '"+user+"';";
+        String retrieveUserStatement = "SELECT * FROM RESIDENT JOIN PROSPECTIVE_RESIDENT WHERE Username = '"+user+"';";
 
         try {
 
@@ -127,7 +127,7 @@ public class LoginSQLObject {
 
             while (rs.next()) {
 
-                CurrentUser.setUserInfo(user, pass, Integer.parseInt(rs.getString("Apt_Number")), userType);
+                CurrentUser.setUserInfo(user, pass, Integer.parseInt(rs.getString("Apt_Number")), userType, Integer.parseInt(rs.getString("Monthly_Income")));
             }
         }
         catch (Exception e) {

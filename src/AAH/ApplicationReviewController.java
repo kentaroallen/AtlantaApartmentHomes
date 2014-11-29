@@ -53,7 +53,7 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
     @FXML
     private TableColumn approvalcol;
 
-    public static String[] chosenPerson;
+
 
     @FXML
     /**
@@ -69,9 +69,15 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
         String rowValues = tablefield.getSelectionModel().getSelectedItems().toString();
         rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
 
+        String[] chosenPerson;
         chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
 
+        if (ApplicationReviewSQLObject.applicatAllotedAlready(chosenPerson[0]) || ErrorCode.getCurrentError() != 0) {
 
+            return;
+        }
+
+        ApartmentAllotmentChoice.setApplicant(chosenPerson[0]);
         /*If the length of the selection was empty set error, otherwise continue*/
         if (chosenPerson.length < 2) {
             ErrorCode.setCode(24);
@@ -86,6 +92,8 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
 
             controller.setScreen(this.getAllotment());
         }
+
+
 
     }
 

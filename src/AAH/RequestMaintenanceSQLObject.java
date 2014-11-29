@@ -12,7 +12,7 @@ public class RequestMaintenanceSQLObject {
 
     public static void main(String[] args) {
 
-        insertMaintenanceRequest(307, "Roaches Dude");
+
     }
 
     public static ArrayList<String[]> getIssues() {
@@ -45,6 +45,11 @@ public class RequestMaintenanceSQLObject {
 
     public static void insertMaintenanceRequest(int apt_num, String issueType ) {
 
+        if (maintRequestExists(apt_num, issueType) || ErrorCode.getCurrentError() != 0) {
+
+            return;
+        }
+
         Date now = new Date();
         java.sql.Date expSQL = new java.sql.Date(now.getTime());
         String maintRequestStatement = "INSERT INTO MAINTENANCE_REQUEST (Apt_Number, Date_Request, Issue_Type) VALUES('"+apt_num+"', '"+expSQL.toString()+"', '"+issueType+"') ";
@@ -63,5 +68,35 @@ public class RequestMaintenanceSQLObject {
         }
 
         return;
+    }
+
+    public static boolean maintRequestExists(int apt_num, String issue_type) {
+
+
+        Date now = new Date();
+        java.sql.Date expSQL = new java.sql.Date(now.getTime());
+
+        String maintCheck = "SELECT * FROM MAINTENANCE_REQUEST MR WHERE MR.Apt_Number = '"+apt_num+"' AND MR.Issue_Type ='"+issue_type+"' AND MR.Date_Resolved IS NULL ;";
+
+        try {
+
+            ResultSet rs = SQLConnector.runQuery(maintCheck);
+
+            if (rs.next()) {
+
+                ErrorCode.setCode(53);
+                System.out.println(ErrorCode.errorMessage());
+                return true;
+            }
+
+            return false;
+        }
+        catch (Exception e) {
+
+            ErrorCode.setCode(52);
+            System.out.println(ErrorCode.errorMessage());
+        }
+
+        return false;
     }
 }

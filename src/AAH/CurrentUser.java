@@ -14,12 +14,12 @@ public class CurrentUser {
     private static String password;
     private static int apartment;
     private static int type;
-    private int rent;
+    private static int rent;
     private Date moveInDate;
 
 
 
-    public static void setUserInfo(String u, String p, int a, int t) {// all relevant user information.
+    public static void setUserInfo(String u, String p, int a, int t, int rent) {// all relevant user information.
 
         set = true;
         username = u;
@@ -39,5 +39,6 @@ public class CurrentUser {
     public static String getPassword() { return password; }
     public static int getApartmentNumber() { return apartment; }
     public static int getUserType() { return type; }
+    public static int getRentAmount() { return rent; }
 
 }

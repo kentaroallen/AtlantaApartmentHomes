@@ -56,6 +56,14 @@ public class ReminderController extends ScreenTemplate implements Initializable,
         String outputMessage = "";
         outputMessage = outputMessage = messagearea.getText().toString();
         System.out.println("Message to: " + aptnum + "\nContaining: \n" + outputMessage);
+
+        ReminderSQLObject.sendReminder(Integer.parseInt(aptnum), outputMessage);
+
+        if (ErrorCode.getCurrentError() != 0) {
+
+            return;
+        }
+
         controller.setScreen(this.getHomepage());
         populateOnceRem = true;
     }
@@ -75,10 +83,9 @@ public class ReminderController extends ScreenTemplate implements Initializable,
     public void autoPopulateRem() {
         if(populateOnceRem) {
             System.out.println("Auto populated reminder controller.");
-            ArrayList<String> delinquentApts = new ArrayList<String>();
-            delinquentApts.add("1544");
-            delinquentApts.add("1206");
-            delinquentApts.add("5623");
+
+            ArrayList<String> delinquentApts = ReminderSQLObject.defaultedApartments(11, 2014);//CHECK THIS
+
             ObservableList<String> obListDelinquents = FXCollections.observableArrayList(delinquentApts);
             aptnobox.setItems(obListDelinquents);
             populateOnceRem = false;
