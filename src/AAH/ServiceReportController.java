@@ -45,9 +45,32 @@ public class ServiceReportController extends ScreenTemplate implements Initializ
     @FXML
     private TableView tablefield;
 
-    public void closeHandler(ActionEvent e) throws IOException {
-        System.out.println("close clicked");
-        controller.setScreen(this.getHomepage());
+    private boolean populateOnceS = true;
+
+
+    public void autoPopulateService() {
+        if (populateOnceS) {
+            System.out.println("auto populated service report");
+            ArrayList<ServiceReport> tablePopulator = new ArrayList<ServiceReport>();
+            tablePopulator.add(new ServiceReport("August", "Garbage Disposal", "20"));
+            tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
+            tablePopulator.add(new ServiceReport("", "BS", "5"));
+
+            tablePopulator.add(new ServiceReport("September", "Garbage Disposal", "20"));
+            tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
+            tablePopulator.add(new ServiceReport("", "BS", "5"));
+
+            tablePopulator.add(new ServiceReport("October", "Garbage Disposal", "20"));
+            tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
+            tablePopulator.add(new ServiceReport("", "BS", "5"));
+
+            ObservableList<ServiceReport> obList = FXCollections.observableArrayList(tablePopulator);
+            tablefield.setItems(obList);
+
+            populateOnceS = false;
+        } else {
+            System.out.println("Prevented auto populate @ service report");
+        }
     }
 
     @Override
@@ -63,8 +86,6 @@ public class ServiceReportController extends ScreenTemplate implements Initializ
 
         /*This populates the table.*/
         /*Month, Category, Apartment*/
-        ArrayList<ServiceReport> tablePopulator = new ArrayList<ServiceReport>();
-
         /*This is the idea to over come the lazy mode listed in the comments below*/
 //        int start = 0;
 //        String month;
@@ -82,22 +103,7 @@ public class ServiceReportController extends ScreenTemplate implements Initializ
 //        }
 
         /*Lazy mode. Month need only show once every 3 entry.*/
-        tablePopulator.add(new ServiceReport("August", "Garbage Disposal", "20"));
-        tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
-        tablePopulator.add(new ServiceReport("", "BS", "5"));
-
-        tablePopulator.add(new ServiceReport("September", "Garbage Disposal", "20"));
-        tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
-        tablePopulator.add(new ServiceReport("", "BS", "5"));
-
-        tablePopulator.add(new ServiceReport("October", "Garbage Disposal", "20"));
-        tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
-        tablePopulator.add(new ServiceReport("", "BS", "5"));
-
-        ObservableList<ServiceReport> obList = FXCollections.observableArrayList(tablePopulator);
-        tablefield.setItems(obList);
-
-        this.setTitleLabel(this.getHomepage());
+        //this.setTitleLabel(this.getHomepage());
     }
 
     @Override

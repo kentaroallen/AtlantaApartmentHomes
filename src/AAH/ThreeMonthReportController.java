@@ -44,9 +44,43 @@ public class ThreeMonthReportController extends ScreenTemplate implements Initia
     @FXML
     private TableView tablefield;
 
+    private boolean populateOnceT = true;
+
     public void closeHandler(ActionEvent e) throws IOException {
         System.out.println("close clicked");
         controller.setScreen(this.getHomepage());
+    }
+
+    /**
+     * Auto populate this 3 month report.
+     * Month --> Category --> Available
+     */
+    public void autoPopulateThree() {
+
+        if (populateOnceT) {
+            System.out.println("Auto populated @ Three month report");
+
+            ArrayList<Report> tablePopulator = new ArrayList<Report>();
+            tablePopulator.add(new Report("August", "1BR-1B", "20"));
+            tablePopulator.add(new Report("", "2BR-1B", "10"));
+            tablePopulator.add(new Report("", "2BR-2B", "5"));
+
+            tablePopulator.add(new Report("September", "1BR-1B", "20"));
+            tablePopulator.add(new Report("", "2BR-1B", "10"));
+            tablePopulator.add(new Report("", "2BR-2B", "5"));
+
+            tablePopulator.add(new Report("October", "1BR-1B", "20"));
+            tablePopulator.add(new Report("", "2BR-1B", "10"));
+            tablePopulator.add(new Report("", "2BR-2B", "5"));
+
+            ObservableList<Report> obList = FXCollections.observableArrayList(tablePopulator);
+            tablefield.setItems(obList);
+            
+            populateOnceT = false;
+        } else {
+            System.out.println("Prevented auto populate @ Three month report");
+        }
+
     }
 
     @Override
@@ -54,17 +88,11 @@ public class ThreeMonthReportController extends ScreenTemplate implements Initia
      * Placeholder method for correct operation.
      */
     public void initialize(URL url, ResourceBundle rb) {
-
         monthcol.setCellValueFactory(new PropertyValueFactory<AAH.model.Person, String>("month"));
         categorycol.setCellValueFactory(new PropertyValueFactory<AAH.model.Person, String>("category"));
         aptscol.setCellValueFactory(new PropertyValueFactory<AAH.model.Person, String>("apts"));
-
-
-        /*This populates the table.*/
         /*Month, Category, Apartment*/
-        ArrayList<Report> tablePopulator = new ArrayList<Report>();
 
-        /*This is the idea to over come the lazy mode listed in the comments below*/
 //        int start = 0;
 //        String month;
 //        for (int i = 0; i < sql.tuples; i++) {
@@ -79,24 +107,6 @@ public class ThreeMonthReportController extends ScreenTemplate implements Initia
 //                tablePopulator.add(new Report("", sql.retrieve.typ, sql.retrieve.aptsleft))
 //            }
 //        }
-
-        /*Lazy mode. Month need only show once every 3 entry.*/
-        tablePopulator.add(new Report("August", "1BR-1B", "20"));
-        tablePopulator.add(new Report("", "2BR-1B", "10"));
-        tablePopulator.add(new Report("", "2BR-2B", "5"));
-
-        tablePopulator.add(new Report("September", "1BR-1B", "20"));
-        tablePopulator.add(new Report("", "2BR-1B", "10"));
-        tablePopulator.add(new Report("", "2BR-2B", "5"));
-
-        tablePopulator.add(new Report("October", "1BR-1B", "20"));
-        tablePopulator.add(new Report("", "2BR-1B", "10"));
-        tablePopulator.add(new Report("", "2BR-2B", "5"));
-
-        ObservableList<Report> obList = FXCollections.observableArrayList(tablePopulator);
-        tablefield.setItems(obList);
-
-        this.setTitleLabel(this.getHomepage());
     }
 
     @Override

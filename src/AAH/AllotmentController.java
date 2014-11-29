@@ -89,15 +89,27 @@ public class AllotmentController extends ScreenTemplate implements Initializable
         }
 
     }
-
+    /**
+     * The auto population function. 
+     */
     public void autoPopulateAL() {
         if (populateOnceAL) {
             System.out.println("Auto populated allotment controller.");
             applicantname.setText(CurrentUser.getUsername() + "");
+
+            /*This populates the table.*/
+            /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
+            ArrayList<Apartment> tablePopulator = new ArrayList<Apartment>();
+            tablePopulator.add(new Apartment("1234", "2BR-2B", "1200", "1500", "12/01/2014"));
+            tablePopulator.add(new Apartment("4321", "1BR-2B", "1005", "1000", "01/21/2014"));
+            tablePopulator.add(new Apartment("2341", "2BR-1B", "1100", "1400", "11/18/2014"));
+            ObservableList<Apartment> obList = FXCollections.observableArrayList(tablePopulator);
+            availtable.setItems(obList);
+
             populateOnceAL = false;
         } else {
             System.out.println("prevented auto population. @ AllotmentController");
-            
+
         }
     }
 
@@ -117,19 +129,6 @@ public class AllotmentController extends ScreenTemplate implements Initializable
         rentcol.setCellValueFactory(new PropertyValueFactory<Apartment, String>("monthlyRent"));
         sqftcol.setCellValueFactory(new PropertyValueFactory<Apartment, String>("sqft"));
         availcol.setCellValueFactory(new PropertyValueFactory<Apartment, String>("availableDate"));
-
-        /*This populates the table.*/
-        /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
-        ArrayList<Apartment> tablePopulator = new ArrayList<Apartment>();
-        tablePopulator.add(new Apartment("1234", "2BR-2B", "1200", "1500", "12/01/2014"));
-        tablePopulator.add(new Apartment("4321", "1BR-2B", "1005", "1000", "01/21/2014"));
-        tablePopulator.add(new Apartment("2341", "2BR-1B", "1100", "1400", "11/18/2014"));
-        ObservableList<Apartment> obList = FXCollections.observableArrayList(tablePopulator);
-        availtable.setItems(obList);
-        /*End of populating the table.*/
-
-//        applicantname.setText(chosenPerson[0]); //ApplicationReviewController.chosenPerson[0]
-        this.setTitleLabel(this.getLogin());
     }
 
     @Override

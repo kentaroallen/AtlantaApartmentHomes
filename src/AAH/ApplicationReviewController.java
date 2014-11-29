@@ -53,6 +53,7 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
     @FXML
     private TableColumn approvalcol;
 
+    private boolean populateOnceApp = true;
 
     @FXML
     /**
@@ -87,10 +88,32 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
         }
 
     }
+    /**
+     * Auto population happens here
+     * @throws Exception 
+     */
+    public void autoPopulateApp() throws Exception {
+        if (populateOnceApp) {
+            System.out.println("Auto populated application review");
+            
+            ArrayList<Person> tablePopulator = new ArrayList<Person>();
+            for (String[] s : ApplicationReviewSQLObject.getApplications()) {
 
-    public void assignHandler(ActionEvent e) throws IOException {
+                tablePopulator.add(new Person(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]));
+            }
+            ObservableList<Person> obList = FXCollections.observableArrayList(tablePopulator);
+            tablefield.setItems(obList);
+            
+            populateOnceApp = false;
+        } else {
+            System.out.println("Prevented auto populate @ application review");
+        }
+    }
 
-        System.out.println("it hit");
+    public void exitHandler(ActionEvent e) throws IOException {
+        System.out.println("Exited application review screen");
+        controller.setScreen(this.getHomepage());
+        populateOnceApp = true;
     }
 
     @Override
@@ -107,37 +130,15 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
         leasecol.setCellValueFactory(new PropertyValueFactory<Person, String>("leaseterm"));
         approvalcol.setCellValueFactory(new PropertyValueFactory<Person, String>("approval"));
 
-        /*This populates the table.*/
         /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
-        ArrayList<Person> tablePopulator = new ArrayList<Person>();
-
-        try {
-            populateTable(tablePopulator);
-        } catch (Exception e) {
-
-        }
-
         //tablePopulator.add(new Person("Kentaro Allen", "1/18/1993", "Male", "1200", "1BR-1B", "11/25/2014", "1 year", "Approved"));
         //tablePopulator.add(new Person("Homeless Joe", "2/24/1956", "Male", "40", "1BR-1B", "11/29/2014", "2 year", "Declined"));
         //tablePopulator.add(new Person("Bro Dude", "1/1/2316", "Male", "4000", "2BR-1B", "12/29/2314", "1 year", "Declined"));
-        ObservableList<Person> obList = FXCollections.observableArrayList(tablePopulator);
-        tablefield.setItems(obList);
-        /*End of populating the table.*/
-
-        this.setTitleLabel(this.getLogin());
     }
 
     @Override
     public void setScreenParent(ScreenController screen) {
         controller = screen;
-    }
-
-    public static void populateTable(ArrayList<Person> table) throws Exception {
-
-        for (String[] s : ApplicationReviewSQLObject.getApplications()) {
-
-            table.add(new Person(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]));
-        }
     }
 
 }

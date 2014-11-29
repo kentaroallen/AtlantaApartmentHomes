@@ -140,6 +140,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
      */
     public void initialize(URL url, ResourceBundle rb) {
         this.setTitleLabel(this.getLogin());
+        
     }
 
     @Override
