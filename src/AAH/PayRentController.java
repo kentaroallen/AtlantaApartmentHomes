@@ -96,6 +96,10 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
             System.out.println(ErrorCode.errorMessage());
         }
     }
+    public void exitHandler(ActionEvent e) {
+        System.out.println("Exit to home page");
+        controller.setScreen(this.getHomepage());
+    }
 
     @Override
     /**

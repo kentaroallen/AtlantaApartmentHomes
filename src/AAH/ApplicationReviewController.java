@@ -53,7 +53,7 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
     @FXML
     private TableColumn approvalcol;
 
-
+    private boolean populateOnceApp = true;
 
     @FXML
     /**
@@ -65,11 +65,10 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
      * @param e the click button event that caused this.
      */
     public void nextHandler(ActionEvent e) throws IOException {
-
+        String[] chosenPerson;
         String rowValues = tablefield.getSelectionModel().getSelectedItems().toString();
         rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
 
-        String[] chosenPerson;
         chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
 
         if (ApplicationReviewSQLObject.applicatAllotedAlready(chosenPerson[0]) || ErrorCode.getCurrentError() != 0) {
@@ -93,13 +92,33 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
             controller.setScreen(this.getAllotment());
         }
 
+    }
+    /**
+     * Auto population happens here
+     * @throws Exception 
+     */
+    public void autoPopulateApp() throws Exception {
+        if (populateOnceApp) {
+            System.out.println("Auto populated application review");
+            
+            ArrayList<Person> tablePopulator = new ArrayList<Person>();
+            for (String[] s : ApplicationReviewSQLObject.getApplications()) {
 
-
+                tablePopulator.add(new Person(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]));
+            }
+            ObservableList<Person> obList = FXCollections.observableArrayList(tablePopulator);
+            tablefield.setItems(obList);
+            
+            populateOnceApp = false;
+        } else {
+            System.out.println("Prevented auto populate @ application review");
+        }
     }
 
-    public void assignHandler(ActionEvent e) throws IOException {
-
-        System.out.println("it hit");
+    public void exitHandler(ActionEvent e) throws IOException {
+        System.out.println("Exited application review screen");
+        controller.setScreen(this.getHomepage());
+        populateOnceApp = true;
     }
 
     @Override
