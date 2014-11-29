@@ -37,6 +37,7 @@
                </font>
             </Label>
             <Label fx:id="datelabel" layoutX="32.0" layoutY="212.0" text="date" />
+            <Button fx:id="loginButton1" layoutX="132.0" layoutY="192.0" mnemonicParsing="false" onAction="#exitHandler" onMouseMoved="#autoPopulate" prefHeight="25.0" prefWidth="54.0" text="Home" />
          </children>
       </AnchorPane>
    </center>

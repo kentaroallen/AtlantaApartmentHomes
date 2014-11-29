@@ -44,6 +44,7 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
     private Label datelabel;
     /*For data integrity.*/
     private boolean populateOnceRM = true;
+
     @FXML
     /**
      * When the user clicks the "New User?" hyperlink.
@@ -72,14 +73,13 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
             String issueType = issuebox.getValue().toString();
             System.out.println("Apartment number: " + apartmentNum + " issueType: " + issueType);
 
-            
             if (ErrorCode.currentError == 0 && !apartmentNum.equals("") && apartmentNum != null) {
                 /*From here this is guranteed to have correct sql input.*/
                 RequestMaintenanceSQLObject.insertMaintenanceRequest(CurrentUser.getApartmentNumber(), issueType);
                 /*Ends the area of where SQL input is guranteed.*/
                 controller.setScreen(this.getHomepage());
                 populateOnceRM = true;
-            }else{
+            } else {
                 ErrorCode.setCode(10);
                 ErrorCode.errorPopUp();
                 //This handles the case where if you left apartment num blank
@@ -95,16 +95,22 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
         //
     }
 
+    public void exitHandler(ActionEvent e) {
+        System.out.println("Exit to home page");
+        controller.setScreen(this.getHomepage());
+    }
+
     public void autoPopulate() {
-        if(populateOnceRM){
+        if (populateOnceRM) {
             System.out.println("auto populated request maintenance.");
-            aptfield.setText(CurrentUser.getApartmentNumber()+"");
+            aptfield.setText(CurrentUser.getApartmentNumber() + "");
             populateOnceRM = false;
-        }else{
+        } else {
             System.out.println("Prevented auto populate for data integrity. @ RequestMaintenance");
         }
-       
+
     }
+
     @Override
     /**
      * Placeholder method for correct operation.

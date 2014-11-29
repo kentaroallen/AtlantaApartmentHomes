@@ -77,6 +77,11 @@ public class PaymentInformationController extends ScreenTemplate implements Init
         }
     }
 
+    public void exitHandler(ActionEvent e) {
+        System.out.println("Exit to home page");
+        controller.setScreen(this.getHomepage());
+    }
+
     @FXML
     /**
      * Saves card information button
