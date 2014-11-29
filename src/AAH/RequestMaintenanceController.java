@@ -101,7 +101,7 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
             aptfield.setText(CurrentUser.getApartmentNumber()+"");
             populateOnceRM = false;
         }else{
-            System.out.println("Prevented auto populate for data integrity.");
+            System.out.println("Prevented auto populate for data integrity. @ RequestMaintenance");
         }
        
     }

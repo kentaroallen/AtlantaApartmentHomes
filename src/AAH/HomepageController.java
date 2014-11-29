@@ -5,7 +5,6 @@
  */
 package AAH;
 
-import static AAH.ErrorCode.errorMessage;
 import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
@@ -16,13 +15,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 /**
@@ -40,6 +39,8 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     private ComboBox reportbox;
     @FXML
     private Hyperlink mail;
+    @FXML
+    private TextArea messagearea;
 
     private boolean populateOnceHome = true;
 
@@ -133,25 +134,43 @@ public class HomepageController extends ScreenTemplate implements Initializable,
 
     }
 
+    public void threeMonthReportData() {
+
+    }
+
     /**
      * Read the latest mail message.
      */
     public void readLatestMail() {
+        try{
         Stage popup = new Stage();
-        HBox popup_hbox = new HBox();
-        Scene popup_scene = new Scene(popup_hbox, 300, 100);
-        popup.setTitle("Mail");
-        popup.setWidth(500);
-        popup.setHeight(150);
+        Parent root = FXMLLoader.load(getClass().getResource("view/MailBox.fxml"));
+        Scene popup_scene = new Scene(root);
+        popup.setTitle("Mail Box");
         popup.setScene(popup_scene);
         popup.show();
-        popup_hbox.setAlignment(Pos.CENTER);
-        popup_hbox.setSpacing(10);
-        Label mailLabel = new Label();
-        popup_hbox.getChildren().addAll(mailLabel);
+        }catch(Exception e){
+            System.out.println("failure to open mailbox.");
+        }
 
-        mailLabel.setText("Hey you smell like taco sandwich \n\n -Management");
-
+//        String[] things = {"Hey you smell like taco sandwich \n\n -Management",
+//            "Sup this is management.",
+//            "Yo do yo yo"};
+//        for (int i = 0; i < things.length; i++) {
+//            Stage popup = new Stage();
+//            HBox popup_hbox = new HBox();
+//            Scene popup_scene = new Scene(popup_hbox, 300, 100);
+//            popup.setTitle("Mail");
+//            popup.setWidth(500);
+//            popup.setHeight(150);
+//            popup.setScene(popup_scene);
+//            popup.show();
+//            popup_hbox.setAlignment(Pos.CENTER);
+//            popup_hbox.setSpacing(10);
+//            Label mailLabel = new Label();
+//            popup_hbox.getChildren().addAll(mailLabel);
+//            mailLabel.setText(things[i]);
+//        }
     }
 
     /**
@@ -160,7 +179,8 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     public void autoPopulateHome() {
         if (populateOnceHome) {
             System.out.println("Auto populated the home page");
-            mail.setText("1 new message");
+            String numberOfMessages = "3";
+            mail.setText(numberOfMessages + " unread messages");
             populateOnceHome = false;
         } else {
             System.out.println("prevented auto populate on home");

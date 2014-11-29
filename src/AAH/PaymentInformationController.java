@@ -132,7 +132,7 @@ public class PaymentInformationController extends ScreenTemplate implements Init
             cardbox.setItems(obListCards);
             populateOncePI = false;
         } else {
-            System.out.println("Prevented auto populate for data integrity.");
+            System.out.println("Prevented auto populate for data integrity. @ payment information");
         }
     }
 

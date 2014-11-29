@@ -83,7 +83,7 @@ public class ReminderController extends ScreenTemplate implements Initializable,
             aptnobox.setItems(obListDelinquents);
             populateOnceRem = false;
         } else {
-            System.out.println("Prevented auto populate");
+            System.out.println("Prevented auto populate @ ReminderController");
         }
     }
 

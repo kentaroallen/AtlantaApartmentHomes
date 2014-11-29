@@ -96,7 +96,7 @@ public class AllotmentController extends ScreenTemplate implements Initializable
             applicantname.setText(CurrentUser.getUsername() + "");
             populateOnceAL = false;
         } else {
-            System.out.println("prevented auto population.");
+            System.out.println("prevented auto population. @ AllotmentController");
             
         }
     }

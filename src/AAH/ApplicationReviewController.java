@@ -53,7 +53,6 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
     @FXML
     private TableColumn approvalcol;
 
-    public static String[] chosenPerson;
 
     @FXML
     /**
@@ -65,7 +64,7 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
      * @param e the click button event that caused this.
      */
     public void nextHandler(ActionEvent e) throws IOException {
-
+        String[] chosenPerson;
         String rowValues = tablefield.getSelectionModel().getSelectedItems().toString();
         rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
 
