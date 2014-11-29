@@ -22,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import java.util.Date;
 
 /**
  * FXML Controller class
@@ -34,17 +35,20 @@ public class PaymentInformationController extends ScreenTemplate implements Init
     /**
      * Initializes the controller class.
      */
-
     @FXML
-    /**
-     * When the user clicks the "New User?" hyperlink.
-     *
-     * @param e the click event.
-     */
-    public void newUserHandler(ActionEvent e) throws IOException {
-        System.out.println("New user clicked");
-        controller.setScreen(this.getNewUserReg());
-    }
+    private TextField namefield;
+    @FXML
+    private TextField cardfield;
+    @FXML
+    private TextField monthfield;
+    @FXML
+    private TextField yearfield;
+    @FXML
+    private TextField cwfield;
+    @FXML
+    private ComboBox cardbox;
+    /*Data integrity.*/
+    private boolean populateOncePI = true;
 
     @FXML
     /**
@@ -55,17 +59,88 @@ public class PaymentInformationController extends ScreenTemplate implements Init
      * These params correspond to inputs from the UI.
      */
     public void deleteHandler(ActionEvent e) throws IOException {
-        System.out.println("delete was clicked");
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
+        System.out.println("Delete was clicked");
+        try {
+            String cardInfo = cardbox.getValue().toString();
+            System.out.println("card info is: " + cardInfo);
+            controller.setScreen(this.getHomepage());
+            populateOncePI = true;
+        } catch (Exception nullInput) {
+            ErrorCode.setCode(46);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
+        }
+    }
+
+    public void exitHandler(ActionEvent e) {
+        System.out.println("Exit to home page");
         controller.setScreen(this.getHomepage());
     }
+
     @FXML
     /**
      * Saves card information button
      */
     public void saveHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("Save was clicked");
-        controller.setScreen(this.getHomepage());
+        String name = namefield.getText();
+        String card = cardfield.getText();
+        String month = monthfield.getText();
+        String year = "20" + yearfield.getText();
+        String cw = cwfield.getText();
+        System.out.println(name + " " + card + " " + month + " "
+                + year + " " + cw);
+
+        if (name.equals("") || card.equals("") || month.equals("") || year.equals("") || cw.equals("")) {
+            ErrorCode.setCode(47);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
+        } else {
+
+            int expyear = Integer.parseInt(year) - 1900;
+            int expmonth = Integer.parseInt(month) - 1;
+            Date exp = new Date(expyear, expmonth, 1);
+            PaymentInformationSQLObject.insertPaymentInfo(card, cw, name, exp, CurrentUser.getUsername());
+
+            if (ErrorCode.getCurrentError() != 0) {
+
+                return;
+            }
+            controller.setScreen(this.getHomepage());
+            populateOncePI = true;
+        }
+
     }
+
+    public void autoPopulatePI() {
+        if (populateOncePI) {
+            /*You can use this to autoPopulate the list of cards the user
+             may want to delete from the database.*/
+            System.out.println("auto populated payment information controller.");
+            ArrayList<String> posCards = new ArrayList<String>();
+            posCards.add("1234567890");
+            posCards.add("14535235535");
+            posCards.add("13371337133");
+            posCards.add("0987654321");
+            posCards.add("1122334455");
+            ObservableList<String> obListCards = FXCollections.observableArrayList(posCards);
+            cardbox.setItems(obListCards);
+            populateOncePI = false;
+        } else {
+            System.out.println("Prevented auto populate for data integrity. @ payment information");
+        }
+    }
+
     @Override
     /**
      * Placeholder method for correct operation.

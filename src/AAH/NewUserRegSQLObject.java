@@ -9,7 +9,7 @@ import java.sql.ResultSet;
  */
 public class NewUserRegSQLObject {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
     }
 
@@ -33,14 +33,14 @@ public class NewUserRegSQLObject {
 
     }
 
-    public static void insertUser(String user, String pass) throws Exception {
+    public static void insertUser(String user, String pass) {
 
         String registerStatement = "INSERT INTO USER VALUES ('"+user+"', '"+pass+"') ";
         //build our SQL statement
         try {
 
             SQLConnector.runUpdate(registerStatement);//run our statement and return if something janky happens
-            CurrentUser.setUserInfo(user, -1, 0);// sets default CU values
+            CurrentUser.setUserInfo(user, pass, -1, 0);// sets default CU values
         }
         catch (Exception e) {
             ErrorCode.setCode(4);

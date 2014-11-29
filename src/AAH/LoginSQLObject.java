@@ -33,6 +33,7 @@ public class LoginSQLObject {
 
             e.printStackTrace();
             ErrorCode.setCode(18);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
 
         }
@@ -51,6 +52,7 @@ public class LoginSQLObject {
 
             e.printStackTrace();
             ErrorCode.setCode(18);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
@@ -72,29 +74,35 @@ public class LoginSQLObject {
             if (!rs.next()) {// if no user exists with this name
 
                 ErrorCode.setCode(16);
+                ErrorCode.errorPopUp();
                 System.out.println(ErrorCode.errorMessage());
                 return false;
             }
 
-            while (rs.next()) {
+            else {
 
                 if (rs.getString("Password").equals(pass)) {
 
                     return true;
                 }
             }
+
         }
         catch (Exception e) {
 
             ErrorCode.setCode(19);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return false;
         }
 
+        ErrorCode.setCode(17);
+        ErrorCode.errorPopUp();
+        System.out.println(ErrorCode.errorMessage());
         return false;
     }
 
-    public static void setCurrentUser(String user) throws Exception{
+    public static void setCurrentUser(String user, String pass) throws Exception{
 
 
         int userType = userType(user);
@@ -106,12 +114,12 @@ public class LoginSQLObject {
 
         if (userType == 2 || userType == 0) {
 
-            CurrentUser.setUserInfo(user, -1 , userType);
+            CurrentUser.setUserInfo(user, pass, -1 , userType);
             return;
         }
         //we know that this is management, so we go ahead and take care of this case.
 
-        String retrieveUserStatement = "SELECT * FROM RESIDENT WHERE U.Username = '"+user+"';";
+        String retrieveUserStatement = "SELECT * FROM RESIDENT WHERE Username = '"+user+"';";
 
         try {
 
@@ -119,14 +127,14 @@ public class LoginSQLObject {
 
             while (rs.next()) {
 
-                CurrentUser.setUserInfo(user, Integer.parseInt(rs.getString("Apt_Number")), userType);
-
-                //String name, String dob, String gender, String income, String typeApt, String prefdate, String leaseterm, String approval
+                CurrentUser.setUserInfo(user, pass, Integer.parseInt(rs.getString("Apt_Number")), userType);
             }
         }
         catch (Exception e) {
 
+            //e.printStackTrace();
             ErrorCode.setCode(18);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
 
         }
@@ -146,6 +154,7 @@ public class LoginSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(20);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return true;
         }

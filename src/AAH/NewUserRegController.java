@@ -13,9 +13,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -64,6 +68,8 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         if (!password.equals(confirm)) {
 
             ErrorCode.setCode(2);
+            ErrorCode.errorPopUp();
+            
             System.out.println(ErrorCode.errorMessage());
             return;
         }
@@ -71,23 +77,22 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         if (NewUserRegSQLObject.userExists(username)) {
 
             ErrorCode.setCode(1);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return;
         }
 
+        if(ErrorCode.getCurrentError() == 0 && (username != null && !username.equals("") && password != null && !password.equals(""))){
 
-        NewUserRegSQLObject.insertUser(username, password);
-
-        if (ErrorCode.getCurrentError() == 0) {
-
+            CurrentUser.setUserInfo(username, password, -1, 0);
             controller.setScreen(this.getProspective());
         }
-
-        else {
-
+        else{
+            ErrorCode.setCode(10);
             System.out.println(ErrorCode.errorMessage());
 
         }
+        
         
         System.out.println("Register clicked \t Username is: " + username 
                + " password is: " + password

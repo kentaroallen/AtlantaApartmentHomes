@@ -36,7 +36,7 @@ public class AllotmentController extends ScreenTemplate implements Initializable
      * Initializes the controller class.
      */
     @FXML
-    private TableView availtable;
+    public static TableView availtable;
     @FXML
     private TableColumn aptnocol;
     @FXML
@@ -48,21 +48,23 @@ public class AllotmentController extends ScreenTemplate implements Initializable
     @FXML
     private TableColumn availcol;
     @FXML
-    public static Label applicantname;
+    private Label applicantname;
 
     public static String[] chosenPerson;
+
+    private boolean populateOnceAL = true;
 
     @FXML
 
     /**
-     * This retrieves the data values comma seperated value style of the highlighted
-     * row. 
-     *  [0]=name,[1]=dob,[2]=gender,[3]=income,[4]=apt type,
-     *  [5]=pref move in date,[6]=lease time,[7]=approval
-     * 
-     *  seperatedData[] holds these values.
-     * 
+     * This retrieves the data values comma seperated value style of the
+     * highlighted row. [0]=name,[1]=dob,[2]=gender,[3]=income,[4]=apt type,
+     * [5]=pref move in date,[6]=lease time,[7]=approval
+     *
+     * seperatedData[] holds these values.
+     *
      * SQL specific comments in implementation.
+     *
      * @param e the click button event that caused this.
      */
     public void assignHandler(ActionEvent e) throws IOException {
@@ -72,27 +74,49 @@ public class AllotmentController extends ScreenTemplate implements Initializable
         /*Comma seperated value retrieval*/
         String[] seperatedData = rowValues.split(",");
 
+        /*If no selection is actually made then error otherwise continue*/
+        if (seperatedData.length < 2) {
+            ErrorCode.setCode(24);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
+        } else {
+            for (int i = 0; i < seperatedData.length; i++) {
+                System.out.print(seperatedData[i] + " ");
+            }
+            System.out.println();
+            controller.setScreen(this.getHomepage());
+            populateOnceAL = true;
+        }
 
-        for (int i = 0; i < seperatedData.length; i++) {
-            System.out.print(seperatedData[i] + " ");
+    }
+    /**
+     * The auto population function. 
+     */
+    public void autoPopulateAL() {
+        if (populateOnceAL) {
+            System.out.println("Auto populated allotment controller.");
+            applicantname.setText(CurrentUser.getUsername() + "");
+
+            /*This populates the table.*/
+            /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
+            ArrayList<Apartment> tablePopulator = new ArrayList<Apartment>();
+            tablePopulator.add(new Apartment("1234", "2BR-2B", "1200", "1500", "12/01/2014"));
+            tablePopulator.add(new Apartment("4321", "1BR-2B", "1005", "1000", "01/21/2014"));
+            tablePopulator.add(new Apartment("2341", "2BR-1B", "1100", "1400", "11/18/2014"));
+            ObservableList<Apartment> obList = FXCollections.observableArrayList(tablePopulator);
+            availtable.setItems(obList);
+
+            populateOnceAL = false;
+        } else {
+            System.out.println("prevented auto population. @ AllotmentController");
 
         }
-        System.out.println();
-
-        /**
-         * Call AtlantaApartmentHomes.aptNameSql (String) to insert the selected
-         * data into the assocated aptNameSql key aptNameSql refers to the Name
-         * of the applicant in the applicant review screen.
-         *
-         *
-         *
-         */
-        controller.setScreen(this.getHomepage());
     }
+
     public void cancelHandler(ActionEvent e) throws IOException {
         System.out.println("Cancel button clicked");
         controller.setScreen(this.getHomepage());
-        
+
     }
 
     @Override
@@ -105,19 +129,6 @@ public class AllotmentController extends ScreenTemplate implements Initializable
         rentcol.setCellValueFactory(new PropertyValueFactory<Apartment, String>("monthlyRent"));
         sqftcol.setCellValueFactory(new PropertyValueFactory<Apartment, String>("sqft"));
         availcol.setCellValueFactory(new PropertyValueFactory<Apartment, String>("availableDate"));
-
-        /*This populates the table.*/
-        /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
-        ArrayList<Apartment> tablePopulator = new ArrayList<Apartment>();
-        tablePopulator.add(new Apartment("1234", "2BR-2B", "1200", "1500", "12/01/2014"));
-        tablePopulator.add(new Apartment("4321", "1BR-2B", "1005", "1000", "01/21/2014"));
-        tablePopulator.add(new Apartment("2341", "2BR-1B", "1100", "1400", "11/18/2014"));
-        ObservableList<Apartment> obList = FXCollections.observableArrayList(tablePopulator);
-        availtable.setItems(obList);
-        /*End of populating the table.*/
-
-//        applicantname.setText(chosenPerson[0]); //ApplicationReviewController.chosenPerson[0]
-        this.setTitleLabel(this.getLogin());
     }
 
     @Override

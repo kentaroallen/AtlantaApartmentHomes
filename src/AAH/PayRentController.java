@@ -35,8 +35,6 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
      * Initializes the controller class.
      */
     @FXML
-    private Label label;
-    @FXML
     private TextField datefield;
     @FXML
     private TextField aptfield;
@@ -48,9 +46,14 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
     private TextField duefield;
     @FXML
     private ComboBox cardfield;
+    /**
+     * Prevents multiple auto populates from fucking up data.
+     */
+    private boolean populateOncePR = true;
     @FXML
     /**
-     * This will take in the apartment number, rent for which month and year, amount due, and card
+     * This will take in the apartment number, rent for which month and year,
+     * amount due, and card
      *
      * @param e the click button event that caused this.
      * @param aptNum apartment number
@@ -59,14 +62,27 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
      * @param cc card to use
      */
     public void payHandler(ActionEvent e) throws IOException {
-//        String aptNum = aptfield.getText().toString();
-//        String mos = monthfield.getValue().toString();
-//        String year = yearfield.getValue().toString();
-//        String cc = cardfield.getValue().toString();
-//        
-//        System.out.println("pay clicked");
-//        System.out.println(aptNum + mos + year+ cc);
-        /*Go to different screen here.*/
+        try {
+            String aptNum = aptfield.getText().toString();
+            String mosRent = monthfield.getValue().toString();
+            String yearRent = yearfield.getValue().toString();
+            String creditCard = cardfield.getValue().toString();
+            String todaysDate = datefield.getText().toString();
+
+            System.out.println("pay clicked");
+            System.out.println("apt number: " + aptNum + " monthRent: " + mosRent + " yearRent: " + yearRent
+                    + " credit card num: " + creditCard + " todaysDate: " + todaysDate);
+            /*Go to different screen here.*/
+            controller.setScreen(this.getHomepage());
+            populateOncePR = true;
+        } catch (Exception nullInput) {
+            ErrorCode.setCode(10);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
+        }
+    }
+    public void exitHandler(ActionEvent e) {
+        System.out.println("Exit to home page");
         controller.setScreen(this.getHomepage());
     }
 
@@ -81,31 +97,49 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         int currentYear = localCalendar.get(Calendar.YEAR);
         String date = currentMonth + "/" + currentDay + "/" + currentYear;
        // System.out.println(date);
-        
+
         datefield.setText(date);
-        
+
         ArrayList<Integer> posMons = new ArrayList<Integer>();
-        for(int i = 1 ;i < 13; i++){
+        for (int i = 1; i < 13; i++) {
             posMons.add(i);
         }
         ObservableList<Integer> obListMonths = FXCollections.observableArrayList(posMons);
         ArrayList<Integer> posYears = new ArrayList<Integer>();
         posYears.add(2014);
         posYears.add(2015);
-        ObservableList<Integer> obListYears= FXCollections.observableArrayList(posYears);
-        
+        ObservableList<Integer> obListYears = FXCollections.observableArrayList(posYears);
+
         /*Populate the credit card numbers from SQL here*/
-        ArrayList<String> cardNumbers = new ArrayList<String>();
-        cardNumbers.add("81571581142");
-        cardNumbers.add("412844812441");
-        ObservableList<String> obListCards = FXCollections.observableArrayList(cardNumbers);
-        /*SQL NEEDED*/
         
-        cardfield.setItems(obListCards);
+        /*SQL NEEDED*/
+
+        
         monthfield.setItems(obListMonths);
         yearfield.setItems(obListYears);
-               
+
         this.setTitleLabel(this.getLogin());
+    }
+
+    public void autoPopulatePR() {
+        if(populateOncePR){
+        System.out.println("auto populated pay rent controller.");
+        aptfield.setText(CurrentUser.getApartmentNumber() + "");
+        String bsDueAmount = "1200"; 
+        duefield.setText(bsDueAmount + "");
+        
+        ArrayList<String> cardNumbers = new ArrayList<String>();
+        cardNumbers.add("815715811421");
+        cardNumbers.add("412844812441");
+        cardNumbers.add("999999999999");
+        cardNumbers.add("133713371337");
+        ObservableList<String> obListCards = FXCollections.observableArrayList(cardNumbers);
+        cardfield.setItems(obListCards);
+        populateOncePR = false;
+        }else{
+            System.out.println("Prevented auto populate for data integrity.");
+        }
+        
     }
 
     @Override

@@ -6,9 +6,12 @@
 package AAH;
 import AAH.model.ScreenNameContainer;
 import javafx.application.Application;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -16,8 +19,8 @@ import javafx.stage.Stage;
  * @author Kentaro
  */
 public class AtlantaApartmentHomes extends Application {
-    public static String aptNameSql = "Harry Potter";
     private ScreenNameContainer snc = new ScreenNameContainer();
+    
     /**
      * 
      * @param stage
@@ -34,6 +37,9 @@ public class AtlantaApartmentHomes extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        
+       
+        
     }
 
     private void initialize(ScreenController main) {

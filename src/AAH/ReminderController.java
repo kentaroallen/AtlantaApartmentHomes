@@ -38,7 +38,7 @@ public class ReminderController extends ScreenTemplate implements Initializable,
     private ComboBox aptnobox;
     @FXML
     private TextArea messagearea;
-
+    private boolean populateOnceRem = true;
     /**
      * Initializes the controller class.
      */
@@ -57,6 +57,7 @@ public class ReminderController extends ScreenTemplate implements Initializable,
         outputMessage = outputMessage = messagearea.getText().toString();
         System.out.println("Message to: " + aptnum + "\nContaining: \n" + outputMessage);
         controller.setScreen(this.getHomepage());
+        populateOnceRem = true;
     }
 
     /**
@@ -68,6 +69,22 @@ public class ReminderController extends ScreenTemplate implements Initializable,
     public void cancelHandler(ActionEvent e) throws IOException {
         System.out.println("Cancel hit");
         controller.setScreen(this.getHomepage());
+        populateOnceRem = true;
+    }
+
+    public void autoPopulateRem() {
+        if(populateOnceRem) {
+            System.out.println("Auto populated reminder controller.");
+            ArrayList<String> delinquentApts = new ArrayList<String>();
+            delinquentApts.add("1544");
+            delinquentApts.add("1206");
+            delinquentApts.add("5623");
+            ObservableList<String> obListDelinquents = FXCollections.observableArrayList(delinquentApts);
+            aptnobox.setItems(obListDelinquents);
+            populateOnceRem = false;
+        } else {
+            System.out.println("Prevented auto populate @ ReminderController");
+        }
     }
 
     @Override
@@ -75,12 +92,6 @@ public class ReminderController extends ScreenTemplate implements Initializable,
      * This should populate the table with each application needed to review.
      */
     public void initialize(URL url, ResourceBundle rb) {
-        ArrayList<String> delinquentApts = new ArrayList<String>();
-        delinquentApts.add("1544");
-        delinquentApts.add("1206");
-        delinquentApts.add("5623");
-        ObservableList<String> obListDelinquents = FXCollections.observableArrayList(delinquentApts);
-        aptnobox.setItems(obListDelinquents);
 
         Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
         int currentDay = localCalendar.get(Calendar.DATE);

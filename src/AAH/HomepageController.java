@@ -17,10 +17,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 /**
@@ -36,68 +37,158 @@ public class HomepageController extends ScreenTemplate implements Initializable,
      */
     @FXML
     private ComboBox reportbox;
+    @FXML
+    private Hyperlink mail;
+    @FXML
+    private TextArea messagearea;
+
+    private boolean populateOnceHome = true;
 
     public void payRentHandler(ActionEvent e) throws IOException {
 
-        if (CurrentUser.getUserType() != 1) { return; }
+        if (CurrentUser.getUserType() != 1) {
+            return;
+        }
         System.out.println("pay rent clicked");
         controller.setScreen(this.getPayRent());
+        populateOnceHome = true;
     }
 
     public void requestMaintenanceHandler(ActionEvent e) throws IOException {
 
-        if (CurrentUser.getUserType() != 1) { return; }
+        if (CurrentUser.getUserType() != 1) {
+            return;
+        }
         System.out.println("request maintenance clicked");
         controller.setScreen(this.getRequestMaintenance());
+        populateOnceHome = true;
     }
 
     public void paymentInformationHandler(ActionEvent e) throws IOException {
 
-        if (CurrentUser.getUserType() != 1) { return; }
+        if (CurrentUser.getUserType() != 1) {
+            return;
+        }
         System.out.println("payment information clicked");
         controller.setScreen(this.getPaymentInformation());
+        populateOnceHome = true;
     }
 
     public void applicationReviewHandler(ActionEvent e) throws IOException {
 
-        if (CurrentUser.getUserType() != 2) { return; }
+        if (CurrentUser.getUserType() != 2) {
+            return;
+        }
         System.out.println("application review clicked");
         controller.setScreen(this.getApplicationReview());
+        populateOnceHome = true;
     }
 
     public void mainRequestsHandler(ActionEvent e) throws IOException {
 
-        if (CurrentUser.getUserType() != 2) { return; }
+        if (CurrentUser.getUserType() != 2) {
+            return;
+        }
         controller.setScreen(this.getViewRequests());
         System.out.println("maintenance request clicked");
+        populateOnceHome = true;
     }
 
     public void rentReminderHandler(ActionEvent e) throws IOException {
 
-        if (CurrentUser.getUserType() != 2) { return; }
+        if (CurrentUser.getUserType() != 2) {
+            return;
+        }
         controller.setScreen(this.getReminder());
         System.out.println("rent reminder clicked");
+        populateOnceHome = true;
     }
+    /*
+     * Amier if you see this remind me to make it such that we get pop up reports
+     * This is fine for now but I want it the other way.
+     */
 
     public void reportHandler(ActionEvent e) throws IOException {
 
-        if (CurrentUser.getUserType() != 2) { return; }
+        if (CurrentUser.getUserType() != 2) {
+            return;
+        }
         System.out.println("Report handler clicked");
         String selectedReport = reportbox.getValue().toString().toLowerCase();
         if (selectedReport.contains("leasing")) {
-            /*The real way involves opening a new stage up
-            I will get to that later.
-            */
-
-            controller.setScreen(this.getThreeMonthReport());
+            System.out.println("Three month report");
+            setReportPopUp(0);
+            populateOnceHome = true;
         } else if (selectedReport.contains("service")) {
             System.out.println("Service request report");
-            controller.setScreen(this.getServiceReport());
+            setReportPopUp(1);
+            populateOnceHome = true;
         } else {
             System.out.println("rent defaulter report");
-            controller.setScreen(this.getDefaulterReport());
+            setReportPopUp(2);
+            populateOnceHome = true;
         }
 
+    }
+    /**
+     * The action handled upon logout
+     * @param e 
+     * @throws Exception 
+     */
+    public void logoutHandler(ActionEvent e) throws Exception{
+        System.out.println("Logged out");
+        controller.setScreen(this.getLogin());
+        populateOnceHome = true;
+        
+    }
+
+    /**
+     * Loads the pop up screen report. Data handling handled in respected controller.
+     * 0 for ThreeMonth, 1 for Service and 2 for Defaulter
+     * @param reportType
+     */
+    public void setReportPopUp(int reportType) {
+        String[] types = {"ThreeMonthReport", "ServiceReport", "DefaulterReport"};
+        try {
+            Stage popup = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("view/" + types[reportType] + ".fxml"));
+            Scene popup_scene = new Scene(root);
+            popup.setTitle(types[reportType]);
+            popup.setScene(popup_scene);
+            popup.show();
+        } catch (Exception e) {
+            System.out.println("failure to open. " + types[reportType]);
+        }
+    }
+
+    /**
+     * Read the latest mail message.
+     */
+    public void readLatestMail() {
+        try {
+            Stage popup = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("view/MailBox.fxml"));
+            Scene popup_scene = new Scene(root);
+            popup.setTitle("Mail Box");
+            popup.setScene(popup_scene);
+            popup.show();
+        } catch (Exception e) {
+            System.out.println("failure to open mailbox.");
+        }
+    }
+
+    /**
+     * the auto populate for home page mail function
+     */
+    public void autoPopulateHome() {
+        if (populateOnceHome) {
+            System.out.println("Auto populated the home page");
+            String numberOfMessages = "3";
+            mail.setText(numberOfMessages + " unread messages");
+            populateOnceHome = false;
+        } else {
+            System.out.println("prevented auto populate on home");
+        }
     }
 
     @Override
@@ -106,13 +197,13 @@ public class HomepageController extends ScreenTemplate implements Initializable,
      */
     public void initialize(URL url, ResourceBundle rb) {
         ArrayList<String> repType = new ArrayList<String>();
-        repType.add("LeasingReport");
-        repType.add("ServiceRequestReport");
-        repType.add("RentDefaulterReport");
+        repType.add("Leasing Report");
+        repType.add("Service Request Report");
+        repType.add("Rent Defaulter Report");
         ObservableList<String> obListReport = FXCollections.observableArrayList(repType);
 
         reportbox.setItems(obListReport);
-        this.setTitleLabel(this.getHomepage());
+        //this.setTitleLabel(this.getHomepage());
     }
 
     @Override

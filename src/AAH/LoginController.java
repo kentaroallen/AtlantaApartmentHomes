@@ -13,13 +13,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
-import org.omg.CORBA.Current;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -59,7 +59,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
      * @param e the click button event that caused this.
      */
     public void loginHandler(ActionEvent e) throws Exception {
-
+    
 
         /////////////////////
         ErrorCode.setCode(0);
@@ -69,16 +69,28 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         String password;
         username = usernameField.getText();
         password = passwordField.getText();
+        
+        /*This is where you should probably
+        set the aptfield problem*/
+      /*  if(username != "donutresidentman"){
+            PayRentController.aptfield.setText("1112");
+        }*/
+
+        
+        
 
         /*SQL logic here*/
-        LoginSQLObject.validateLogin(username, password);
-        LoginSQLObject.setCurrentUser(username);
+        if (!LoginSQLObject.validateLogin(username, password)) {//don't log in if we can't.
 
+            return;
+        }
 
-        if ((CurrentUser.getUserType() == 0) && !LoginSQLObject.filledOutApplication(username)) { // if our user is prospective and hasn't completed their prospective resident application, we will make them finish it before loggin in to the good stuff
+        LoginSQLObject.setCurrentUser(username, password);
 
-                controller.setScreen(getProspective());
-                return;
+        if ((CurrentUser.getUserType() == 0) && !LoginSQLObject.filledOutApplication(username)) {
+
+            controller.setScreen(getProspective());
+            return;
         }
 
         if (ErrorCode.currentError == 0) {
@@ -87,22 +99,40 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
 
             if (CurrentUser.getUserType() != 0) {
                 controller.setScreen(this.getHomepage());
+
             }
+
             else {
 
+                prospectivePopUp();
                 System.out.println("Application Under Review.");
             }
             return;
-        }
-        else {
+        } else {
 
             return;
         }
 
         /*Go to different screen here.*/
-
     }
 
+    public static void prospectivePopUp(){
+        Stage popup = new Stage();
+        HBox popup_hbox = new HBox();
+        Scene popup_scene = new Scene(popup_hbox, 300, 100);
+        popup.setTitle("Prospective Resident");
+        popup.setWidth(500);
+        popup.setHeight(150);
+        popup.setScene(popup_scene);
+        popup.show();
+        popup_hbox.setAlignment(Pos.CENTER);
+        popup_hbox.setSpacing(10);
+        Label errorlabel = new Label();
+        // errorlabel.setStyle("-fx-font: 12px Stencil;");
+        popup_hbox.getChildren().addAll(errorlabel);
+
+        errorlabel.setText("Application Under Review.");
+    }
 
     @Override
     /**
@@ -110,6 +140,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
      */
     public void initialize(URL url, ResourceBundle rb) {
         this.setTitleLabel(this.getLogin());
+        
     }
 
     @Override

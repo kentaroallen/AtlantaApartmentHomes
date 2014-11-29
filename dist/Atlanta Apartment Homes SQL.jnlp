@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Atlanta Apartment Homes.jnlp">
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Atlanta Apartment Homes SQL.jnlp">
   <information>
-    <title>Atlanta Apartment Homes</title>
+    <title>Atlanta Apartment Homes SQL</title>
     <vendor>Kentaro</vendor>
     <description>null</description>
     <offline-allowed/>
@@ -11,10 +11,11 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="lib/mysql-connector-java-5.1.23-bin.jar" size="827921" download="eager" />
   </resources>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Atlanta Apartment Homes" >
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Atlanta Apartment Homes SQL" >
     <param name="requiredFXVersion" value="2.2+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="AAH.AtlantaApartmentHomes"  name="Atlanta Apartment Homes" />
+  <jfx:javafx-desc  width="800" height="600" main-class="AAH.AtlantaApartmentHomes"  name="Atlanta Apartment Homes SQL" />
   <update check="always"/>
 </jnlp>

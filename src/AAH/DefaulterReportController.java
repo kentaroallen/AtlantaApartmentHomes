@@ -46,16 +46,46 @@ public class DefaulterReportController extends ScreenTemplate implements Initial
     @FXML
     private ComboBox monthchose;
 
-    public void closeHandler(ActionEvent e) throws IOException {
-        System.out.println("close clicked");
-        controller.setScreen(this.getHomepage());
-    }
+    private boolean populateOnceDefaulter = true;
 
+    /**
+     * This handler chooses the month picked in the combo box.
+     * @param e
+     * @throws IOException 
+     */
     public void monthHandler(ActionEvent e) throws IOException {
-        System.out.println("month chosen");
         String chosenMonth = monthchose.getValue().toString().toLowerCase();
-        System.out.println(chosenMonth);
+        System.out.println("month chosen " + chosenMonth);
+        populateTableBasedOnMonth(chosenMonth);
 
+    }
+    /**
+     * This populates the tables according to the selected month.
+     * @param month 
+     */
+    public void populateTableBasedOnMonth(String month) {
+        ArrayList<Defaulters> tablePopulator = new ArrayList<Defaulters>();
+        if (month.contains("january") || month.contains("december")) {
+            tablePopulator.add(new Defaulters("1234", "100", "20"));
+            tablePopulator.add(new Defaulters("3243", "200", "10"));
+            tablePopulator.add(new Defaulters("5452", "300", "5"));
+        }else{
+            tablePopulator.add(new Defaulters("999", "999", "9"));
+        }
+
+        /*Month, Category, Apartment*/
+        ObservableList<Defaulters> obList = FXCollections.observableArrayList(tablePopulator);
+        tablefield.setItems(obList);
+    }
+    /*This may not be needed since table is loaded only after a selection choice.*/
+    public void autoPopulateDefaulter() {
+        if (populateOnceDefaulter) {
+            System.out.println("Auto populated defaulter report");
+
+            populateOnceDefaulter = false;
+        } else {
+            System.out.println("Prevented auto populate @ Defaulter report");
+        }
     }
 
     @Override
@@ -69,33 +99,12 @@ public class DefaulterReportController extends ScreenTemplate implements Initial
         ObservableList<String> obListmo = FXCollections.observableArrayList(posGender);
 
         monthchose.setItems(obListmo);
-        
-        
-        
+
         aptcol.setCellValueFactory(new PropertyValueFactory<Defaulters, String>("apartment"));
         paidcol.setCellValueFactory(new PropertyValueFactory<Defaulters, String>("extramoney"));
         defaultcol.setCellValueFactory(new PropertyValueFactory<Defaulters, String>("defaultby"));
-        
-        /*This populates the table.*/
-        /*Month, Category, Apartment*/
-        /*Lazy mode. Month need only show once every 3 entry.
-         Algorithm fix in other comments in service report*/
-        ArrayList<Defaulters> tablePopulator = new ArrayList<Defaulters>();
-        tablePopulator.add(new Defaulters("1234","100","20"));
-        tablePopulator.add(new Defaulters("3243","200","10"));
-        tablePopulator.add(new Defaulters("5452","300","5"));
 
-        tablePopulator.add(new Defaulters("1234","100","20"));
-        tablePopulator.add(new Defaulters("3243","200","10"));
-        tablePopulator.add(new Defaulters("5452","300","5"));
-        
-        tablePopulator.add(new Defaulters("1234","100","20"));
-        tablePopulator.add(new Defaulters("3243","200","10"));
-        tablePopulator.add(new Defaulters("5452","300","5"));
-        ObservableList<Defaulters> obList = FXCollections.observableArrayList(tablePopulator);
-        tablefield.setItems(obList);
-
-        this.setTitleLabel(this.getHomepage());
+        this.setTitleLabel("Defaulter Report");
     }
 
     @Override

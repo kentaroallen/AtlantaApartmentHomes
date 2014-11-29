@@ -42,6 +42,8 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
     private ComboBox issuebox;
     @FXML
     private Label datelabel;
+    /*For data integrity.*/
+    private boolean populateOnceRM = true;
 
     @FXML
     /**
@@ -63,11 +65,50 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
      */
     public void requestHandler(ActionEvent e) throws IOException {
 
-        //String apartmentNum = aptfield.getText().toString();
+        ////////////////////
+        ErrorCode.setCode(0);
+        ///////////////////
+        try {
+            String apartmentNum = aptfield.getText().toString();
+            String issueType = issuebox.getValue().toString();
+            System.out.println("Apartment number: " + apartmentNum + " issueType: " + issueType);
 
+            if (ErrorCode.currentError == 0 && !apartmentNum.equals("") && apartmentNum != null) {
+                /*From here this is guranteed to have correct sql input.*/
+                RequestMaintenanceSQLObject.insertMaintenanceRequest(CurrentUser.getApartmentNumber(), issueType);
+                /*Ends the area of where SQL input is guranteed.*/
+                controller.setScreen(this.getHomepage());
+                populateOnceRM = true;
+            } else {
+                ErrorCode.setCode(10);
+                ErrorCode.errorPopUp();
+                //This handles the case where if you left apartment num blank
+            }
+        } catch (Exception nullInput) {
+            ErrorCode.setCode(10);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
+        }
         /*SQL logic here*/
         /*Go to different screen here.*/
+
+        //
+    }
+
+    public void exitHandler(ActionEvent e) {
+        System.out.println("Exit to home page");
         controller.setScreen(this.getHomepage());
+    }
+
+    public void autoPopulate() {
+        if (populateOnceRM) {
+            System.out.println("auto populated request maintenance.");
+            aptfield.setText(CurrentUser.getApartmentNumber() + "");
+            populateOnceRM = false;
+        } else {
+            System.out.println("Prevented auto populate for data integrity. @ RequestMaintenance");
+        }
+
     }
 
     @Override
@@ -75,8 +116,13 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
      * Placeholder method for correct operation.
      */
     public void initialize(URL url, ResourceBundle rb) {
+        ////////////////////
+        ErrorCode.setCode(0);
+        ///////////////////
         ArrayList<String> posIssues = new ArrayList<String>();
-        String[] types = {"Roaches", "Broken Appliances", "Just come now"};
+
+        String[] types = getIssueTypes();
+
         posIssues.addAll(Arrays.asList(types));
         ObservableList<String> obListIssues = FXCollections.observableArrayList(posIssues);
 
@@ -89,8 +135,27 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
 
         datelabel.setText(date);
 
+        System.out.println(CurrentUser.getApartmentNumber());
+
+        aptfield.setEditable(false);
+
         issuebox.setItems(obListIssues);
         this.setTitleLabel(this.getLogin());
+    }
+
+    public String[] getIssueTypes() {
+
+        ArrayList<String[]> as = RequestMaintenanceSQLObject.getIssues();
+
+        String[] out = new String[as.size()];
+        int i = 0;
+
+        for (String[] s : as) {
+
+            out[i++] = s[0];
+        }
+
+        return out;
     }
 
     @Override

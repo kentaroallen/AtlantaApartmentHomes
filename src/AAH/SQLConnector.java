@@ -8,6 +8,17 @@ public class SQLConnector {
 
     private static SQLConnector sqc = null;
     private static Connection conn = null;
+
+    /*
+    $mysql_host = "mysql2.000webhost.com";
+    $mysql_database = "a3997589_4400";
+    $mysql_user = "a3997589_4400";
+    $mysql_password = "4400back";
+
+    private static final String dbLocation = "jdbc:mysql://academic-mysql.cc.gatech.edu/cs4400_Group_34";
+    private static final String user = "cs4400_Group_34";
+    private static final String pass = "Q73RJrl6";
+     */
     private static final String dbLocation = "jdbc:mysql://academic-mysql.cc.gatech.edu/cs4400_Group_34";
     private static final String user = "cs4400_Group_34";
     private static final String pass = "Q73RJrl6";
