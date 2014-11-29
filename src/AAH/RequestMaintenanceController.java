@@ -42,7 +42,8 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
     private ComboBox issuebox;
     @FXML
     private Label datelabel;
-
+    /*For data integrity.*/
+    private boolean populateOnceRM = true;
     @FXML
     /**
      * When the user clicks the "New User?" hyperlink.
@@ -77,6 +78,7 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
                 RequestMaintenanceSQLObject.insertMaintenanceRequest(CurrentUser.getApartmentNumber(), issueType);
                 /*Ends the area of where SQL input is guranteed.*/
                 controller.setScreen(this.getHomepage());
+                populateOnceRM = true;
             }else{
                 ErrorCode.setCode(10);
                 ErrorCode.errorPopUp();
@@ -94,8 +96,14 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
     }
 
     public void autoPopulate() {
-
-       aptfield.setText(CurrentUser.getApartmentNumber()+"");
+        if(populateOnceRM){
+            System.out.println("auto populated request maintenance.");
+            aptfield.setText(CurrentUser.getApartmentNumber()+"");
+            populateOnceRM = false;
+        }else{
+            System.out.println("Prevented auto populate for data integrity.");
+        }
+       
     }
     @Override
     /**

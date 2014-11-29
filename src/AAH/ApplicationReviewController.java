@@ -58,10 +58,9 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
     @FXML
     /**
      * This selects the highlighted row comma seperated value style and puts it
-     * into the array chosenPerson[]
-     * The following defines chosenPerson
-     * [0]=name,[1]=dob,[2]=gender,[3]=income,[4]=apt type,
-     *  [5]=pref move in date,[6]=lease time,[7]=approval
+     * into the array chosenPerson[] The following defines chosenPerson
+     * [0]=name,[1]=dob,[2]=gender,[3]=income,[4]=apt type, [5]=pref move in
+     * date,[6]=lease time,[7]=approval
      *
      * @param e the click button event that caused this.
      */
@@ -72,12 +71,7 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
 
         chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
 
-        /*This holds the saved value of the persons name. This is useful for SQL in comparison on screen change.*/
-        AtlantaApartmentHomes.aptNameSql = chosenPerson[0];
-        AllotmentController.applicantname.setText(" ");
-        /*As above ^*/
-        System.out.println(AtlantaApartmentHomes.aptNameSql);
-        
+
         /*If the length of the selection was empty set error, otherwise continue*/
         if (chosenPerson.length < 2) {
             ErrorCode.setCode(24);

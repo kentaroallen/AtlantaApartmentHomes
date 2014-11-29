@@ -48,9 +48,11 @@ public class AllotmentController extends ScreenTemplate implements Initializable
     @FXML
     private TableColumn availcol;
     @FXML
-    public static Label applicantname;
+    private Label applicantname;
 
     public static String[] chosenPerson;
+
+    private boolean populateOnceAL = true;
 
     @FXML
 
@@ -83,8 +85,20 @@ public class AllotmentController extends ScreenTemplate implements Initializable
             }
             System.out.println();
             controller.setScreen(this.getHomepage());
+            populateOnceAL = true;
         }
 
+    }
+
+    public void autoPopulateAL() {
+        if (populateOnceAL) {
+            System.out.println("Auto populated allotment controller.");
+            applicantname.setText(CurrentUser.getUsername() + "");
+            populateOnceAL = false;
+        } else {
+            System.out.println("prevented auto population.");
+            
+        }
     }
 
     public void cancelHandler(ActionEvent e) throws IOException {

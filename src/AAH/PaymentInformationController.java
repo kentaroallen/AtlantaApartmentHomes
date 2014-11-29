@@ -47,6 +47,8 @@ public class PaymentInformationController extends ScreenTemplate implements Init
     private TextField cwfield;
     @FXML
     private ComboBox cardbox;
+    /*Data integrity.*/
+    private boolean populateOncePI = true;
 
     @FXML
     /**
@@ -63,11 +65,12 @@ public class PaymentInformationController extends ScreenTemplate implements Init
         ////////////////////
 
         System.out.println("Delete was clicked");
-        try{
+        try {
             String cardInfo = cardbox.getValue().toString();
             System.out.println("card info is: " + cardInfo);
             controller.setScreen(this.getHomepage());
-        }catch(Exception nullInput){
+            populateOncePI = true;
+        } catch (Exception nullInput) {
             ErrorCode.setCode(46);
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
@@ -88,7 +91,7 @@ public class PaymentInformationController extends ScreenTemplate implements Init
         String name = namefield.getText();
         String card = cardfield.getText();
         String month = monthfield.getText();
-        String year = "20"+yearfield.getText();
+        String year = "20" + yearfield.getText();
         String cw = cwfield.getText();
         System.out.println(name + " " + card + " " + month + " "
                 + year + " " + cw);
@@ -99,18 +102,38 @@ public class PaymentInformationController extends ScreenTemplate implements Init
             System.out.println(ErrorCode.errorMessage());
         } else {
 
-            int expyear = Integer.parseInt(year)-1900;
-            int expmonth = Integer.parseInt(month)-1;
+            int expyear = Integer.parseInt(year) - 1900;
+            int expmonth = Integer.parseInt(month) - 1;
             Date exp = new Date(expyear, expmonth, 1);
-            PaymentInformationSQLObject.insertPaymentInfo(card, cw, name, exp , CurrentUser.getUsername() );
+            PaymentInformationSQLObject.insertPaymentInfo(card, cw, name, exp, CurrentUser.getUsername());
 
             if (ErrorCode.getCurrentError() != 0) {
 
                 return;
             }
             controller.setScreen(this.getHomepage());
+            populateOncePI = true;
         }
 
+    }
+
+    public void autoPopulatePI() {
+        if (populateOncePI) {
+            /*You can use this to autoPopulate the list of cards the user
+             may want to delete from the database.*/
+            System.out.println("auto populated payment information controller.");
+            ArrayList<String> posCards = new ArrayList<String>();
+            posCards.add("1234567890");
+            posCards.add("14535235535");
+            posCards.add("13371337133");
+            posCards.add("0987654321");
+            posCards.add("1122334455");
+            ObservableList<String> obListCards = FXCollections.observableArrayList(posCards);
+            cardbox.setItems(obListCards);
+            populateOncePI = false;
+        } else {
+            System.out.println("Prevented auto populate for data integrity.");
+        }
     }
 
     @Override
@@ -119,14 +142,6 @@ public class PaymentInformationController extends ScreenTemplate implements Init
      */
     public void initialize(URL url, ResourceBundle rb) {
         /*Need to load cardbox with sql statements into an observable list*/
-        ArrayList<String> posCards = new ArrayList<String>();
-        posCards.add("1234567890");
-        posCards.add("0987654321");
-        posCards.add("1122334455");
-        ObservableList<String> obListCards = FXCollections.observableArrayList(posCards);
-        cardbox.setItems(obListCards);
-        
-        
         this.setTitleLabel(this.getNewUserReg());
     }
 

@@ -19,7 +19,6 @@ import javafx.stage.Stage;
  * @author Kentaro
  */
 public class AtlantaApartmentHomes extends Application {
-    public static String aptNameSql = "Harry Potter";
     private ScreenNameContainer snc = new ScreenNameContainer();
     
     /**

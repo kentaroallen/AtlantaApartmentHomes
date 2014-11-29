@@ -61,6 +61,7 @@
                   <Image url="@../img/index.png" />
                </image>
             </ImageView>
+            <Hyperlink fx:id="mail" layoutX="108.0" layoutY="234.0" onAction="#readLatestMail" text="1 New Message" />
          </children></AnchorPane>
    </center>
 </BorderPane>
