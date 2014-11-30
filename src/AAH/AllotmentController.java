@@ -36,7 +36,7 @@ public class AllotmentController extends ScreenTemplate implements Initializable
      * Initializes the controller class.
      */
     @FXML
-    public static TableView availtable;
+    public TableView availtable;
     @FXML
     private TableColumn aptnocol;
     @FXML
@@ -68,6 +68,11 @@ public class AllotmentController extends ScreenTemplate implements Initializable
      * @param e the click button event that caused this.
      */
     public void assignHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         String rowValues = availtable.getSelectionModel().getSelectedItems().toString();
         /*Removes the [ ] around the string*/
         rowValues = rowValues.substring(1, rowValues.length() - 1);
@@ -84,6 +89,13 @@ public class AllotmentController extends ScreenTemplate implements Initializable
                 System.out.print(seperatedData[i] + " ");
             }
             System.out.println();
+
+            ApartmentAllotmentSQLObject.allotToResident(ApartmentAllotmentChoice.getApplicant(), Integer.parseInt(seperatedData[0]));
+
+            if (ErrorCode.currentError != 0) {
+
+                return;
+            }
             controller.setScreen(this.getHomepage());
             populateOnceAL = true;
         }
@@ -95,14 +107,18 @@ public class AllotmentController extends ScreenTemplate implements Initializable
     public void autoPopulateAL() {
         if (populateOnceAL) {
             System.out.println("Auto populated allotment controller.");
-            applicantname.setText(CurrentUser.getUsername() + "");
+            applicantname.setText("   " + ApartmentAllotmentChoice.getApplicant() + "");
 
             /*This populates the table.*/
             /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
             ArrayList<Apartment> tablePopulator = new ArrayList<Apartment>();
-            tablePopulator.add(new Apartment("1234", "2BR-2B", "1200", "1500", "12/01/2014"));
-            tablePopulator.add(new Apartment("4321", "1BR-2B", "1005", "1000", "01/21/2014"));
-            tablePopulator.add(new Apartment("2341", "2BR-1B", "1100", "1400", "11/18/2014"));
+            //new String[] {rs.getString("Apt_Number"), rs.getString("Available_On"), rs.getString("Square_Feet"), rs.getString("Lease_Term"), rs.getString("Category"), rs.getString("Rent")};
+
+            for (String[] s : ApartmentAllotmentSQLObject.getMatchingApartments(ApartmentAllotmentChoice.getApplicant())) {
+
+                tablePopulator.add(new Apartment(s[0], s[4], s[5], s[2], s[1]));
+            }
+
             ObservableList<Apartment> obList = FXCollections.observableArrayList(tablePopulator);
             availtable.setItems(obList);
 

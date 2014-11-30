@@ -35,6 +35,7 @@ public class MailBoxController implements Initializable {
     private TableView tablefieldmb;
 
     private boolean populateOnceMB = true;
+    private ArrayList<String[]> messages;
 
     public void autoPopulateMailBox() {
         messcol.setCellValueFactory(new PropertyValueFactory<Mail, String>("number"));
@@ -42,8 +43,18 @@ public class MailBoxController implements Initializable {
 
         if (populateOnceMB) {
             ArrayList<Mail> tablePopulator = new ArrayList<Mail>();
-            tablePopulator.add(new Mail("1", "1/1/2316"));
-            tablePopulator.add(new Mail("2", "2/3/2116"));
+            messages = MailBoxSQLObject.getUnreadMessages(CurrentUser.getUsername());
+
+            if (ErrorCode.getCurrentError() != 0) {
+
+                return;
+            }
+
+            for (String[] s : messages) {
+
+                tablePopulator.add(new Mail(s[0], s[2]));
+            }
+
             ObservableList<Mail> obList = FXCollections.observableArrayList(tablePopulator);
             tablefieldmb.setItems(obList);
             populateOnceMB = false;
@@ -54,7 +65,7 @@ public class MailBoxController implements Initializable {
 
     public void readMessage() {
         String[] chosenMail;
-        String rowValues = tablefieldmb.getSelectionModel().getSelectedItems().toString();//....
+        String rowValues = tablefieldmb.getSelectionModel().getSelectedItems().toString();//...
         rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
 
         chosenMail = rowValues.split(","); /*Comma seperated value retrieval*/
@@ -70,11 +81,16 @@ public class MailBoxController implements Initializable {
                 System.out.print(chosenMail[i] + " ");
             }
             System.out.println();
-            if(chosenMail[0].contains("1")){
-                messagearea.setText("You are late on your bills \n\n -Management");
-            }else{
-                messagearea.setText("We fixed the problems in your apartment \n\n -Management");
+
+            String outputMessage = messages.get(Integer.parseInt(chosenMail[0])-1)[1];
+            MailBoxSQLObject.setMessagesRead(CurrentUser.getUsername(), CurrentUser.getApartmentNumber(), outputMessage);
+
+            if (ErrorCode.getCurrentError() != 0) {
+
+                return;
             }
+            messagearea.setText(outputMessage);
+            //ADD IN CODE TO SET AS READ//
         }
 
         

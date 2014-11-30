@@ -54,6 +54,11 @@ public class DefaulterReportController extends ScreenTemplate implements Initial
      * @throws IOException 
      */
     public void monthHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         String chosenMonth = monthchose.getValue().toString().toLowerCase();
         System.out.println("month chosen " + chosenMonth);
         populateTableBasedOnMonth(chosenMonth);

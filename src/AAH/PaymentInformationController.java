@@ -8,6 +8,7 @@ package AAH;
 import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -68,6 +69,13 @@ public class PaymentInformationController extends ScreenTemplate implements Init
         try {
             String cardInfo = cardbox.getValue().toString();
             System.out.println("card info is: " + cardInfo);
+
+            PaymentInformationSQLObject.deletePaymentInfo(cardInfo);
+            if (ErrorCode.getCurrentError() != 0) {
+
+                return;
+            }
+
             controller.setScreen(this.getHomepage());
             populateOncePI = true;
         } catch (Exception nullInput) {
@@ -127,18 +135,27 @@ public class PaymentInformationController extends ScreenTemplate implements Init
             /*You can use this to autoPopulate the list of cards the user
              may want to delete from the database.*/
             System.out.println("auto populated payment information controller.");
-            ArrayList<String> posCards = new ArrayList<String>();
-            posCards.add("1234567890");
-            posCards.add("14535235535");
-            posCards.add("13371337133");
-            posCards.add("0987654321");
-            posCards.add("1122334455");
+
+            ArrayList<String> posCards = payInfoCardNumbers() ;
+
             ObservableList<String> obListCards = FXCollections.observableArrayList(posCards);
             cardbox.setItems(obListCards);
             populateOncePI = false;
         } else {
             System.out.println("Prevented auto populate for data integrity. @ payment information");
         }
+    }
+
+    public static ArrayList<String> payInfoCardNumbers() {
+
+        ArrayList<String> out = new ArrayList<String>();
+
+        for (String[] s : PaymentInformationSQLObject.getPaymentInfo(CurrentUser.getUsername())) {
+
+            out.add(s[0]);
+        }
+
+        return out;
     }
 
     @Override

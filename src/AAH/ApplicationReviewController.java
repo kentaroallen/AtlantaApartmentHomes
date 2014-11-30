@@ -65,13 +65,23 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
      * @param e the click button event that caused this.
      */
     public void nextHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         String[] chosenPerson;
         String rowValues = tablefield.getSelectionModel().getSelectedItems().toString();
         rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
 
         chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
 
+        if (ApplicationReviewSQLObject.applicantAllotedAlready(chosenPerson[0]) || ErrorCode.getCurrentError() != 0) {
 
+            return;
+        }
+
+        ApartmentAllotmentChoice.setApplicant(chosenPerson[0], Integer.parseInt(chosenPerson[3]), "2B");
         /*If the length of the selection was empty set error, otherwise continue*/
         if (chosenPerson.length < 2) {
             ErrorCode.setCode(24);
@@ -111,6 +121,11 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
     }
 
     public void exitHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("Exited application review screen");
         controller.setScreen(this.getHomepage());
         populateOnceApp = true;

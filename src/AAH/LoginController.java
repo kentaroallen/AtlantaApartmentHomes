@@ -48,6 +48,11 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
      * @param e the click event.
      */
     public void newUserHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("New user clicked");
         controller.setScreen(this.getNewUserReg());
     }
@@ -75,9 +80,6 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
       /*  if(username != "donutresidentman"){
             PayRentController.aptfield.setText("1112");
         }*/
-
-        
-        
 
         /*SQL logic here*/
         if (!LoginSQLObject.validateLogin(username, password)) {//don't log in if we can't.

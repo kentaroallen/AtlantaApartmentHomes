@@ -13,27 +13,22 @@ public class PayRentSQLObject {
 
     public static void main(String[] args) {
 
-        Date now = Calendar.getInstance().getTime();
-
-        payRent("Bhavs", 465, 354, "100090003444588", new Date(2014-1900, 11-1, 30 ), 11, 2014);
-
-
     }
 
-    public static void payRent(String user, int apt_number, int baseRent, String card_num, Date paymentDate, int pay_month, int pay_year) {
+
+    public static int amountOwed(String user, int apt_number, int baseRent, Date paymentDate, int pay_month, int pay_year) {
 
 
-        if (alreadyPaid(user, apt_number, pay_month, pay_year) || ErrorCode.getCurrentError() != 0) {
+        if ((paymentDate.getMonth() + 1) != pay_month || (paymentDate.getYear() + 1900) != pay_year) {//make sure we are only paying for the current month
 
-            return;
+            System.out.println((paymentDate.getMonth()+1)+" "+(paymentDate.getYear()+1900)+"");
+            return 0;
         }
 
         int rent = baseRent;
 
-        String firstTimeStatement = "SELECT * FROM PAYS_RENT PR JOIN RESIDENT R WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"';";
-
-        //System.out.println(firstTimeStatement);
-
+        String firstTimeStatement = "SELECT * FROM PAYS_RENT PR JOIN RESIDENT R ON PR.Apartment_Number = R.Apt_Number WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"';";
+        System.out.println(firstTimeStatement);
 
         try {
 
@@ -42,8 +37,7 @@ public class PayRentSQLObject {
             if ( (!rs.next()) && paymentDate.after(new Date(pay_year-1900, pay_month-1, 3))) {
 
                 System.out.println("hit");
-                proratedRent(card_num, apt_number, pay_month, pay_year, paymentDate, baseRent);
-                return;
+                return proratedRent(paymentDate, baseRent);
             }
 
             else {
@@ -51,11 +45,11 @@ public class PayRentSQLObject {
 
                 if (paymentDate.after(new Date(pay_year-1900, pay_month-1, 3))) {
 
-                    lateRent(card_num, apt_number, pay_month, pay_year, paymentDate, baseRent);
-                    return;
+                    System.out.println("hit2");
+                    return lateRent(pay_month, pay_year, paymentDate, baseRent);
                 }
 
-                regularRent(card_num, apt_number, pay_month, pay_year, paymentDate, baseRent);
+                return baseRent;
             }
         }
         catch (Exception e) {
@@ -63,23 +57,19 @@ public class PayRentSQLObject {
 
             ErrorCode.setCode(9);
             System.out.println(ErrorCode.errorMessage());
-            return;
+            return baseRent;
         }
 
     }
 
-    public static void regularRent(String credit_card, int apt_num, int month, int year, Date payDate, int amt) {
 
-        insertRentPayment(credit_card, apt_num, month, year, payDate, amt);
-    }
-
-    public static void lateRent(String credit_card, int apt_num, int month, int year, Date payDate, int amt) {
+    public static int lateRent(int month, int year, Date payDate, int amt) {
 
         int daysLate = daysBetween(new Date(year, month, 3), payDate);
-        insertRentPayment(credit_card, apt_num, month, year, payDate, amt + 50*daysLate);
+        return (amt + 50*daysLate);
     }
 
-    public static void proratedRent(String credit_card, int apt_num, int month, int year, Date payDate, int amt) {
+    public static int proratedRent(Date payDate, int amt) {
 
 
         System.out.println(lastDayOfMonth(payDate).toString());
@@ -87,11 +77,17 @@ public class PayRentSQLObject {
         System.out.println(totalDaysInMonth);
         System.out.println(daysBetween(payDate, lastDayOfMonth(payDate)));
 
-        int rent = (int) ((amt/totalDaysInMonth)*daysBetween(payDate, lastDayOfMonth(payDate)));
-        insertRentPayment(credit_card, apt_num, month, year, payDate, rent);
+
+        return (int) ((amt/totalDaysInMonth)*daysBetween(payDate, lastDayOfMonth(payDate)));
+
     }
 
-    public static void insertRentPayment(String credit_card, int apt_num, int month, int year, Date payDate, int amt) {
+    public static void payRent(String user, String credit_card, int apt_num, int month, int year, Date payDate, int amt) {
+
+        if (alreadyPaid(user, apt_num, month, year) || ErrorCode.getCurrentError() != 0) {
+
+            return;
+        }
 
         java.sql.Date sqlPayDate = new java.sql.Date(payDate.getTime());
         String insertRentStatement = "INSERT INTO PAYS_RENT VALUES('"+credit_card+"', '"+month+"', '"+year+"', '"+apt_num+"', '"+sqlPayDate.toString()+"', '"+amt+"');";
@@ -130,7 +126,7 @@ public class PayRentSQLObject {
 
     public static boolean alreadyPaid(String user, int apt_number, int month, int year) {
 
-        String alreadyPaidStatement = "SELECT * FROM PAYS_RENT PR NATURAL JOIN RESIDENT R WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"' AND PR.MONTH = '"+month+"' AND PR.YEAR = '"+year+"';";
+        String alreadyPaidStatement = "SELECT * FROM PAYS_RENT PR JOIN RESIDENT R ON PR.Apartment_Number = R.Apt_Number  WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"' AND PR.MONTH = '"+month+"' AND PR.YEAR = '"+year+"';";
         System.out.println(alreadyPaidStatement);
 
         try {
@@ -155,7 +151,7 @@ public class PayRentSQLObject {
         return false;
     }
 
-    public ArrayList<String> getCreditCardInfo() {
+    public ArrayList<String> getCreditCardInfo() {//
 
         return null;
     }

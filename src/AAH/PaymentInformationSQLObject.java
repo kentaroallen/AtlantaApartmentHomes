@@ -56,6 +56,11 @@ public class PaymentInformationSQLObject {
 
     public static void insertPaymentInfo(String card_num, String cvv, String name_on_card, Date exp, String user) {
 
+        if (paymentInfoExists(card_num) || ErrorCode.getCurrentError() != 0) {
+
+            return;
+        }
+
         java.sql.Date expSQL = new java.sql.Date(exp.getTime());
         String payInfoStatement = "INSERT INTO PAYMENT_INFO VALUES ('"+card_num+"', '"+cvv+"', '"+name_on_card+"', '"+expSQL.toString()+"', '"+user+"') ";
         //build our SQL statement
@@ -70,6 +75,51 @@ public class PaymentInformationSQLObject {
         }
 
         return;
+    }
+
+    public static void deletePaymentInfo(String card_num) {
+
+        String deletePayStatement = "DELETE FROM PAYMENT_INFO WHERE Card_Number = '"+card_num+"';";
+
+        System.out.println(deletePayStatement);
+        try {
+
+            SQLConnector.runUpdate(deletePayStatement);
+
+        }
+        catch (Exception e) {
+
+            e.printStackTrace();
+            ErrorCode.setCode(45);
+            System.out.println(ErrorCode.errorMessage());
+        }
+    }
+
+    public static boolean paymentInfoExists(String card_num) {
+
+
+        String payInfoCheck = "SELECT * FROM PAYMENT_INFO PI WHERE PI.Card_Number = '"+card_num+"';";
+
+        try {
+
+            ResultSet rs = SQLConnector.runQuery(payInfoCheck);
+
+            if (rs.next()) {
+
+                ErrorCode.setCode(48);
+                System.out.println(ErrorCode.errorMessage());
+                return true;
+            }
+
+            return false;
+        }
+        catch (Exception e) {
+
+            ErrorCode.setCode(45);
+            System.out.println(ErrorCode.errorMessage());
+        }
+
+        return false;
     }
 
 }

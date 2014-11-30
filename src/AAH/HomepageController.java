@@ -130,6 +130,19 @@ public class HomepageController extends ScreenTemplate implements Initializable,
         }
 
     }
+    /**
+     * The action handled upon logout
+     * @param e 
+     * @throws Exception 
+     */
+    public void logoutHandler(ActionEvent e) throws Exception{
+
+        CurrentUser.clear();
+        System.out.println("Logged out");
+        controller.setScreen(this.getLogin());
+        populateOnceHome = true;
+        
+    }
 
     /**
      * Loads the pop up screen report. Data handling handled in respected controller.
@@ -154,6 +167,11 @@ public class HomepageController extends ScreenTemplate implements Initializable,
      * Read the latest mail message.
      */
     public void readLatestMail() {
+
+        if (CurrentUser.getUserType() == 2) {
+            return;
+        }
+
         try {
             Stage popup = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("view/MailBox.fxml"));
@@ -172,7 +190,7 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     public void autoPopulateHome() {
         if (populateOnceHome) {
             System.out.println("Auto populated the home page");
-            String numberOfMessages = "3";
+            String numberOfMessages = (CurrentUser.getUserType() == 2) ? "x" : ""+MailBoxSQLObject.getUnreadMessages(CurrentUser.getUsername()).size();
             mail.setText(numberOfMessages + " unread messages");
             populateOnceHome = false;
         } else {

@@ -18,6 +18,7 @@
                   <Font name="Cambria Math" size="48.0" />
                </font>
             </Text>
+            <Hyperlink layoutX="14.0" layoutY="14.0" onAction="#logoutHandler" text="Logout" />
          </children>
       </AnchorPane>
    </top>

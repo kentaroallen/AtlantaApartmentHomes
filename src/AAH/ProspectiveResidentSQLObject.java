@@ -59,7 +59,7 @@ public class ProspectiveResidentSQLObject {
     }
 
 
-    public static void insertProspectiveResident(String username, Date dob, String name, String gender, Date moveIn, int leaseTerm,  int monthlyIncome, String category, String prevAddress, int minRent, int maxRent, String apartmentStatus) throws Exception {
+    public static void insertProspectiveResident(String username, Date dob, String name, String gender, Date moveIn, int leaseTerm,  int monthlyIncome, String category, String prevAddress, int minRent, int maxRent) throws Exception {
 
         //assume we pass in valid information
 
@@ -70,10 +70,18 @@ public class ProspectiveResidentSQLObject {
             return;
         }
 
+        boolean accept = availableApartmentExists(monthlyIncome, moveIn, category, minRent, maxRent);
+
+        if (ErrorCode.getCurrentError() != 0) {
+
+            return;
+        }
+
+        String decision = (accept) ? "Accepted": "Rejected";
+
         java.sql.Date sqlDOB = new java.sql.Date(dob.getTime());//because JDBC is lame, it wants us to convert our dates to SQL readable ones
         java.sql.Date sqlMoveInDate = new java.sql.Date(moveIn.getTime());
-
-        String applicationStatement = "INSERT INTO PROSPECTIVE_RESIDENT VALUES ('"+username+"', '"+sqlDOB.toString()+"', '"+name+"', '"+gender+"', '"+sqlMoveInDate.toString()+"', '"+leaseTerm+"', '"+monthlyIncome+"', '"+category+"', '"+prevAddress+"', '"+minRent+"', '"+maxRent+"', '"+apartmentStatus+"') ";
+        String applicationStatement = "INSERT INTO PROSPECTIVE_RESIDENT VALUES ('"+username+"', '"+sqlDOB.toString()+"', '"+name+"', '"+gender+"', '"+sqlMoveInDate.toString()+"', '"+leaseTerm+"', '"+monthlyIncome+"', '"+category+"', '"+prevAddress+"', '"+minRent+"', '"+maxRent+"', '"+decision+"') ";
         //build our SQL statement
 
         try {
@@ -97,6 +105,25 @@ public class ProspectiveResidentSQLObject {
         c.add(Calendar.MONTH, 2);
 
         return (c.getTime().after(d) || c.getTime().equals(d));
+    }
+
+    public static boolean availableApartmentExists(int rent, Date preferredMoveIn, String category, int min_rent, int max_rent) {
+
+        java.sql.Date sqlDate = new java.sql.Date(preferredMoveIn.getTime());
+        String checkAvailabilityStatement = "SELECT * FROM APARTMENT A WHERE A.Rent < "+(3*rent)+" AND A.Available_On  <= '"+sqlDate.toString()+"' AND A.Category = '"+category+"' AND A.Rent > "+min_rent+" AND A.Rent < "+max_rent+";";
+
+        try {
+
+            ResultSet rs = SQLConnector.runQuery(checkAvailabilityStatement);
+
+            return (rs.next());
+        }
+        catch (Exception e) {
+
+            ErrorCode.setCode(14);
+            System.out.println(ErrorCode.errorMessage());
+            return true;
+        }
     }
 
 }

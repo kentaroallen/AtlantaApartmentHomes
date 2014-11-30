@@ -31,8 +31,8 @@
             <TextField fx:id="aptfield" editable="false" layoutX="11.0" layoutY="65.0" prefHeight="25.0" prefWidth="166.0" />
             <Label layoutX="12.0" layoutY="48.0" text="Apartment Number:" />
             <Label layoutX="12.0" layoutY="90.0" text="Rent for Month:" />
-            <ComboBox fx:id="monthfield" layoutX="14.0" layoutY="105.0" prefHeight="25.0" prefWidth="69.0" />
-            <ComboBox fx:id="yearfield" layoutX="91.0" layoutY="105.0" prefHeight="25.0" prefWidth="88.0" />
+            <ComboBox fx:id="monthfield" layoutX="14.0" layoutY="105.0" onAction="#setAmountDue" prefHeight="25.0" prefWidth="69.0" />
+            <ComboBox fx:id="yearfield" layoutX="91.0" layoutY="105.0" onAction="#setAmountDue" prefHeight="25.0" prefWidth="88.0" />
             <Label layoutX="10.0" layoutY="130.0" text="Amount Due:" />
             <TextField fx:id="duefield" editable="false" layoutX="10.0" layoutY="147.0" prefHeight="25.0" prefWidth="173.0" />
             <Label layoutX="12.0" layoutY="172.0" text="Use Card:" />

@@ -52,6 +52,11 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
      * @param e the click event.
      */
     public void newUserHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("New user clicked");
         controller.setScreen(this.getNewUserReg());
     }

@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import java.util.Date;
 
 /**
  * FXML Controller class Everything about the application review is a straight
@@ -50,12 +51,21 @@ public class ReminderController extends ScreenTemplate implements Initializable,
      * @param e the click button event that caused this.
      */
     public void sendHandler(ActionEvent e) throws IOException {
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("Things were hit.");
         String aptnum = "";
         aptnum = aptnobox.getValue().toString();
         String outputMessage = "";
         outputMessage = outputMessage = messagearea.getText().toString();
         System.out.println("Message to: " + aptnum + "\nContaining: \n" + outputMessage);
+
+        ReminderSQLObject.sendReminder(Integer.parseInt(aptnum), outputMessage);
+
+        if (ErrorCode.getCurrentError() != 0) { return; }
+
         controller.setScreen(this.getHomepage());
         populateOnceRem = true;
     }
@@ -67,6 +77,11 @@ public class ReminderController extends ScreenTemplate implements Initializable,
      * @throws IOException
      */
     public void cancelHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("Cancel hit");
         controller.setScreen(this.getHomepage());
         populateOnceRem = true;
@@ -75,10 +90,13 @@ public class ReminderController extends ScreenTemplate implements Initializable,
     public void autoPopulateRem() {
         if(populateOnceRem) {
             System.out.println("Auto populated reminder controller.");
-            ArrayList<String> delinquentApts = new ArrayList<String>();
-            delinquentApts.add("1544");
-            delinquentApts.add("1206");
-            delinquentApts.add("5623");
+            Date now = Calendar.getInstance().getTime();
+
+            System.out.println((now.getMonth()+1) + "");
+            System.out.println((now.getYear()+1900) + "");
+            ArrayList<String> delinquentApts = ReminderSQLObject.defaultedApartments(now.getMonth() + 1, now.getYear() + 1900);
+
+
             ObservableList<String> obListDelinquents = FXCollections.observableArrayList(delinquentApts);
             aptnobox.setItems(obListDelinquents);
             populateOnceRem = false;

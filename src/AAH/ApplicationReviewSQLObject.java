@@ -36,6 +36,34 @@ public class ApplicationReviewSQLObject {
 
     }
 
+
+    public static boolean applicantAllotedAlready(String user) {
+
+        String checkAllotedStatement = "SELECT * FROM RESIDENT R WHERE R.Username = '"+user+"';";
+
+        try {
+
+            ResultSet rs = SQLConnector.runQuery(checkAllotedStatement);
+
+            if (rs.next()) {
+
+                ErrorCode.setCode(25);
+                System.out.println(ErrorCode.errorMessage());
+                return true;
+            }
+
+            return false;
+
+        }
+        catch (Exception e) {
+
+            ErrorCode.setCode(26);
+            System.out.println(ErrorCode.errorMessage());
+            return true;
+        }
+
+    }
+
     public static boolean residentStatus(boolean decision, String user, int apartmentNumber) throws Exception {
 
         return (decision) ? acceptResident(user, apartmentNumber) : rejectResident(user);

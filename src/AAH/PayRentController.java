@@ -9,6 +9,7 @@ import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,10 +47,14 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
     private TextField duefield;
     @FXML
     private ComboBox cardfield;
+
+    private boolean monthSet;
+    private boolean yearSet;
     /**
      * Prevents multiple auto populates from fucking up data.
      */
     private boolean populateOncePR = true;
+
     @FXML
     /**
      * This will take in the apartment number, rent for which month and year,
@@ -71,7 +76,18 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
 
             System.out.println("pay clicked");
             System.out.println("apt number: " + aptNum + " monthRent: " + mosRent + " yearRent: " + yearRent
-                    + " credit card num: " + creditCard + " todaysDate: " + todaysDate);
+                   + " credit card num: " + creditCard + " todaysDate: " + todaysDate);
+
+            int amtOwed = Integer.parseInt(duefield.getText());
+            int month = Integer.parseInt(mosRent);
+            int year = Integer.parseInt(yearRent);
+
+            PayRentSQLObject.payRent(CurrentUser.getUsername(), creditCard, CurrentUser.getApartmentNumber(), month, year, Calendar.getInstance().getTime(), amtOwed);
+
+            if (ErrorCode.getCurrentError() != 0) {
+
+                return;
+            }
             /*Go to different screen here.*/
             controller.setScreen(this.getHomepage());
             populateOncePR = true;
@@ -81,8 +97,10 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
             System.out.println(ErrorCode.errorMessage());
         }
     }
+
     public void exitHandler(ActionEvent e) {
         System.out.println("Exit to home page");
+        populateOncePR = true;
         controller.setScreen(this.getHomepage());
     }
 
@@ -96,7 +114,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         int currentMonth = localCalendar.get(Calendar.MONTH) + 1;
         int currentYear = localCalendar.get(Calendar.YEAR);
         String date = currentMonth + "/" + currentDay + "/" + currentYear;
-       // System.out.println(date);
+        // System.out.println(date);
 
         datefield.setText(date);
 
@@ -111,10 +129,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         ObservableList<Integer> obListYears = FXCollections.observableArrayList(posYears);
 
         /*Populate the credit card numbers from SQL here*/
-        
         /*SQL NEEDED*/
-
-        
         monthfield.setItems(obListMonths);
         yearfield.setItems(obListYears);
 
@@ -122,24 +137,49 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
     }
 
     public void autoPopulatePR() {
-        if(populateOncePR){
-        System.out.println("auto populated pay rent controller.");
-        aptfield.setText(CurrentUser.getApartmentNumber() + "");
-        String bsDueAmount = "1200"; 
-        duefield.setText(bsDueAmount + "");
-        
-        ArrayList<String> cardNumbers = new ArrayList<String>();
-        cardNumbers.add("815715811421");
-        cardNumbers.add("412844812441");
-        cardNumbers.add("999999999999");
-        cardNumbers.add("133713371337");
-        ObservableList<String> obListCards = FXCollections.observableArrayList(cardNumbers);
-        cardfield.setItems(obListCards);
-        populateOncePR = false;
-        }else{
+        if (populateOncePR) {
+            System.out.println("auto populated pay rent controller.");
+            aptfield.setText(CurrentUser.getApartmentNumber() + "");
+
+            ArrayList<String> cardNumbers = payInfoCardNumbers();
+            ObservableList<String> obListCards = FXCollections.observableArrayList(cardNumbers);
+            cardfield.setItems(obListCards);
+            populateOncePR = false;
+        } else {
             System.out.println("Prevented auto populate for data integrity.");
         }
-        
+
+    }
+
+    /**
+     * Set the SQL here
+     *
+     * @param e
+     * @throws Exception
+     */
+    public void setAmountDue(ActionEvent e) throws Exception {
+        try {
+            String mosRent = monthfield.getValue().toString();
+            String yearRent = yearfield.getValue().toString();
+            String DueAmount = PayRentSQLObject.amountOwed(CurrentUser.getUsername(), CurrentUser.getApartmentNumber(), CurrentUser.getRentAmount(), Calendar.getInstance().getTime(), Integer.parseInt(mosRent), Integer.parseInt(yearRent)) + "";
+            duefield.setText(DueAmount + "");
+        } catch (Exception bs) {
+            System.out.println("Error: Both things are not set yet.");
+        }
+
+    }
+
+
+    public static ArrayList<String> payInfoCardNumbers() {
+
+        ArrayList<String> out = new ArrayList<String>();
+
+        for (String[] s : PaymentInformationSQLObject.getPaymentInfo(CurrentUser.getUsername())) {//
+
+            out.add(s[0]);
+        }
+
+        return out;
     }
 
     @Override
