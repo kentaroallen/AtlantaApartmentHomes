@@ -19,7 +19,7 @@ public class ReminderSQLObject {
 
 
         //String getDefaultedStatement = "SELECT * FROM (SELECT Apt_Number FROM APARTMENT) MINUS (SELECT A.Apt_Number FROM (SELECT * FROM APARTMENT A JOIN PAYS_RENT PR ON A.Apt_Number = PR.Apartment_Number) WHERE PR.Month = '"+month+"' AND PR.Year = '"+year+"' ) ";
-        String getDefaultedStatement = "SELECT Apt_Number FROM APARTMENT WHERE APARTMENT.Apt_Number NOT IN (SELECT X.Apt_Number FROM (SELECT * FROM APARTMENT A JOIN PAYS_RENT PR ON A.Apt_Number = PR.Apartment_Number) X WHERE Month = '"+month+" AND Year = '"+year+"' )";
+        String getDefaultedStatement = "SELECT Apt_Number FROM APARTMENT WHERE APARTMENT.Apt_Number NOT IN (SELECT X.Apt_Number FROM (SELECT * FROM APARTMENT A JOIN PAYS_RENT PR ON A.Apt_Number = PR.Apartment_Number) X WHERE Month = '"+month+"' AND Year = '"+year+"' )";
         System.out.println(getDefaultedStatement);
         ArrayList<String> out = new ArrayList<String>();
 
@@ -43,7 +43,8 @@ public class ReminderSQLObject {
 
     public static void sendReminder(int apt_num, String message) {
 
-        String sendReminderStatement = "INSERT INTO REMINDER VALUES ( '"+apt_num+"', '"+message+"' );";
+        java.sql.Date now = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        String sendReminderStatement = "INSERT INTO REMINDER VALUES ( '"+apt_num+"', '"+now.toString()+"' , '"+message+"', 'Unread' );";
 
         try {
 

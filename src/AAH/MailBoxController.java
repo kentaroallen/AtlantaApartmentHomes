@@ -35,6 +35,7 @@ public class MailBoxController implements Initializable {
     private TableView tablefieldmb;
 
     private boolean populateOnceMB = true;
+    private ArrayList<String[]> messages;
 
     public void autoPopulateMailBox() {
         messcol.setCellValueFactory(new PropertyValueFactory<Mail, String>("number"));
@@ -42,8 +43,18 @@ public class MailBoxController implements Initializable {
 
         if (populateOnceMB) {
             ArrayList<Mail> tablePopulator = new ArrayList<Mail>();
-            tablePopulator.add(new Mail("1", "1/1/2316"));
-            tablePopulator.add(new Mail("2", "2/3/2116"));
+            messages = MailBoxSQLObject.getMessages(CurrentUser.getApartmentNumber());
+
+            if (ErrorCode.getCurrentError() != 0) {
+
+                return;
+            }
+
+            for (String[] s : messages) {
+
+                tablePopulator.add(new Mail(s[0], s[2]));
+            }
+
             ObservableList<Mail> obList = FXCollections.observableArrayList(tablePopulator);
             tablefieldmb.setItems(obList);
             populateOnceMB = false;
@@ -70,11 +81,9 @@ public class MailBoxController implements Initializable {
                 System.out.print(chosenMail[i] + " ");
             }
             System.out.println();
-            if(chosenMail[0].contains("1")){
-                messagearea.setText("You are late on your bills \n\n -Management");
-            }else{
-                messagearea.setText("We fixed the problems in your apartment \n\n -Management");
-            }
+
+            messagearea.setText(messages.get(Integer.parseInt(chosenMail[0])-1)[1]);
+            //ADD IN CODE TO SET AS READ//
         }
 
         

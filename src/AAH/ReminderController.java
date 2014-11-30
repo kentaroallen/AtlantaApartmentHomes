@@ -61,6 +61,11 @@ public class ReminderController extends ScreenTemplate implements Initializable,
         String outputMessage = "";
         outputMessage = outputMessage = messagearea.getText().toString();
         System.out.println("Message to: " + aptnum + "\nContaining: \n" + outputMessage);
+
+        ReminderSQLObject.sendReminder(Integer.parseInt(aptnum), outputMessage);
+
+        if (ErrorCode.getCurrentError() != 0) { return; }
+
         controller.setScreen(this.getHomepage());
         populateOnceRem = true;
     }
@@ -87,9 +92,9 @@ public class ReminderController extends ScreenTemplate implements Initializable,
             System.out.println("Auto populated reminder controller.");
             Date now = Calendar.getInstance().getTime();
 
-            ArrayList<String> delinquentApts = ReminderSQLObject.defaultedApartments(now.getMonth(), now.getYear());
-
-
+            System.out.println((now.getMonth()+1) + "");
+            System.out.println((now.getYear()+1900) + "");
+            ArrayList<String> delinquentApts = ReminderSQLObject.defaultedApartments(now.getMonth() + 1, now.getYear() + 1900);
 
 
             ObservableList<String> obListDelinquents = FXCollections.observableArrayList(delinquentApts);
