@@ -67,6 +67,11 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
      * @param cc card to use
      */
     public void payHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         try {
             String aptNum = aptfield.getText().toString();
             String mosRent = monthfield.getValue().toString();
@@ -99,6 +104,11 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
     }
 
     public void exitHandler(ActionEvent e) {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("Exit to home page");
         populateOncePR = true;
         controller.setScreen(this.getHomepage());

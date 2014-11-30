@@ -377,7 +377,7 @@ public class ErrorCode {
             case 69:
                 return "Rent Reminder Error: Database Error Sending Reminder Message!";
             case 70:
-                return "-";
+                return "Rent Reminder Error: Reminder Already Sent today for this Apartment!";
             case 71:
                 return "-";
             case 72:

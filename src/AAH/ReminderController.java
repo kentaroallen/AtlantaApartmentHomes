@@ -51,6 +51,7 @@ public class ReminderController extends ScreenTemplate implements Initializable,
      * @param e the click button event that caused this.
      */
     public void sendHandler(ActionEvent e) throws IOException {
+
         /////////////////////
         ErrorCode.setCode(0);
         ////////////////////
@@ -89,6 +90,7 @@ public class ReminderController extends ScreenTemplate implements Initializable,
 
     public void autoPopulateRem() {
         if(populateOnceRem) {
+
             System.out.println("Auto populated reminder controller.");
             Date now = Calendar.getInstance().getTime();
 
@@ -117,6 +119,9 @@ public class ReminderController extends ScreenTemplate implements Initializable,
         int currentYear = localCalendar.get(Calendar.YEAR);
         String date = currentMonth + "/" + currentDay + "/" + currentYear;
         datelabel.setText(date);
+
+        messagearea.setText("Your payment is past due. Please Pay Immediately.");
+        messagearea.setEditable(false);
 
         this.setTitleLabel(this.getLogin());
     }

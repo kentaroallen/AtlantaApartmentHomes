@@ -47,6 +47,10 @@ public class ThreeMonthReportController extends ScreenTemplate implements Initia
     private boolean populateOnceT = true;
 
     public void closeHandler(ActionEvent e) throws IOException {
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("close clicked");
         controller.setScreen(this.getHomepage());
     }

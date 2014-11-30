@@ -8,14 +8,16 @@ public class MailBoxSQLObject {
 
     public static ArrayList<String[]> getUnreadMessages(String user) {
 
-        String messageStatement = "SELECT * FROM REMINDER REM JOIN RESIDENT RES WHERE RES.Username = '"+user+"' AND Status = 'Unread';";
+        String messageStatement = "SELECT * FROM REMINDER REM JOIN RESIDENT RES ON REM.Apt_Number = RES.Apt_Number WHERE RES.Username = '"+user+"' AND Status = 'Unread';";
+        System.out.println(messageStatement);
+
         ArrayList<String[]> out = new ArrayList<String[]>();
 
         try {
 
             ResultSet rs = SQLConnector.runQuery(messageStatement);
 
-            int i = 0;
+            int i = 1;
             while (rs.next()) {
 
                 out.add(new String[] { i+"", rs.getString("Message"), rs.getString("Date_Sent") });
@@ -23,6 +25,7 @@ public class MailBoxSQLObject {
             }
         }
         catch (Exception e) {
+
 
             ErrorCode.setCode(75);
             System.out.println(ErrorCode.errorMessage());

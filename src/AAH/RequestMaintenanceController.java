@@ -101,6 +101,11 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
     }
 
     public void exitHandler(ActionEvent e) {
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
+
         System.out.println("Exit to home page");
         controller.setScreen(this.getHomepage());
     }

@@ -43,6 +43,11 @@ public class ReminderSQLObject {
 
     public static void sendReminder(int apt_num, String message) {
 
+        if (reminderAlreadyExists(apt_num) || ErrorCode.getCurrentError() != 0) {
+
+            return;
+        }
+
         java.sql.Date now = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         String sendReminderStatement = "INSERT INTO REMINDER VALUES ( '"+apt_num+"', '"+now.toString()+"' , '"+message+"', 'Unread' );";
 
@@ -53,9 +58,38 @@ public class ReminderSQLObject {
 
         catch (Exception e) {
 
+            e.printStackTrace();
+            ErrorCode.setCode(69);
+            System.out.println(ErrorCode.errorMessage());
+        }
+    }
+
+    public static boolean reminderAlreadyExists(int apt_num) {
+
+        java.sql.Date now = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+        String sendReminderStatement = "SELECT * FROM REMINDER WHERE Apt_Number = '"+apt_num+"' AND Date_Sent = '"+now.toString()+"';";
+
+
+        try {
+
+            ResultSet rs = SQLConnector.runQuery(sendReminderStatement);
+
+            if (rs.next()) {
+
+                ErrorCode.setCode(70);
+                System.out.println(ErrorCode.errorMessage());
+                return true;
+            }
+
+        }
+
+        catch (Exception e) {
+
             ErrorCode.setCode(69);
             System.out.println(ErrorCode.errorMessage());
         }
 
+        return false;
     }
 }

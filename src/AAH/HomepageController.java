@@ -179,6 +179,7 @@ public class HomepageController extends ScreenTemplate implements Initializable,
             popup.setTitle("Mail Box");
             popup.setScene(popup_scene);
             popup.show();
+
         } catch (Exception e) {
             System.out.println("failure to open mailbox.");
         }

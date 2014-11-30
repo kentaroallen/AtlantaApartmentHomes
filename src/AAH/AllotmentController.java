@@ -130,6 +130,11 @@ public class AllotmentController extends ScreenTemplate implements Initializable
     }
 
     public void cancelHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("Cancel button clicked");
         controller.setScreen(this.getHomepage());
 
