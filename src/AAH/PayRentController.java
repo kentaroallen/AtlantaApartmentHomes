@@ -100,6 +100,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
 
     public void exitHandler(ActionEvent e) {
         System.out.println("Exit to home page");
+        populateOncePR = true;
         controller.setScreen(this.getHomepage());
     }
 
