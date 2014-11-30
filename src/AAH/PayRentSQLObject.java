@@ -27,7 +27,8 @@ public class PayRentSQLObject {
 
         int rent = baseRent;
 
-        String firstTimeStatement = "SELECT * FROM PAYS_RENT PR JOIN RESIDENT R WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"';";
+        String firstTimeStatement = "SELECT * FROM PAYS_RENT PR JOIN RESIDENT R ON PR.Apartment_Number = R.Apt_Number WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"';";
+        System.out.println(firstTimeStatement);
 
         try {
 
@@ -65,7 +66,10 @@ public class PayRentSQLObject {
     public static int lateRent(int month, int year, Date payDate, int amt) {
 
         int daysLate = daysBetween(new Date(year, month, 3), payDate);
+        System.out.println("AMT: " + amt);
+        System.out.println("fine: " + 50*daysLate);
         return (amt + 50*daysLate);
+
     }
 
     public static int proratedRent(Date payDate, int amt) {
@@ -75,7 +79,7 @@ public class PayRentSQLObject {
         double totalDaysInMonth = lastDayOfMonth(payDate).getDate();
         System.out.println(totalDaysInMonth);
         System.out.println(daysBetween(payDate, lastDayOfMonth(payDate)));
-
+        System.out.println("difference b/w today and last day: " + (int) ((amt/totalDaysInMonth)*daysBetween(payDate, lastDayOfMonth(payDate))));
         return (int) ((amt/totalDaysInMonth)*daysBetween(payDate, lastDayOfMonth(payDate)));
 
     }
