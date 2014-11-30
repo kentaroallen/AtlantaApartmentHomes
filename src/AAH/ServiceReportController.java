@@ -51,18 +51,44 @@ public class ServiceReportController extends ScreenTemplate implements Initializ
     public void autoPopulateService() {
         if (populateOnceS) {
             System.out.println("auto populated service report");
+
             ArrayList<ServiceReport> tablePopulator = new ArrayList<ServiceReport>();
-            tablePopulator.add(new ServiceReport("August", "Garbage Disposal", "20"));
-            tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
-            tablePopulator.add(new ServiceReport("", "BS", "5"));
+            ArrayList<ArrayList<String[]>> out = ServiceReportSQLObject.serviceRequestReport();
 
-            tablePopulator.add(new ServiceReport("September", "Garbage Disposal", "20"));
-            tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
-            tablePopulator.add(new ServiceReport("", "BS", "5"));
+            for (int month = 0; month < 3; month++)
+            {
+                String strMonth = "";
+                switch (month)
+                {
+                    case 0: strMonth = "August";
+                        break;
+                    case 1: strMonth = "September";
+                        break;
+                    case 2: strMonth = "October";
+                        break;
+                    default: strMonth = "Invalid Month";
+                        break;
+                }
+                for (int issue = 0; issue < out.get(month).size(); issue++)
+                {
+                    if (issue == 0)
+                        tablePopulator.add(new ServiceReport(strMonth, ((out.get(month)).get(issue))[0], ((out.get(month)).get(issue))[1]));
+                    else
+                        tablePopulator.add(new ServiceReport("", ((out.get(month)).get(issue))[0], ((out.get(month)).get(issue))[1]));
+                }
+            }
 
-            tablePopulator.add(new ServiceReport("October", "Garbage Disposal", "20"));
-            tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
-            tablePopulator.add(new ServiceReport("", "BS", "5"));
+//            tablePopulator.add(new ServiceReport("August", "Garbage Disposal", "20"));
+//            tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
+//            tablePopulator.add(new ServiceReport("", "BS", "5"));
+//
+//            tablePopulator.add(new ServiceReport("September", "Garbage Disposal", "20"));
+//            tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
+//            tablePopulator.add(new ServiceReport("", "BS", "5"));
+//
+//            tablePopulator.add(new ServiceReport("October", "Garbage Disposal", "20"));
+//            tablePopulator.add(new ServiceReport("", "Plumbing", "10"));
+//            tablePopulator.add(new ServiceReport("", "BS", "5"));
 
             ObservableList<ServiceReport> obList = FXCollections.observableArrayList(tablePopulator);
             tablefield.setItems(obList);
