@@ -54,6 +54,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
      * Prevents multiple auto populates from fucking up data.
      */
     private boolean populateOncePR = true;
+
     @FXML
     /**
      * This will take in the apartment number, rent for which month and year,
@@ -75,7 +76,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
 
             System.out.println("pay clicked");
             System.out.println("apt number: " + aptNum + " monthRent: " + mosRent + " yearRent: " + yearRent
-                    + " credit card num: " + creditCard + " todaysDate: " + todaysDate);
+                   + " credit card num: " + creditCard + " todaysDate: " + todaysDate);
 
             int amtOwed = Integer.parseInt(duefield.getText());
             int month = Integer.parseInt(mosRent);
@@ -96,6 +97,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
             System.out.println(ErrorCode.errorMessage());
         }
     }
+
     public void exitHandler(ActionEvent e) {
         System.out.println("Exit to home page");
         controller.setScreen(this.getHomepage());
@@ -111,7 +113,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         int currentMonth = localCalendar.get(Calendar.MONTH) + 1;
         int currentYear = localCalendar.get(Calendar.YEAR);
         String date = currentMonth + "/" + currentDay + "/" + currentYear;
-       // System.out.println(date);
+        // System.out.println(date);
 
         datefield.setText(date);
 
@@ -126,10 +128,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         ObservableList<Integer> obListYears = FXCollections.observableArrayList(posYears);
 
         /*Populate the credit card numbers from SQL here*/
-        
         /*SQL NEEDED*/
-
-        
         monthfield.setItems(obListMonths);
         yearfield.setItems(obListYears);
 
@@ -137,26 +136,43 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
     }
 
     public void autoPopulatePR() {
-        if(populateOncePR){
-        System.out.println("auto populated pay rent controller.");
-        aptfield.setText(CurrentUser.getApartmentNumber() + "");
-        String DueAmount = "x";
-        duefield.setText(DueAmount + "");
-        
-        ArrayList<String> cardNumbers = payInfoCardNumbers();
-        ObservableList<String> obListCards = FXCollections.observableArrayList(cardNumbers);
-        cardfield.setItems(obListCards);
-        populateOncePR = false;
-        }else{
+        if (populateOncePR) {
+            System.out.println("auto populated pay rent controller.");
+            aptfield.setText(CurrentUser.getApartmentNumber() + "");
+
+            ArrayList<String> cardNumbers = payInfoCardNumbers();
+            ObservableList<String> obListCards = FXCollections.observableArrayList(cardNumbers);
+            cardfield.setItems(obListCards);
+            populateOncePR = false;
+        } else {
             System.out.println("Prevented auto populate for data integrity.");
         }
-        
+
+    }
+
+    /**
+     * Set the SQL here
+     *
+     * @param e
+     * @throws Exception
+     */
+    public void setAmountDue(ActionEvent e) throws Exception {
+        try {
+            String mosRent = monthfield.getValue().toString();
+            String yearRent = yearfield.getValue().toString();
+            String DueAmount = "1200";
+            duefield.setText(DueAmount + "");
+        } catch (Exception bs) {
+            System.out.println("Error: Both things are not set yet.");
+        }
+
     }
 
     public void setMonth() {
         monthSet = true;
         setRent();
     }
+
     public void setYear() {
         yearSet = true;
         setRent();
@@ -169,7 +185,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
             int month = Integer.parseInt(monthfield.getValue().toString());
             int year = Integer.parseInt(yearfield.getValue().toString());
             int set = PayRentSQLObject.amountOwed(CurrentUser.getUsername(), CurrentUser.getApartmentNumber(), CurrentUser.getRentAmount(), Calendar.getInstance().getTime(), month, year);
-            duefield.setText(set+"");
+            duefield.setText(set + "");
         }
     }
 
