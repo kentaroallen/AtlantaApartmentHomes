@@ -28,6 +28,7 @@ public class PayRentSQLObject {
         int rent = baseRent;
 
         String firstTimeStatement = "SELECT * FROM PAYS_RENT PR JOIN RESIDENT R ON PR.Apartment_Number = R.Apt_Number WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"';";
+        System.out.println(firstTimeStatement);
 
         try {
 
@@ -125,7 +126,7 @@ public class PayRentSQLObject {
 
     public static boolean alreadyPaid(String user, int apt_number, int month, int year) {
 
-        String alreadyPaidStatement = "SELECT * FROM PAYS_RENT PR JOIN RESIDENT R ON PR.Apartment_Number = R.Apt_Number WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"' AND PR.MONTH = '"+month+"' AND PR.YEAR = '"+year+"';";
+        String alreadyPaidStatement = "SELECT * FROM PAYS_RENT PR JOIN RESIDENT R ON PR.Apartment_Number = R.Apt_Number  WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"' AND PR.MONTH = '"+month+"' AND PR.YEAR = '"+year+"';";
         System.out.println(alreadyPaidStatement);
 
         try {
