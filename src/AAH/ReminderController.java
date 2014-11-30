@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import java.util.Date;
 
 /**
  * FXML Controller class Everything about the application review is a straight
@@ -84,10 +85,13 @@ public class ReminderController extends ScreenTemplate implements Initializable,
     public void autoPopulateRem() {
         if(populateOnceRem) {
             System.out.println("Auto populated reminder controller.");
-            ArrayList<String> delinquentApts = new ArrayList<String>();
-            delinquentApts.add("1544");
-            delinquentApts.add("1206");
-            delinquentApts.add("5623");
+            Date now = Calendar.getInstance().getTime();
+
+            ArrayList<String> delinquentApts = ReminderSQLObject.defaultedApartments(now.getMonth(), now.getYear());
+
+
+
+
             ObservableList<String> obListDelinquents = FXCollections.observableArrayList(delinquentApts);
             aptnobox.setItems(obListDelinquents);
             populateOnceRem = false;
