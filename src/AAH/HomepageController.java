@@ -190,7 +190,7 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     public void autoPopulateHome() {
         if (populateOnceHome) {
             System.out.println("Auto populated the home page");
-            String numberOfMessages = (CurrentUser.getUserType() == 2) ? "x" : ""+MailBoxSQLObject.getMessages(CurrentUser.getApartmentNumber()).size();
+            String numberOfMessages = (CurrentUser.getUserType() == 2) ? "x" : ""+MailBoxSQLObject.getUnreadMessages(CurrentUser.getUsername()).size();
             mail.setText(numberOfMessages + " unread messages");
             populateOnceHome = false;
         } else {
