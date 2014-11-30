@@ -84,7 +84,7 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
 
         if(ErrorCode.getCurrentError() == 0 && (username != null && !username.equals("") && password != null && !password.equals(""))){
 
-            CurrentUser.setUserInfo(username, password, -1, 0);
+            CurrentUser.setUserInfo(username, password, -1, 0, 0);
             controller.setScreen(this.getProspective());
         }
         else{

@@ -19,13 +19,14 @@ public class CurrentUser {
 
 
 
-    public static void setUserInfo(String u, String p, int a, int t) {// all relevant user information.
+    public static void setUserInfo(String u, String p, int a, int t, int r) {// all relevant user information.
 
         set = true;
         username = u;
         apartment = a;
         type = t;
         password = p;
+        rent = r;
 
     }
 

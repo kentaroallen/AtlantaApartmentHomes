@@ -70,7 +70,7 @@ public class ProspectiveResidentSQLObject {
             return;
         }
 
-        boolean accept = availableApartmentExists(monthlyIncome, moveIn, category);
+        boolean accept = availableApartmentExists(monthlyIncome, moveIn, category, minRent, maxRent);
 
         if (ErrorCode.getCurrentError() != 0) {
 
@@ -107,10 +107,10 @@ public class ProspectiveResidentSQLObject {
         return (c.getTime().after(d) || c.getTime().equals(d));
     }
 
-    public static boolean availableApartmentExists(int rent, Date preferredMoveIn, String category) {
+    public static boolean availableApartmentExists(int rent, Date preferredMoveIn, String category, int min_rent, int max_rent) {
 
         java.sql.Date sqlDate = new java.sql.Date(preferredMoveIn.getTime());
-        String checkAvailabilityStatement = "SELECT * FROM APARTMENT A WHERE A.Rent < "+(3*rent)+" AND A.Available_On  <= '"+sqlDate.toString()+"' AND A.Category = '"+category+"';";
+        String checkAvailabilityStatement = "SELECT * FROM APARTMENT A WHERE A.Rent < "+(3*rent)+" AND A.Available_On  <= '"+sqlDate.toString()+"' AND A.Category = '"+category+"' AND A.Rent > "+min_rent+" AND A.Rent < "+max_rent+";";
 
         try {
 

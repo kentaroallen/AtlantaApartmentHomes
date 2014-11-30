@@ -63,7 +63,7 @@ public class LoginSQLObject {
     public static boolean validateLogin(String user, String pass) throws Exception {
 
 
-        String loginStatement = "SELECT * FROM USER U WHERE U.Username = '"+user+"' AND U.Password = '"+pass+"';";
+        String loginStatement = "SELECT * FROM USER U WHERE U.Username = '"+user+"';";
         System.out.println(loginStatement);
         //build our SQL statement
 
@@ -80,7 +80,11 @@ public class LoginSQLObject {
             }
 
             else {
+
+                if (rs.getString("Password").equals(pass)) {
+
                     return true;
+                }
             }
 
         }
@@ -91,6 +95,11 @@ public class LoginSQLObject {
             System.out.println(ErrorCode.errorMessage());
             return false;
         }
+
+        ErrorCode.setCode(17);
+        ErrorCode.errorPopUp();
+        System.out.println(ErrorCode.errorMessage());
+        return false;
     }
 
     public static void setCurrentUser(String user, String pass) throws Exception{
@@ -105,12 +114,12 @@ public class LoginSQLObject {
 
         if (userType == 2 || userType == 0) {
 
-            CurrentUser.setUserInfo(user, pass, -1 , userType);
+            CurrentUser.setUserInfo(user, pass, -1 , userType, 0);
             return;
         }
         //we know that this is management, so we go ahead and take care of this case.
 
-        String retrieveUserStatement = "SELECT * FROM RESIDENT WHERE Username = '"+user+"';";
+        String retrieveUserStatement = "SELECT * FROM RESIDENT R JOIN APARTMENT A  WHERE Username = '"+user+"';";
 
         try {
 
@@ -118,7 +127,7 @@ public class LoginSQLObject {
 
             while (rs.next()) {
 
-                CurrentUser.setUserInfo(user, pass, Integer.parseInt(rs.getString("Apt_Number")), userType);
+                CurrentUser.setUserInfo(user, pass, Integer.parseInt(rs.getString("Apt_Number")), userType, Integer.parseInt(rs.getString("Rent")));
             }
         }
         catch (Exception e) {
