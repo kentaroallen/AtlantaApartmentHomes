@@ -43,7 +43,7 @@ public class MailBoxController implements Initializable {
 
         if (populateOnceMB) {
             ArrayList<Mail> tablePopulator = new ArrayList<Mail>();
-            messages = MailBoxSQLObject.getMessages(CurrentUser.getApartmentNumber());
+            messages = MailBoxSQLObject.getUnreadMessages(CurrentUser.getUsername());
 
             if (ErrorCode.getCurrentError() != 0) {
 
@@ -82,7 +82,14 @@ public class MailBoxController implements Initializable {
             }
             System.out.println();
 
-            messagearea.setText(messages.get(Integer.parseInt(chosenMail[0])-1)[1]);
+            String outputMessage = messages.get(Integer.parseInt(chosenMail[0])-1)[1];
+            MailBoxSQLObject.setMessagesRead(CurrentUser.getUsername(), CurrentUser.getApartmentNumber(), outputMessage);
+
+            if (ErrorCode.getCurrentError() != 0) {
+
+                return;
+            }
+            messagearea.setText(outputMessage);
             //ADD IN CODE TO SET AS READ//
         }
 

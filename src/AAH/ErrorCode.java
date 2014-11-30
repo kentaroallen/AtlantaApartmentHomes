@@ -181,11 +181,27 @@ public class ErrorCode {
 
      HomeMessage Errors:
      75 : SQL Error Getting Messages
-     76 :
+     76 : SQL Error G
      77 :
      78 :
      79 :
      80 :
+
+     Three Month Report Errors:
+     81 : SQL Error Getting Report
+     82 :
+     83 :
+
+     Service Request Report Errors:
+     84 : SQL Error Getting Report
+     85 :
+     86 :
+
+     Defaulter Report Errors:
+     87 : SQL Error Getting Report
+     88 :
+     89 :
+
      >>>>>>> ee58a9b63607107a01d9947795a361efb12e4d47
 
 
@@ -376,6 +392,33 @@ public class ErrorCode {
                 return "Home Message Error: Database Error Setting Messages Read!";
             case 77:
                 return "-";
+            case 78:
+                return "-";
+            case 79:
+                return "-";
+            case 80:
+                return "-";
+            case 81:
+                return "Three Month Report Error: Database Error Getting Report!";
+            case 82:
+                return "-";
+            case 83:
+                return "-";
+            case 84:
+                return "Service Request Report Error: Database Error Getting Report!";
+            case 85:
+                return "-";
+            case 86:
+                return "-";
+            case 87:
+                return "Defaulter Report Error: Database Error Getting Report!";
+            case 88:
+                return "-";
+            case 89:
+                return "-";
+            case 90:
+                return "-";
+
         }
         
         return null;
