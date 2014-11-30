@@ -160,7 +160,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         try {
             String mosRent = monthfield.getValue().toString();
             String yearRent = yearfield.getValue().toString();
-            String DueAmount = "1200";
+            String DueAmount = PayRentSQLObject.amountOwed(CurrentUser.getUsername(), CurrentUser.getApartmentNumber(), CurrentUser.getRentAmount(), Calendar.getInstance().getTime(), Integer.parseInt(mosRent), Integer.parseInt(yearRent)) + "";
             duefield.setText(DueAmount + "");
         } catch (Exception bs) {
             System.out.println("Error: Both things are not set yet.");
@@ -168,26 +168,6 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
 
     }
 
-    public void setMonth() {
-        monthSet = true;
-        setRent();
-    }
-
-    public void setYear() {
-        yearSet = true;
-        setRent();
-    }
-
-    public void setRent() {
-
-        if (monthSet && yearSet) {
-
-            int month = Integer.parseInt(monthfield.getValue().toString());
-            int year = Integer.parseInt(yearfield.getValue().toString());
-            int set = PayRentSQLObject.amountOwed(CurrentUser.getUsername(), CurrentUser.getApartmentNumber(), CurrentUser.getRentAmount(), Calendar.getInstance().getTime(), month, year);
-            duefield.setText(set + "");
-        }
-    }
 
     public static ArrayList<String> payInfoCardNumbers() {
 

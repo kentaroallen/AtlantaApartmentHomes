@@ -19,6 +19,12 @@ public class PayRentSQLObject {
     public static int amountOwed(String user, int apt_number, int baseRent, Date paymentDate, int pay_month, int pay_year) {
 
 
+        if ((paymentDate.getMonth() + 1) != pay_month || (paymentDate.getYear() + 1900) != pay_year) {//make sure we are only paying for the current month
+
+            System.out.println((paymentDate.getMonth()+1)+" "+(paymentDate.getYear()+1900)+"");
+            return 0;
+        }
+
         int rent = baseRent;
 
         String firstTimeStatement = "SELECT * FROM PAYS_RENT PR JOIN RESIDENT R WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"';";
@@ -38,6 +44,7 @@ public class PayRentSQLObject {
 
                 if (paymentDate.after(new Date(pay_year-1900, pay_month-1, 3))) {
 
+                    System.out.println("hit2");
                     return lateRent(pay_month, pay_year, paymentDate, baseRent);
                 }
 

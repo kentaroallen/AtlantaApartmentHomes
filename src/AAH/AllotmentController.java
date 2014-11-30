@@ -36,7 +36,7 @@ public class AllotmentController extends ScreenTemplate implements Initializable
      * Initializes the controller class.
      */
     @FXML
-    public static TableView availtable;
+    public TableView availtable;
     @FXML
     private TableColumn aptnocol;
     @FXML

@@ -149,7 +149,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
 
             int leaseValue = Integer.parseInt(lease);
             Date dob = new Date(year, Integer.parseInt(month), day);
-            Date moveInDate = new Date(Integer.parseInt(prefMoveInDate[0]), Integer.parseInt(prefMoveInDate[1]), Integer.parseInt(prefMoveInDate[2]));
+            Date moveInDate = new Date(Integer.parseInt(prefMoveInDate[0])-1900, Integer.parseInt(prefMoveInDate[1])-1, Integer.parseInt(prefMoveInDate[2]));
             String gender = (resGender.equals("Male")) ? "M" : (resGender.equals("Female")) ? "F" : "N";
         /*Go to different screen here.*/
 
