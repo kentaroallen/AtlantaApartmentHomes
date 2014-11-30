@@ -54,7 +54,7 @@ public class MailBoxController implements Initializable {
 
     public void readMessage() {
         String[] chosenMail;
-        String rowValues = tablefieldmb.getSelectionModel().getSelectedItems().toString();//
+        String rowValues = tablefieldmb.getSelectionModel().getSelectedItems().toString();//...
         rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
 
         chosenMail = rowValues.split(","); /*Comma seperated value retrieval*/
