@@ -63,7 +63,7 @@ public class LoginSQLObject {
     public static boolean validateLogin(String user, String pass) throws Exception {
 
 
-        String loginStatement = "SELECT * FROM USER U WHERE U.Username = '"+user+"';";
+        String loginStatement = "SELECT * FROM USER U WHERE U.Username = '"+user+"' AND U.Password = '"+pass+"';";
         System.out.println(loginStatement);
         //build our SQL statement
 
@@ -80,11 +80,7 @@ public class LoginSQLObject {
             }
 
             else {
-
-                if (rs.getString("Password").equals(pass)) {
-
                     return true;
-                }
             }
 
         }
@@ -95,11 +91,6 @@ public class LoginSQLObject {
             System.out.println(ErrorCode.errorMessage());
             return false;
         }
-
-        ErrorCode.setCode(17);
-        ErrorCode.errorPopUp();
-        System.out.println(ErrorCode.errorMessage());
-        return false;
     }
 
     public static void setCurrentUser(String user, String pass) throws Exception{

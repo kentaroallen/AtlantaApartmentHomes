@@ -104,8 +104,8 @@ public class ErrorCode {
      15 :
 
      Login Errors :
-     16 : No Such Username
-     17 : Incorrect Password
+     16 : Incorrect Credentials
+     17 :
      18 : SQL Error getting User Type
      19 : SQL Error Validating Password
      20 : SQL Error Checking if Application is Filled Out
@@ -253,9 +253,9 @@ public class ErrorCode {
             case 15:
                 return "-";
             case 16:
-                return "Login Error: No Such Username!";
-            case 17:
-                return "Login Error: Incorrect Password!";
+                return "Incorrect Credentials!";
+            //case 17:
+                //return "Login Error: Incorrect Password!";
             case 18:
                 return "Login Error: Database Error Getting User Type!";
             case 19:
