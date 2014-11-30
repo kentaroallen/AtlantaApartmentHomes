@@ -174,7 +174,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
 
         ArrayList<String> out = new ArrayList<String>();
 
-        for (String[] s : PaymentInformationSQLObject.getPaymentInfo(CurrentUser.getUsername())) {
+        for (String[] s : PaymentInformationSQLObject.getPaymentInfo(CurrentUser.getUsername())) {//
 
             out.add(s[0]);
         }
