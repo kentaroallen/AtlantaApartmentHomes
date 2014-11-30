@@ -76,6 +76,10 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
      */
     public void resolvedHandler(ActionEvent e) throws IOException {
 
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         String[] chosenPerson;
         String[] resolvedPerson = new String[4];
         int removeIndex;
@@ -126,6 +130,11 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
     }
 
     public void homeHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         controller.setScreen(this.getHomepage());
         System.out.println("Home button clicked.");
     }

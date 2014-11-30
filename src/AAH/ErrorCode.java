@@ -100,7 +100,7 @@ public class ErrorCode {
      11 : SQL error inputting application
      12 : Move In Date not more than 2 months after current date
      13 : Some Values are Null
-     14 :
+     14 : SQL Error Checking Apartment Availability
      15 :
 
      Login Errors :
@@ -115,8 +115,8 @@ public class ErrorCode {
 
      Application Review Errors:
      24 : Selection Error: No selection highlighted.
-     25 :
-     26 :
+     25 : Applicant Already Has Apartment Alloted
+     26 : SQL Error Checking for Allotment
      27 :
      28 :
      29 :
@@ -124,7 +124,7 @@ public class ErrorCode {
 
      Apartment Allotment Errors:
      31 : SQL Error Getting Apartment Values
-     32 :
+     32 : SQL Error Allotting to Resident
      33 :
      34 :
      35 :
@@ -144,15 +144,16 @@ public class ErrorCode {
      45 : SQL Error Retrieving Payment Info
      46 : Selection Error: No card selected for Deletion
      47 : Selection Error: Some payment information fields are blank.
-     48 :
-     49 :
-     50 :
+     48 : Card Already Exists
+     49 : SQL Error Deleting Card Info
+
 
      Maintenance Request Errors:
-     51 : SQL Error Getting Issue Types
-     52 : SQL Error Inserting Maintenance Request
-     53 : SQL Error Checking if payment has been made already
-     54 : Payment has been made already
+     50 : SQL Error Getting Issue Types
+     51 : SQL Error Inserting Maintenance Request
+     52 : Error Retrieving Request Info!
+     53 : Maintenance Request Already Made
+     54 :
      55 :
      56 :
      57 :
@@ -161,9 +162,30 @@ public class ErrorCode {
      Pay Rent Errors:
      59 : Error Inserting Values into Rent Payment
      60 : Error Getting Previous Info
-     61 :
-     62 :
+     61 : SQL Error Checking if payment has been made already
+     62 : Payment has been made already
      63 :
+     64 :
+     65 :
+     66 :
+     67 :
+
+     Rent Reminder Errors:
+     68 : SQL Error Getting Remindable Apartments
+     69 :
+     70 :
+     71 :
+     72 :
+     73 :
+     74 :
+
+     HomeMessage Errors:
+     75 : SQL Error Getting Messages
+     76 :
+     77 :
+     78 :
+     79 :
+     80 :
      >>>>>>> ee58a9b63607107a01d9947795a361efb12e4d47
 
 
@@ -227,7 +249,7 @@ public class ErrorCode {
             case 13:
                 return "Prospective Application Error: Some Fields are null!";
             case 14:
-                return "-";
+                return "Prospective Application Error: Database Error Retrieving Apartment Availability";
             case 15:
                 return "-";
             case 16:
@@ -249,9 +271,9 @@ public class ErrorCode {
             case 24:
                 return "Selection Error: No selection highlighted.";
             case 25:
-                return "-";
+                return "Application Review Error: User already has Apartment Allotted to them!";
             case 26:
-                return "-";
+                return "Application Review Error: Error Checking for Apartment Allotment!";
             case 27:
                 return "-";
             case 28:
@@ -263,7 +285,7 @@ public class ErrorCode {
             case 31:
                 return "Apartment Allotment Error: Database Error Getting Available Apartment Values!";
             case 32:
-                return "-";
+                return "Apartment Allotment Error: Database Error Creating Resident";
             case 33:
                 return "-";
             case 34:
@@ -295,17 +317,17 @@ public class ErrorCode {
             case 47:
                 return "Selection Error: Some payment information fields are blank.";
             case 48:
-                return "-";
+                return "Payment Info Error: Card Info Already Exists!";
             case 49:
-                return "-";
+                return "Payment Info Error: Database Error Deleting Card!";
             case 50:
                 return "Maintenance Request Error: Database Error Retrieving Issue Types!";
             case 51:
                 return "Maintenance Request Error: Database Error Inputting Maintenance Request!";
             case 52:
-                return "-";
+                return "Maintenance Request Error: Database Error Retrieving Request Info!";
             case 53:
-                return "-";
+                return "Maintenance Request Error: Maintenance Request for this Issue Type already made!";
             case 54:
                 return "-";
             case 55:
@@ -325,6 +347,34 @@ public class ErrorCode {
             case 62:
                 return "Rent Payment Error: User has already paid for this month and year!";
             case 63:
+                return "-";
+            case 64:
+                return "-";
+            case 65:
+                return "-";
+            case 66:
+                return "-";
+            case 67:
+                return "-";
+            case 68:
+                return "Rent Reminder Error: Database Error Retrieving Remind-able Apartments!";
+            case 69:
+                return "Rent Reminder Error: Database Error Sending Reminder Message!";
+            case 70:
+                return "-";
+            case 71:
+                return "-";
+            case 72:
+                return "-";
+            case 73:
+                return "-";
+            case 74:
+                return "-";
+            case 75:
+                return "Home Message Error: Database Error Getting Unread Messages!";
+            case 76:
+                return "Home Message Error: Database Error Setting Messages Read!";
+            case 77:
                 return "-";
         }
         

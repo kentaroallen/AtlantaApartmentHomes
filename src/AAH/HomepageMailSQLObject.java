@@ -6,10 +6,10 @@ import java.util.ArrayList;
  */
 public class HomepageMailSQLObject {
 
-    public static ArrayList<String> getUnreadMessages(String user) {
+    public static ArrayList<String[]> getUnreadMessages(String user) {
 
         String messageStatement = "SELECT * FROM REMINDER REM JOIN RESIDENT RES WHERE RES.Username = '"+user+"' AND Status = 'Unread';";
-        ArrayList<String> out = new ArrayList<String>();
+        ArrayList<String[]> out = new ArrayList<String[]>();
 
         try {
 
@@ -17,7 +17,7 @@ public class HomepageMailSQLObject {
 
             while (rs.next()) {
 
-                out.add(rs.getString("Message"));
+                out.add(new String[] {rs.getString("Apt_Number"), rs.getString("Message")});
             }
         }
         catch (Exception e) {
@@ -29,9 +29,9 @@ public class HomepageMailSQLObject {
         return out;
     }
 
-    public static void setMessagesRead(String user, int apt_num) {
+    public static void setMessagesRead(String user, int apt_num, String message) {
 
-        String setReadStatement = "UPDATE REMINDER SET Status = 'Read' WHERE Apt_Number = '"+apt_num+"';";
+        String setReadStatement = "UPDATE REMINDER SET Status = 'Read' WHERE Apt_Number = '"+apt_num+"' AND Message = '"+message+"';";
 
         try {
 

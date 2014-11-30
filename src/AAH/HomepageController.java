@@ -136,6 +136,8 @@ public class HomepageController extends ScreenTemplate implements Initializable,
      * @throws Exception 
      */
     public void logoutHandler(ActionEvent e) throws Exception{
+
+        CurrentUser.clear();
         System.out.println("Logged out");
         controller.setScreen(this.getLogin());
         populateOnceHome = true;

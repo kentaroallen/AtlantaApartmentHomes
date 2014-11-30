@@ -50,6 +50,10 @@ public class ReminderController extends ScreenTemplate implements Initializable,
      * @param e the click button event that caused this.
      */
     public void sendHandler(ActionEvent e) throws IOException {
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("Things were hit.");
         String aptnum = "";
         aptnum = aptnobox.getValue().toString();
@@ -67,6 +71,11 @@ public class ReminderController extends ScreenTemplate implements Initializable,
      * @throws IOException
      */
     public void cancelHandler(ActionEvent e) throws IOException {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
         System.out.println("Cancel hit");
         controller.setScreen(this.getHomepage());
         populateOnceRem = true;

@@ -6,6 +6,16 @@ package AAH;
 public class ApartmentAllotmentChoice {
 
     public static String prospective_applicant;
-    public static void setApplicant(String s) { prospective_applicant = s;}
+    public static int rent;
+    public static String category;
+
+    public static void setApplicant(String s, int r, String cat) {
+        prospective_applicant = s;
+        rent = r;
+        category = cat;
+    }
+
     public static String getApplicant() { return prospective_applicant;}
+    public static int getRent() { return rent; }
+    public static String getCategory() { return category; }
 }
