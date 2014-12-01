@@ -39,13 +39,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
      * Initializes the controller class.
      */
     @FXML
-    private Label label;
-
-    @FXML
     private TextField usernameField;
-
-    @FXML
-    private TextField passwordField;
     @FXML
     private ComboBox months;
     @FXML
@@ -70,21 +64,6 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
     private ComboBox genderbox;
 
     @FXML
-    /**
-     * When the user clicks the "New User?" hyperlink.
-     *
-     * @param e the click event.
-     */
-    public void newUserHandler(ActionEvent e) throws IOException {
-
-        /////////////////////
-        ErrorCode.setCode(0);
-        ////////////////////
-
-        System.out.println("New user clicked");
-        controller.setScreen(this.getNewUserReg());
-    }
-
 
     public boolean allSet() {
 
@@ -202,8 +181,18 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
     }
 
     public void clearFields() {
-
-        //
+        usernameField.setText("");
+        months.setValue("");
+        days.setValue("");
+        years.setValue("");
+        aptcategory.setValue("");
+        monthlyIncomeField.setText("");
+        prevResField.setText("");
+        minRent.setText("");
+        maxRent.setText("");
+        leaseterm.setValue("");
+        genderbox.setValue("");
+        
     }
 
 

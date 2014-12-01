@@ -33,7 +33,7 @@
                   <Font name="Calibri" size="20.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwordField" layoutX="22.0" layoutY="145.0" />
+            <PasswordField fx:id="passwordField" layoutX="22.0" layoutY="145.0" onAction="#loginHandler" />
             <Hyperlink fx:id="newuser" layoutX="137.0" layoutY="223.0" onAction="#newUserHandler" text="New User?" textFill="#2054d6" />
             <Button fx:id="loginButton" layoutX="86.0" layoutY="192.0" mnemonicParsing="false" onAction="#loginHandler" style="-fx-background-color: #24E5FF;" text="Login" />
          </children>

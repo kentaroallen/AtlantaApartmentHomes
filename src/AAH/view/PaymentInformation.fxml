@@ -56,7 +56,7 @@
                         </Text>
                         <TextField fx:id="yearfield" layoutX="18.0" layoutY="195.0" prefHeight="25.0" prefWidth="36.0" promptText="YY" />
                         <TextField fx:id="monthfield" layoutX="18.0" layoutY="195.0" prefHeight="25.0" prefWidth="38.0" promptText="MM" />
-                        <TextField fx:id="yearfield1" layoutX="65.0" layoutY="195.0" prefHeight="25.0" prefWidth="36.0" promptText="YY" />
+                        <TextField fx:id="yearfield" layoutX="65.0" layoutY="195.0" prefHeight="25.0" prefWidth="36.0" promptText="YY" />
                         <Text layoutX="146.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CW:" />
                         <TextField fx:id="cwfield" layoutX="116.0" layoutY="195.0" prefHeight="25.0" prefWidth="87.0" />
                         <Button layoutX="71.0" layoutY="237.0" mnemonicParsing="false" onAction="#exitHandler" text="Home" />

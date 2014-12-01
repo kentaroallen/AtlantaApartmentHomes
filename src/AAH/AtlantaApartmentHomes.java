@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 public class AtlantaApartmentHomes extends Application {
 
     private ScreenNameContainer snc = new ScreenNameContainer();
+    public static MusicPlayerController elevator;
 
     /**
      * https://docs.google.com/document/d/1GHgOBdYnp0VR9j4evQbVS0C3GGKIxISOnbKHm7rs9O4/edit
@@ -39,11 +40,8 @@ public class AtlantaApartmentHomes extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
-        URL resource = getClass().getResource("elevatormusic.mp3");
-        Media media = new Media(resource.toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+        /*Singleton init*/
+        elevator = MusicPlayerController.getInstance();
 
     }
 

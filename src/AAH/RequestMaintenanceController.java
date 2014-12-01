@@ -59,6 +59,7 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
 
         System.out.println("New user clicked");
         controller.setScreen(this.getNewUserReg());
+        clearFields();
     }
 
     @FXML
@@ -99,6 +100,10 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
 
         //
     }
+    public void clearFields(){
+        aptfield.setText("");
+        issuebox.setValue("");
+    }
 
     public void exitHandler(ActionEvent e) {
         /////////////////////
@@ -108,6 +113,7 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
 
         System.out.println("Exit to home page");
         controller.setScreen(this.getHomepage());
+        clearFields();
         populateOnceRM = true;
     }
 
