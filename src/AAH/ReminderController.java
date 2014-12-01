@@ -120,7 +120,7 @@ public class ReminderController extends ScreenTemplate implements Initializable,
         String date = currentMonth + "/" + currentDay + "/" + currentYear;
         datelabel.setText(date);
 
-        messagearea.setText("Your payment is past due. Please Pay Immediately.");
+        messagearea.setText("Your payment is past due. \nPlease Pay Immediately.");
         messagearea.setEditable(false);
 
         this.setTitleLabel(this.getLogin());

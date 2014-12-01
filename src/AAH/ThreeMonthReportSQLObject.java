@@ -27,6 +27,7 @@ public class ThreeMonthReportSQLObject {
         catch(Exception e) {
 
             ErrorCode.setCode(81);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 

@@ -46,6 +46,7 @@ public class ServiceReportSQLObject {
         catch(Exception e) {
             e.printStackTrace();
             ErrorCode.setCode(84);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
         return out;

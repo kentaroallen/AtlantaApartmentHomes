@@ -49,8 +49,8 @@
                         <TableView fx:id="tablefield" layoutY="44.0" prefHeight="200.0" prefWidth="591.0">
                            <columns>
                               <TableColumn fx:id="namecol" prefWidth="71.0" text="Name" />
-                              <TableColumn fx:id="dobcol" prefWidth="58.0" text="DOB" />
-                              <TableColumn fx:id="gendercol" prefWidth="77.0" text="Gender" />
+                              <TableColumn fx:id="dobcol" prefWidth="72.0" text="DOB" />
+                              <TableColumn fx:id="gendercol" prefWidth="63.0" text="Gender" />
                               <TableColumn fx:id="incomecol" prefWidth="76.0" text="Income" />
                               <TableColumn fx:id="aptcol" prefWidth="87.0" text="Apt. Type" />
                               <TableColumn fx:id="datecol" prefWidth="87.0" text="Pref. Date" />

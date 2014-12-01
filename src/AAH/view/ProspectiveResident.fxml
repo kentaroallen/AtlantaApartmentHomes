@@ -49,8 +49,8 @@
                         <TextField id="username" fx:id="prevResField" layoutX="14.0" layoutY="254.0" prefHeight="25.0" prefWidth="171.0" />
                         <Label layoutX="14.0" layoutY="231.0" text="Previous Residence:" />
                         <ComboBox fx:id="months" layoutX="14.0" layoutY="86.0" prefHeight="25.0" prefWidth="56.0" promptText="MM" />
-                        <ComboBox fx:id="days" layoutX="82.0" layoutY="86.0" prefHeight="25.0" prefWidth="58.0" promptText="D" />
-                        <ComboBox fx:id="years" layoutX="146.0" layoutY="84.0" prefHeight="31.0" prefWidth="56.0" promptText="Y" />
+                        <ComboBox fx:id="days" layoutX="73.0" layoutY="86.0" prefHeight="25.0" prefWidth="58.0" promptText="D" />
+                        <ComboBox fx:id="years" layoutX="135.0" layoutY="86.0" prefHeight="25.0" prefWidth="69.0" promptText="Y" />
                         <ComboBox fx:id="genderbox" layoutX="82.0" layoutY="126.0" prefHeight="31.0" prefWidth="90.0" promptText="M/F" />
                         <ComboBox fx:id="leaseterm" layoutX="253.0" layoutY="216.0" prefWidth="150.0" />
                         <ComboBox fx:id="aptcategory" layoutX="253.0" layoutY="25.0" prefWidth="150.0" />

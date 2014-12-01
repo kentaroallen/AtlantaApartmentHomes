@@ -34,6 +34,7 @@ public class ViewRequestsSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(40);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
     }
@@ -57,6 +58,7 @@ public class ViewRequestsSQLObject {
         catch (SQLException e) {
 
             ErrorCode.setCode(38);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
@@ -84,6 +86,7 @@ public class ViewRequestsSQLObject {
         catch (SQLException e) {
 
             ErrorCode.setCode(39);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
