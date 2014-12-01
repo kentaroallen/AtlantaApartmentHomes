@@ -36,7 +36,10 @@ public class ServiceReportSQLObject {
             while (rs.next()) {
                 String[] strArr = new String[2];
                 strArr[0] = rs.getString(2);
-                strArr[1] = "" + rs.getDouble(3);
+                if (rs.getDouble(3) == 0.0)
+                    strArr[1] = "" + (rs.getDouble(3) + 1);
+                else
+                    strArr[1] = "" + rs.getDouble(3);
                 (out.get(rs.getInt(1) - 8)).add(strArr);  //rs.getString(2) + "," + rs.getInt(3)
             }
         }

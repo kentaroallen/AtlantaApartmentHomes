@@ -61,22 +61,56 @@ public class DefaulterReportController extends ScreenTemplate implements Initial
 
         String chosenMonth = monthchose.getValue().toString().toLowerCase();
         System.out.println("month chosen " + chosenMonth);
-        populateTableBasedOnMonth(chosenMonth);
+        int monthInt = 0;
+        if (chosenMonth.equals("january"))
+            monthInt = 1;
+        if (chosenMonth.equals("february"))
+            monthInt = 2;
+        if (chosenMonth.equals("march"))
+            monthInt = 3;
+        if (chosenMonth.equals("april"))
+            monthInt = 4;
+        if (chosenMonth.equals("may"))
+            monthInt = 5;
+        if (chosenMonth.equals("june"))
+            monthInt = 6;
+        if (chosenMonth.equals("july"))
+            monthInt = 7;
+        if (chosenMonth.equals("august"))
+            monthInt = 8;
+        if (chosenMonth.equals("september"))
+            monthInt = 9;
+        if (chosenMonth.equals("october"))
+            monthInt = 10;
+        if (chosenMonth.equals("november"))
+            monthInt = 11;
+        if (chosenMonth.equals("december"))
+            monthInt = 12;
 
+        populateTableBasedOnMonth(monthInt);
     }
     /**
      * This populates the tables according to the selected month.
      * @param month 
      */
-    public void populateTableBasedOnMonth(String month) {
+    public void populateTableBasedOnMonth(int month) {
         ArrayList<Defaulters> tablePopulator = new ArrayList<Defaulters>();
-        if (month.contains("january") || month.contains("december")) {
-            tablePopulator.add(new Defaulters("1234", "100", "20"));
-            tablePopulator.add(new Defaulters("3243", "200", "10"));
-            tablePopulator.add(new Defaulters("5452", "300", "5"));
-        }else{
-            tablePopulator.add(new Defaulters("999", "999", "9"));
+
+        ArrayList<String[]> out = DefaulterReportSQLObject.getDefaulterReport(month);
+
+        for (int apt = 0; apt < out.size(); apt++)
+        {
+            tablePopulator.add(new Defaulters(out.get(apt)[0], out.get(apt)[1], out.get(apt)[2]));
         }
+
+
+//        if (month.contains("january") || month.contains("december")) {
+//            tablePopulator.add(new Defaulters("1234", "100", "20"));
+//            tablePopulator.add(new Defaulters("3243", "200", "10"));
+//            tablePopulator.add(new Defaulters("5452", "300", "5"));
+//        }else{
+//            tablePopulator.add(new Defaulters("999", "999", "9"));
+//        }
 
         /*Month, Category, Apartment*/
         ObservableList<Defaulters> obList = FXCollections.observableArrayList(tablePopulator);
