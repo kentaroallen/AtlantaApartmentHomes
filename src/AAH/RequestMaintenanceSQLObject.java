@@ -35,7 +35,7 @@ public class RequestMaintenanceSQLObject {
         catch (SQLException e) {
 
             ErrorCode.setCode(50);
-            //ErrorCode.errorPopUp();
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
 
         }
@@ -57,8 +57,7 @@ public class RequestMaintenanceSQLObject {
         }
         catch (Exception e) {
             ErrorCode.setCode(51);
-            e.printStackTrace();
-            //ErrorCode.errorPopUp();
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 

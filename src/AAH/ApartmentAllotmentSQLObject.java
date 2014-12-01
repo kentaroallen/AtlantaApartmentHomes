@@ -3,6 +3,7 @@ package AAH;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -32,29 +33,33 @@ public class ApartmentAllotmentSQLObject {
         }
         catch(Exception e) {
 
-            e.printStackTrace();
+
             ErrorCode.setCode(32);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
-        String updateApartmentAvailabilityStatement = "UPDATE APARTMENT SET Available_On = DATE_ADD(Available_On, INTERVAL "+getPreferredLeaseTerm(user)+" MONTH) WHERE Apt_Number = '"+apt_number+"';";
+        String updateApartmentAvailabilityStatement = "UPDATE APARTMENT SET Available_On = '"+getApartmentAvailabilityDate(user, apt_number).toString()+"' WHERE Apt_Number = '"+apt_number+"';";
 
+        System.out.println(updateApartmentAvailabilityStatement);
         try {
 
             SQLConnector.runUpdate(updateApartmentAvailabilityStatement);
         }
         catch(Exception e) {
 
-            e.printStackTrace();
+
             ErrorCode.setCode(32);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
     }
 
-    public static int getPreferredLeaseTerm(String user) {
+    public static java.sql.Date getApartmentAvailabilityDate(String user, int apt_number) {
 
-        String makeResidentStatement = "SELECT Preferred_Lease_Term FROM PROSPECTIVE_RESIDENT WHERE Username = '"+user+"';";
+        String makeResidentStatement = "SELECT DATE_ADD(Preferred_Move_In_Date, INTERVAL Lease_Term MONTH)  FROM PROSPECTIVE_RESIDENT, APARTMENT WHERE Username = '"+user+"' AND Apt_Number = '"+apt_number+"';";
 
+        System.out.println(makeResidentStatement);
         System.out.println(makeResidentStatement);
 
         try {
@@ -62,17 +67,18 @@ public class ApartmentAllotmentSQLObject {
             ResultSet rs= SQLConnector.runQuery(makeResidentStatement);
             while (rs.next()) {
 
-                return rs.getInt("Preferred_Lease_Term");
+                return rs.getDate(1);
             }
         }
         catch(Exception e) {
 
-            e.printStackTrace();
+
             ErrorCode.setCode(32);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
-        return 1;
+        return new java.sql.Date(Calendar.getInstance().getTime().getTime());
     }
 
     public static ArrayList<String[]> getMatchingApartments(String user) {
@@ -99,6 +105,7 @@ public class ApartmentAllotmentSQLObject {
         catch (SQLException e) {
 
             ErrorCode.setCode(31);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 

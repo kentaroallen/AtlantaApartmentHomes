@@ -35,6 +35,7 @@ public class DefaulterReportSQLObject {
         }
         catch(Exception e) {
             ErrorCode.setCode(81);
+            ErrorCode.errorPopUp();
         }
         return out;
     }

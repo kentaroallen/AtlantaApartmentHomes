@@ -35,6 +35,7 @@ public class ReminderSQLObject {
         catch (Exception e) {
 
                 ErrorCode.setCode(68);
+                ErrorCode.errorPopUp();
                 System.out.println(ErrorCode.errorMessage());
         }
 
@@ -58,8 +59,9 @@ public class ReminderSQLObject {
 
         catch (Exception e) {
 
-            e.printStackTrace();
+
             ErrorCode.setCode(69);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
     }
@@ -78,6 +80,7 @@ public class ReminderSQLObject {
             if (rs.next()) {
 
                 ErrorCode.setCode(70);
+                ErrorCode.errorPopUp();
                 System.out.println(ErrorCode.errorMessage());
                 return true;
             }
@@ -87,6 +90,7 @@ public class ReminderSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(69);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 

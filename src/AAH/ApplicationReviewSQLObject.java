@@ -48,6 +48,7 @@ public class ApplicationReviewSQLObject {
             if (rs.next()) {
 
                 ErrorCode.setCode(25);
+                ErrorCode.errorPopUp();
                 System.out.println(ErrorCode.errorMessage());
                 return true;
             }
@@ -58,6 +59,7 @@ public class ApplicationReviewSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(26);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return true;
         }

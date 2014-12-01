@@ -56,6 +56,7 @@ public class PayRentSQLObject {
 
 
             ErrorCode.setCode(9);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return baseRent;
         }
@@ -99,8 +100,9 @@ public class PayRentSQLObject {
         }
         catch (Exception e) {
 
-            e.printStackTrace();
+
             ErrorCode.setCode(59);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
     }
@@ -136,6 +138,7 @@ public class PayRentSQLObject {
             if (rs.next()) {
 
                 ErrorCode.setCode(62);
+                ErrorCode.errorPopUp();
                 System.out.println(ErrorCode.errorMessage());
                 return true;
             }
@@ -144,6 +147,7 @@ public class PayRentSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(61);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
 
         }

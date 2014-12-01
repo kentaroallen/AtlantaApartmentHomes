@@ -89,6 +89,7 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         }
         else{
             ErrorCode.setCode(10);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
 
         }

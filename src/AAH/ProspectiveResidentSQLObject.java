@@ -42,6 +42,7 @@ public class ProspectiveResidentSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(8);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return null;
         }
@@ -52,7 +53,7 @@ public class ProspectiveResidentSQLObject {
     public static ArrayList<String> getAvailableApartmentLeaseTerms() throws Exception {
 
         ArrayList<String> out = new ArrayList<String>();
-        String categoryStatement = "SELECT DISTINCT A.Lease_Term FROM APARTMENT A WHERE A.Available_On >= CURDATE()";
+        String categoryStatement = "SELECT DISTINCT A.Lease_Term FROM APARTMENT A WHERE A.Available_On >= CURDATE() ORDER BY A.Lease_Term ASC";
 
         try {
             ResultSet rs = SQLConnector.runQuery(categoryStatement);
@@ -65,6 +66,7 @@ public class ProspectiveResidentSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(9);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
@@ -79,6 +81,7 @@ public class ProspectiveResidentSQLObject {
         if (!validDate(new Date())) {// check other validations here.
 
             ErrorCode.setCode(12);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return;
         }
@@ -103,8 +106,9 @@ public class ProspectiveResidentSQLObject {
         }
         catch (Exception e) {
 
-            e.printStackTrace();
+
             ErrorCode.setCode(11);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return;
         }
@@ -123,7 +127,7 @@ public class ProspectiveResidentSQLObject {
     public static boolean availableApartmentExists(int rent, Date preferredMoveIn, String category, int min_rent, int max_rent) {
 
         java.sql.Date sqlDate = new java.sql.Date(preferredMoveIn.getTime());
-        String checkAvailabilityStatement = "SELECT * FROM APARTMENT A WHERE A.Rent < "+(3*rent)+" AND A.Available_On  <= '"+sqlDate.toString()+"' AND A.Category = '"+category+"' AND A.Rent > "+min_rent+" AND A.Rent < "+max_rent+";";
+        String checkAvailabilityStatement = "SELECT * FROM APARTMENT A WHERE 3*A.Rent < "+(rent)+" AND A.Available_On  <= '"+sqlDate.toString()+"' AND A.Category = '"+category+"' AND A.Rent > "+min_rent+" AND A.Rent < "+max_rent+";";
 
         try {
 
@@ -134,6 +138,7 @@ public class ProspectiveResidentSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(14);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return true;
         }

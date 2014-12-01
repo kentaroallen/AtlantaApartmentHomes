@@ -28,6 +28,7 @@ public class MailBoxSQLObject {
 
 
             ErrorCode.setCode(75);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
@@ -45,6 +46,7 @@ public class MailBoxSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(76);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
     }

@@ -47,6 +47,7 @@ public class PaymentInformationSQLObject {
         catch (SQLException e) {
 
             ErrorCode.setCode(45);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
@@ -71,6 +72,7 @@ public class PaymentInformationSQLObject {
         }
         catch (Exception e) {
             ErrorCode.setCode(44);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
@@ -89,8 +91,9 @@ public class PaymentInformationSQLObject {
         }
         catch (Exception e) {
 
-            e.printStackTrace();
+
             ErrorCode.setCode(45);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
     }
@@ -107,6 +110,7 @@ public class PaymentInformationSQLObject {
             if (rs.next()) {
 
                 ErrorCode.setCode(48);
+                ErrorCode.errorPopUp();
                 System.out.println(ErrorCode.errorMessage());
                 return true;
             }
@@ -116,6 +120,7 @@ public class PaymentInformationSQLObject {
         catch (Exception e) {
 
             ErrorCode.setCode(45);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 

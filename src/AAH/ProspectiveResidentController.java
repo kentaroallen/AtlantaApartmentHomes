@@ -120,6 +120,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         if (!allSet()) {
 
             ErrorCode.setCode(10);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return;
         }
@@ -163,6 +164,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
             if (!isDateValid(dobYear, dobMonth, dobDay)) {
 
                 ErrorCode.setCode(15);
+                ErrorCode.errorPopUp();
                 System.out.println(ErrorCode.errorMessage());
                 return;
             }
@@ -190,12 +192,18 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
 
         if (ErrorCode.getCurrentError() == 0) {
             controller.setScreen(this.getLogin());
+            clearFields();
         }
         else {
 
             System.out.println(ErrorCode.errorMessage());
         }
         //String username, Date dob, String name, String gender, Date moveIn, int leaseTerm,  int monthlyIncome, String category, String prevAddress, int minRent, int maxRent, String apartmentStatus
+    }
+
+    public void clearFields() {
+
+        //
     }
 
 

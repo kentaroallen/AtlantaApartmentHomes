@@ -25,8 +25,9 @@ public class NewUserRegSQLObject {
         }
         catch (Exception e) {
 
-            e.printStackTrace();
+
             ErrorCode.setCode(3);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
             return true;
         }
@@ -44,6 +45,7 @@ public class NewUserRegSQLObject {
         }
         catch (Exception e) {
             ErrorCode.setCode(4);
+            ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
