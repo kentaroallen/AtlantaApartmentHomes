@@ -9,6 +9,7 @@ import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
 import java.net.URL;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,10 +135,12 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
             String apartmentCategory = aptcategory.getValue().toString();
             int minimumRent = Integer.valueOf(minRent.getText());
             int maximumRent = Integer.valueOf(maxRent.getText());
+
             String[] prefMoveInDate = new String[3];
             prefMoveInDate[0] = date.toString().substring(0, 4);    //YEAR
             prefMoveInDate[1] = date.toString().substring(5, 7);     //MONTH
             prefMoveInDate[2] = date.toString().substring(8, 10);    //DAY
+
             String lease = leaseterm.getValue().toString();
             String resGender = genderbox.getValue().toString();
 
@@ -149,11 +152,26 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
                 return;
             }
 
+            int dobYear = year;
+            int dobMonth = Integer.parseInt(month);
+            int dobDay = day;
+
+            System.out.println(dobYear);
+            System.out.println(dobMonth);
+            System.out.println(dobDay);
+
+            if (!isDateValid(dobYear, dobMonth, dobDay)) {
+
+                ErrorCode.setCode(15);
+                System.out.println(ErrorCode.errorMessage());
+                return;
+            }
+
             System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " " +
                     prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
 
             int leaseValue = Integer.parseInt(lease);
-            Date dob = new Date(year, Integer.parseInt(month), day);
+            Date dob = new Date(year-1900, Integer.parseInt(month)-1, day);
             Date moveInDate = new Date(Integer.parseInt(prefMoveInDate[0])-1900, Integer.parseInt(prefMoveInDate[1])-1, Integer.parseInt(prefMoveInDate[2]));
             String gender = (resGender.equals("Male")) ? "M" : (resGender.equals("Female")) ? "F" : "N";
         /*Go to different screen here.*/
@@ -193,7 +211,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
 
         ObservableList<Integer> oblist = FXCollections.observableArrayList(posMonths);
         ArrayList<Integer> posDays = new ArrayList<Integer>();
-        for (int i = 0; i < 32; i++) {
+        for (int i = 1; i < 32; i++) {
             posDays.add(i);
         }
 
@@ -281,6 +299,16 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         }
 
         return apartmentLease;
+    }
+
+    public static boolean isDateValid(int year, int month, int day) {
+        boolean dateIsValid = true;
+        try {
+            LocalDate.of(year, month, day);
+        } catch (DateTimeException e) {
+            dateIsValid = false;
+        }
+        return dateIsValid;
     }
 
     @Override

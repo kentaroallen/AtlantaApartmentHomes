@@ -1,5 +1,7 @@
 package AAH;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
@@ -11,6 +13,17 @@ public class ProspectiveResidentSQLObject {
 
     public static void main(String[] args) throws Exception {
 
+        System.out.println(isDateValid(2012, 2, 29));
+    }
+
+    public static boolean isDateValid(int year, int month, int day) {
+        boolean dateIsValid = true;
+        try {
+            LocalDate.of(year, month, day);
+        } catch (DateTimeException e) {
+            dateIsValid = false;
+        }
+        return dateIsValid;
     }
 
     public static ArrayList<String> getAvailableApartmentCategories() {

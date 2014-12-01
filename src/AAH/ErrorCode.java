@@ -101,7 +101,7 @@ public class ErrorCode {
      12 : Move In Date not more than 2 months after current date
      13 : Some Values are Null
      14 : SQL Error Checking Apartment Availability
-     15 :
+     15 : Invalid Date
 
      Login Errors :
      16 : No Such Username
@@ -267,7 +267,7 @@ public class ErrorCode {
             case 14:
                 return "Prospective Application Error: Database Error Retrieving Apartment Availability";
             case 15:
-                return "-";
+                return "Prospective Application Error: Invalid Date!";
             case 16:
                 return "Login Error: No Such Username!";
             case 17:
