@@ -40,10 +40,10 @@ public class AtlantaApartmentHomes extends Application {
         stage.setScene(scene);
         stage.show();
 
-//        URL resource = getClass().getResource("elevatormusic.mp3");
-//        Media media = new Media(resource.toString());
-//        MediaPlayer mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.play();
+        URL resource = getClass().getResource("elevatormusic.mp3");
+        Media media = new Media(resource.toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
 
     }
 
