@@ -161,4 +161,32 @@ public class LoginSQLObject {
         }
     }
 
+    public static boolean movedIn(String user) {
+
+        String filledApplicationStatement = "SELECT DATEDIFF(CURDATE(), PR.Preferred_Move_In_Date) FROM PROSPECTIVE_RESIDENT PR WHERE PR.Username =  '"+user+"';";
+
+        System.out.println(filledApplicationStatement);
+
+        try {
+
+            ResultSet rs = SQLConnector.runQuery(filledApplicationStatement);//run our statement and return if something janky happens
+            rs.next();
+            if (rs.getInt(1) >= 0) {
+
+                return true;
+            }
+
+            ErrorCode.setCode(21);
+            ErrorCode.errorPopUp();
+            return false;
+
+        }
+        catch (Exception e) {
+
+            e.printStackTrace();
+            System.out.println(ErrorCode.errorMessage());
+            return false;
+        }
+    }
+
 }
