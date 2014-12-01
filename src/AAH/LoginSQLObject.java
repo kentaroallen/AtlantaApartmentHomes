@@ -119,7 +119,7 @@ public class LoginSQLObject {
         }
         //we know that this is management, so we go ahead and take care of this case.
 
-        String retrieveUserStatement = "SELECT * FROM RESIDENT R JOIN APARTMENT A  WHERE Username = '"+user+"';";
+        String retrieveUserStatement = "SELECT * FROM RESIDENT R JOIN APARTMENT A ON R.Apt_Number = A.Apt_Number WHERE Username = '"+user+"';";
 
         try {
 
@@ -127,6 +127,7 @@ public class LoginSQLObject {
 
             while (rs.next()) {
 
+                System.out.println("!!!!!!!!!!!!"+Integer.parseInt(rs.getString("Rent"))+"!!!!!!!!!!!!!!!!!!!");
                 CurrentUser.setUserInfo(user, pass, Integer.parseInt(rs.getString("Apt_Number")), userType, Integer.parseInt(rs.getString("Rent")));
             }
         }

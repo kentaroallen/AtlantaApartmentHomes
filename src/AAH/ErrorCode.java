@@ -164,7 +164,7 @@ public class ErrorCode {
      60 : Error Getting Previous Info
      61 : SQL Error Checking if payment has been made already
      62 : Payment has been made already
-     63 :
+     63 : Invalid Date
      64 :
      65 :
      66 :
@@ -218,7 +218,7 @@ public class ErrorCode {
         Stage popup = new Stage();
         HBox popup_hbox = new HBox();
         Scene popup_scene = new Scene(popup_hbox, 300, 100);
-        popup.setTitle("Errorcode");
+        popup.setTitle("Error (Code "+getCurrentError()+")");
         popup.setWidth(500);
         popup.setHeight(150);
         popup.setScene(popup_scene);
@@ -363,7 +363,7 @@ public class ErrorCode {
             case 62:
                 return "Rent Payment Error: User has already paid for this month and year!";
             case 63:
-                return "-";
+                return "Rent Payment Error: Invalid Date!";
             case 64:
                 return "-";
             case 65:

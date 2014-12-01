@@ -9,7 +9,10 @@ import AAH.model.ScreenTemplate;
 import AAH.model.SetControlScreen;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import sun.java2d.pipe.SpanShapeRenderer;
 
 /**
  * FXML Controller class
@@ -50,6 +54,8 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
 
     private boolean monthSet;
     private boolean yearSet;
+    private Date now = Calendar.getInstance().getTime();
+    private DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
     /**
      * Prevents multiple auto populates from fucking up data.
      */
@@ -87,7 +93,14 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
             int month = Integer.parseInt(mosRent);
             int year = Integer.parseInt(yearRent);
 
-            PayRentSQLObject.payRent(CurrentUser.getUsername(), creditCard, CurrentUser.getApartmentNumber(), month, year, Calendar.getInstance().getTime(), amtOwed);
+
+            if (!isDateValid(todaysDate)) {
+                return;
+            }
+
+            now = df.parse(todaysDate);
+
+            PayRentSQLObject.payRent(CurrentUser.getUsername(), creditCard, CurrentUser.getApartmentNumber(), month, year, now, amtOwed);
 
             if (ErrorCode.getCurrentError() != 0) {
 
@@ -168,12 +181,24 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
      * @throws Exception
      */
     public void setAmountDue(ActionEvent e) throws Exception {
+
+        /////////////////////
+        ErrorCode.setCode(0);
+        ////////////////////
+
+        if (!isDateValid(datefield.getText().toString())) {
+            return;
+        }
+
         try {
+            now = df.parse(datefield.getText().toString());
+            System.out.println(now.toString());
             String mosRent = monthfield.getValue().toString();
             String yearRent = yearfield.getValue().toString();
-            String DueAmount = PayRentSQLObject.amountOwed(CurrentUser.getUsername(), CurrentUser.getApartmentNumber(), CurrentUser.getRentAmount(), Calendar.getInstance().getTime(), Integer.parseInt(mosRent), Integer.parseInt(yearRent)) + "";
+            String DueAmount = PayRentSQLObject.amountOwed(CurrentUser.getUsername(), CurrentUser.getApartmentNumber(), CurrentUser.getRentAmount(), now, Integer.parseInt(mosRent), Integer.parseInt(yearRent)) + "";
             duefield.setText(DueAmount + "");
         } catch (Exception bs) {
+
             System.out.println("Error: Both things are not set yet.");
         }
 
@@ -190,6 +215,39 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         }
 
         return out;
+    }
+
+    public static boolean isDateValid(String s) {
+
+        String out[] = s.split("/+");
+
+        try {
+
+            if (isDateValid(Integer.parseInt(out[2]), Integer.parseInt(out[0]), Integer.parseInt(out[1]))) {
+
+                return true;
+            }
+
+            ErrorCode.setCode(63);
+            ErrorCode.errorPopUp();
+            return false;
+        }
+        catch (Exception e) {
+
+            ErrorCode.setCode(63);
+            ErrorCode.errorPopUp();
+            return false;
+        }
+    }
+
+    public static boolean isDateValid(int year, int month, int day) {
+        boolean dateIsValid = true;
+        try {
+            LocalDate.of(year, month, day);
+        } catch (DateTimeException e) {
+            dateIsValid = false;
+        }
+        return dateIsValid;
     }
 
     @Override

@@ -49,6 +49,7 @@ public class PayRentSQLObject {
                     return lateRent(pay_month, pay_year, paymentDate, baseRent);
                 }
 
+                System.out.println(baseRent);
                 return baseRent;
             }
         }
