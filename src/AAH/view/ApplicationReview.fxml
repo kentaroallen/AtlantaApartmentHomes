@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulateApp" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.ApplicationReviewController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulateApp" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #989CA3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.ApplicationReviewController">
    <children>
       <VBox prefHeight="413.0" prefWidth="620.0">
          <children>
@@ -33,7 +33,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="332.0" prefWidth="620.0">
                <children>
-                  <ImageView fitHeight="321.0" fitWidth="584.0" pickOnBounds="true">
+                  <ImageView fitHeight="321.0" fitWidth="600.0" pickOnBounds="true">
                      <image>
                         <Image url="@../img/applicationReview.jpg" />
                      </image>
@@ -58,6 +58,7 @@
                               <TableColumn fx:id="approvalcol" prefWidth="91.0" text="Approval" />
                            </columns>
                         </TableView>
+                        <Button layoutX="459.0" layoutY="250.0" mnemonicParsing="false" onAction="#exitHandler" text="Home" />
                      </children>
                   </AnchorPane>
                </children>

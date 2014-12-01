@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulateThree" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.ThreeMonthReportController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulateThree" prefHeight="360.0" prefWidth="572.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.ThreeMonthReportController">
    <children>
       <VBox prefHeight="413.0" prefWidth="620.0">
          <children>
@@ -33,7 +33,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="332.0" prefWidth="620.0" style=": ;">
                <children>
-                  <ImageView fitHeight="321.0" fitWidth="600.0" pickOnBounds="true">
+                  <ImageView fitHeight="321.0" fitWidth="579.0" layoutX="-6.0" pickOnBounds="true">
                      <image>
                         <Image url="@../img/ThreemonthReport.jpg" />
                      </image>
@@ -51,24 +51,24 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane opacity="0.7" prefHeight="48.0" prefWidth="620.0" style="-fx-background-color: #989CA3;">
+            <AnchorPane opacity="0.7" prefHeight="40.0" prefWidth="566.0" style="-fx-background-color: #989CA3;">
                <children>
                   <Label layoutX="7.0" layoutY="-12.0" prefHeight="52.0" prefWidth="114.0" text="Amier Naji" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="296.0" layoutY="-12.0" prefHeight="52.0" prefWidth="132.0" text="Kentaro Allen" textAlignment="CENTER" textFill="WHITE">
+                  <Label layoutX="254.0" layoutY="-12.0" prefHeight="52.0" prefWidth="132.0" text="Kentaro Allen" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="142.0" layoutY="-12.0" prefHeight="52.0" prefWidth="114.0" text="Bhavya Garg" textAlignment="CENTER" textFill="WHITE">
+                  <Label layoutX="121.0" layoutY="-12.0" prefHeight="52.0" prefWidth="114.0" text="Bhavya Garg" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="450.0" layoutY="-12.0" prefHeight="52.0" prefWidth="150.0" text="Clarence Chang" textAlignment="CENTER" textFill="WHITE">
+                  <Label layoutX="386.0" layoutY="-12.0" prefHeight="52.0" prefWidth="150.0" text="Clarence Chang" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="22.0" />
                      </font>

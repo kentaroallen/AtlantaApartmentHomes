@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
@@ -49,25 +50,30 @@
                               <Font name="Calibri Bold" size="22.0" />
                            </font>
                         </Label>
-                        <Hyperlink fx:id="paymentinformation" layoutX="10.0" layoutY="144.0" onAction="#paymentInformationHandler" text="Payment Information">
+                        <Hyperlink fx:id="paymentinformation" layoutX="40.0" layoutY="154.0" onAction="#paymentInformationHandler" text="Payment Information" textFill="#100000" underline="true">
                            <font>
-                              <Font name="Arial" size="22.0" />
+                              <Font name="Arial" size="16.0" />
                            </font>
                         </Hyperlink>
-                        <Hyperlink fx:id="payrent" layoutX="64.0" layoutY="42.0" onAction="#payRentHandler" prefHeight="52.0" prefWidth="132.0" text="Pay Rent" textAlignment="CENTER">
+                        <Hyperlink fx:id="payrent" layoutX="75.0" layoutY="52.0" onAction="#payRentHandler" prefHeight="36.0" prefWidth="87.0" text="Pay Rent" textAlignment="CENTER" textFill="#280101" underline="true">
                            <font>
-                              <Font name="Arial" size="22.0" />
+                              <Font name="Arial" size="16.0" />
                            </font>
                         </Hyperlink>
-                        <Hyperlink fx:id="requestmaintenance" layoutX="7.0" layoutY="94.0" onAction="#requestMaintenanceHandler" text="Request Maintenance" textAlignment="CENTER">
+                        <Hyperlink fx:id="requestmaintenance" layoutX="36.0" layoutY="103.0" onAction="#requestMaintenanceHandler" text="Request Maintenance" textAlignment="CENTER" textFill="#100000" underline="true">
                            <font>
-                              <Font name="Arial" size="22.0" />
+                              <Font name="Arial" size="16.0" />
                            </font>
                         </Hyperlink>
-                        <Hyperlink fx:id="mail" layoutX="81.0" layoutY="180.0" onAction="#readLatestMail" prefHeight="42.0" prefWidth="98.0" text="Inbox">
+                        <Hyperlink fx:id="mail" layoutX="68.0" layoutY="208.0" onAction="#readLatestMail" prefHeight="36.0" prefWidth="166.0" text="10 unread messages" textFill="#100000" underline="true">
                            <font>
-                              <Font name="Arial" size="22.0" />
+                              <Font name="Arial" size="16.0" />
                            </font></Hyperlink>
+                        <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="36.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/mail.gif" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="332.0" layoutY="43.0" opacity="0.69" prefHeight="250.0" prefWidth="221.0" style="-fx-background-color: #E6EBE6; -fx-border-radius: 50px;">
@@ -77,9 +83,18 @@
                               <Font name="Calibri Bold" size="22.0" />
                            </font>
                         </Label>
-                        <Hyperlink fx:id="appreview" layoutX="43.0" layoutY="52.0" onAction="#applicationReviewHandler" text="Application Review" />
-                        <Hyperlink fx:id="maintenance" layoutX="31.0" layoutY="81.0" onAction="#mainRequestsHandler" text="Maintenance Requests" />
-                        <Hyperlink fx:id="rentreminder" layoutX="56.0" layoutY="110.0" onAction="#rentReminderHandler" text="Rent Reminder" />
+                        <Hyperlink fx:id="appreview" layoutX="50.0" layoutY="52.0" onAction="#applicationReviewHandler" text="Application Review" textFill="#100000" underline="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Hyperlink>
+                        <Hyperlink fx:id="maintenance" layoutX="37.0" layoutY="85.0" onAction="#mainRequestsHandler" text="Maintenance Requests" textFill="#100000" underline="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Hyperlink>
+                        <Hyperlink fx:id="rentreminder" layoutX="65.0" layoutY="118.0" onAction="#rentReminderHandler" text="Rent Reminder" textFill="#100000" underline="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Hyperlink>
                         <Text layoutX="14.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Reports:" />
                         <Button fx:id="viewbtn" layoutX="132.0" layoutY="210.0" mnemonicParsing="false" onAction="#reportHandler" style="-fx-background-color: #87DBFF; -fx-border-color: #000000;" text="View" />
                         <ComboBox fx:id="reportbox" layoutX="36.0" layoutY="166.0" prefWidth="150.0" style="-fx-border-color: #000000;">

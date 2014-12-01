@@ -69,7 +69,7 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
         /////////////////////
         ErrorCode.setCode(0);
         ////////////////////
-
+        try{
         String[] chosenPerson;
         String rowValues = tablefield.getSelectionModel().getSelectedItems().toString();
         rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
@@ -95,6 +95,11 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
             System.out.println();
 
             controller.setScreen(this.getAllotment());
+        }
+        }catch(Exception ea){
+            ErrorCode.setCode(24);
+            ErrorCode.errorPopUp();
+            System.out.println(ErrorCode.errorMessage());
         }
 
     }
