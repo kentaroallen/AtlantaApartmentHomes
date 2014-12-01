@@ -108,6 +108,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
             }
             /*Go to different screen here.*/
             controller.setScreen(this.getHomepage());
+            clearFields();
             populateOncePR = true;
         } catch (Exception nullInput) {
             ErrorCode.setCode(10);
@@ -125,6 +126,14 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         System.out.println("Exit to home page");
         populateOncePR = true;
         controller.setScreen(this.getHomepage());
+        clearFields();
+    }
+    public void clearFields(){
+        aptfield.setText("");
+        monthfield.setValue("");
+        yearfield.setValue("");
+        cardfield.setValue("");
+        duefield.setText("");
     }
 
     @Override

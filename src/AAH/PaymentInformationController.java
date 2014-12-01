@@ -93,6 +93,15 @@ public class PaymentInformationController extends ScreenTemplate implements Init
 
         System.out.println("Exit to home page");
         controller.setScreen(this.getHomepage());
+        clearFields();
+    }
+    public void clearFields(){
+        namefield.setText("");
+        cardfield.setText("");
+        monthfield.setText("");
+        cwfield.setText("");
+        cardbox.setValue("");
+        yearfield.setText("");
     }
 
     @FXML
@@ -130,6 +139,7 @@ public class PaymentInformationController extends ScreenTemplate implements Init
                 return;
             }
             controller.setScreen(this.getHomepage());
+            clearFields();
             populateOncePI = true;
         }
 

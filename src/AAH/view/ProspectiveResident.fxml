@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.ProspectiveResidentController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #989CA3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.ProspectiveResidentController">
    <children>
       <VBox prefHeight="413.0" prefWidth="620.0">
          <children>
@@ -61,7 +61,7 @@
                         <Label layoutX="250.0" layoutY="4.0" text="Category of Apartment:" />
                         <Button id="registerButton" fx:id="register" layoutX="412.0" layoutY="254.0" mnemonicParsing="false" onAction="#loginHandler" style="-fx-background-color: #3BB9F7;" text="Apply!" />
                         <DatePicker fx:id="prefdate" layoutX="252.0" layoutY="154.0" prefHeight="25.0" prefWidth="158.0" />
-                        <Label layoutX="251.0" layoutY="131.0" style="-fx-background-color: #;" text="Preferred Move In Date::" />
+                        <Label layoutX="251.0" layoutY="131.0" text="Preferred Move In Date::" />
                      </children>
                   </AnchorPane>
                </children>

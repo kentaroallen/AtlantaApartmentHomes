@@ -55,6 +55,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
 
         System.out.println("New user clicked");
         controller.setScreen(this.getNewUserReg());
+        clearFields();
     }
 
     @FXML
@@ -101,6 +102,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
 
             if (CurrentUser.getUserType() != 0) {
                 controller.setScreen(this.getHomepage());
+                clearFields();
 
             }
 
@@ -116,6 +118,11 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         }
 
         /*Go to different screen here.*/
+    }
+    public void clearFields(){
+        usernameField.setText("");
+        passwordField.setText("");
+        
     }
 
     public static void prospectivePopUp(){

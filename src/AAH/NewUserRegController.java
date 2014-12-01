@@ -86,6 +86,7 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
 
             CurrentUser.setUserInfo(username, password, -1, 0, 0);
             controller.setScreen(this.getProspective());
+            clearFields();
         }
         else{
             ErrorCode.setCode(10);
@@ -102,8 +103,11 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         /*Go to different screen here.*/
 
     }
-
-
+    public void clearFields(){
+        usernameField.setText("");
+        passwordField.setText("");
+        confirmField.setText("");
+    }
     @Override
     /**
      * Placeholder method for correct operation.
