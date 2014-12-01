@@ -1,68 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.web.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulateHome" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FEC343;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.HomepageController">
-   <top>
-      <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #72CBDB;" BorderPane.alignment="CENTER">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulateHome" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.HomepageController">
+   <children>
+      <VBox prefHeight="413.0" prefWidth="620.0">
          <children>
-            <Text layoutX="242.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home" textAlignment="CENTER">
-               <font>
-                  <Font name="Cambria Math" size="48.0" />
-               </font>
-            </Text>
-            <Hyperlink layoutX="14.0" layoutY="14.0" onAction="#logoutHandler" text="Logout" />
+            <AnchorPane opacity="0.59" prefHeight="0.0" prefWidth="620.0" style="-fx-background-color: #989CA3;">
+               <effect>
+                  <Blend />
+               </effect>
+               <children>
+                  <Label layoutX="61.0" prefHeight="52.0" prefWidth="477.0" text="Atlanta Apartment Homes" textAlignment="CENTER" textFill="#54370d">
+                     <font>
+                        <Font name="Dotum" size="36.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="42.0" fitWidth="60.0" layoutX="8.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Hyperlink layoutX="508.0" layoutY="5.0" onAction="#logoutHandler" prefHeight="42.0" prefWidth="98.0" text="Logout">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font></Hyperlink>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="332.0" prefWidth="620.0">
+               <children>
+                  <ImageView fitHeight="321.0" fitWidth="600.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../img/Homepage.jpeg" />
+                     </image>
+                  </ImageView>
+                  <AnchorPane fx:id="payrent" layoutX="14.0" layoutY="43.0" onDragDetected="#payRentHandler" opacity="0.69" prefHeight="250.0" prefWidth="235.0" style="-fx-background-color: #E6EBE6; -fx-border-radius: 50px;">
+                     <children>
+                        <Label layoutX="72.0" prefHeight="52.0" prefWidth="93.0" text="Residents" textAlignment="CENTER">
+                           <font>
+                              <Font name="Calibri Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <Hyperlink fx:id="paymentinformation" layoutX="10.0" layoutY="144.0" onAction="#paymentInformationHandler" text="Payment Information">
+                           <font>
+                              <Font name="Arial" size="22.0" />
+                           </font>
+                        </Hyperlink>
+                        <Hyperlink fx:id="payrent" layoutX="64.0" layoutY="42.0" onAction="#payRentHandler" prefHeight="52.0" prefWidth="132.0" text="Pay Rent" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="22.0" />
+                           </font>
+                        </Hyperlink>
+                        <Hyperlink fx:id="requestmaintenance" layoutX="7.0" layoutY="94.0" onAction="#requestMaintenanceHandler" text="Request Maintenance" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="22.0" />
+                           </font>
+                        </Hyperlink>
+                        <Hyperlink fx:id="mail" layoutX="81.0" layoutY="180.0" onAction="#readLatestMail" prefHeight="42.0" prefWidth="98.0" text="Inbox">
+                           <font>
+                              <Font name="Arial" size="22.0" />
+                           </font></Hyperlink>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="332.0" layoutY="43.0" opacity="0.69" prefHeight="250.0" prefWidth="221.0" style="-fx-background-color: #E6EBE6; -fx-border-radius: 50px;">
+                     <children>
+                        <Label layoutX="56.0" prefHeight="52.0" prefWidth="132.0" text="Management" textAlignment="CENTER">
+                           <font>
+                              <Font name="Calibri Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <Hyperlink fx:id="appreview" layoutX="43.0" layoutY="52.0" onAction="#applicationReviewHandler" text="Application Review" />
+                        <Hyperlink fx:id="maintenance" layoutX="31.0" layoutY="81.0" onAction="#mainRequestsHandler" text="Maintenance Requests" />
+                        <Hyperlink fx:id="rentreminder" layoutX="56.0" layoutY="110.0" onAction="#rentReminderHandler" text="Rent Reminder" />
+                        <Text layoutX="14.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Reports:" />
+                        <Button fx:id="viewbtn" layoutX="132.0" layoutY="210.0" mnemonicParsing="false" onAction="#reportHandler" style="-fx-background-color: #87DBFF; -fx-border-color: #000000;" text="View" />
+                        <ComboBox fx:id="reportbox" layoutX="36.0" layoutY="166.0" prefWidth="150.0" style="-fx-border-color: #000000;">
+                           <cursor>
+                              <Cursor fx:constant="NONE" />
+                           </cursor>
+                        </ComboBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane opacity="0.7" prefHeight="48.0" prefWidth="620.0" style="-fx-background-color: #989CA3;">
+               <children>
+                  <Label layoutX="7.0" layoutY="-12.0" prefHeight="52.0" prefWidth="114.0" text="Amier Naji" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Light" size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="296.0" layoutY="-12.0" prefHeight="52.0" prefWidth="132.0" text="Kentaro Allen" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Light" size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="142.0" layoutY="-12.0" prefHeight="52.0" prefWidth="114.0" text="Bhavya Garg" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Light" size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="450.0" layoutY="-12.0" prefHeight="52.0" prefWidth="150.0" text="Clarence Chang" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Light" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
-      </AnchorPane>
-   </top>
-   <bottom>
-      <AnchorPane prefHeight="61.0" prefWidth="600.0" style="-fx-background-color: #55134E;" BorderPane.alignment="CENTER" />
-   </bottom>
-   <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-         <children>
-            <Text layoutX="70.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users">
-               <font>
-                  <Font name="Cambria Bold" size="18.0" />
-               </font>
-            </Text>
-            <Hyperlink fx:id="payrent" layoutX="64.0" layoutY="57.0" onAction="#payRentHandler" text="Pay Rent" />
-            <Hyperlink fx:id="requestmaintenance" layoutX="32.0" layoutY="118.0" onAction="#requestMaintenanceHandler" text="Request Maintenance" />
-            <Hyperlink fx:id="paymentinformation" layoutX="34.0" layoutY="180.0" onAction="#paymentInformationHandler" text="Payment Information" />
-         </children></AnchorPane>
-   </left>
-   <right>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-         <children>
-            <Text layoutX="51.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management">
-               <font>
-                  <Font name="Cambria Bold" size="18.0" />
-               </font>
-            </Text>
-            <Hyperlink fx:id="appreview" layoutX="50.0" layoutY="49.0" onAction="#applicationReviewHandler" text="Application Review" />
-            <Hyperlink fx:id="maintenance" layoutX="40.0" layoutY="94.0" onAction="#mainRequestsHandler" text="Maintenance Requests" />
-            <Hyperlink fx:id="rentreminder" layoutX="57.0" layoutY="136.0" onAction="#rentReminderHandler" text="Rent Reminder" />
-            <ComboBox fx:id="reportbox" layoutX="25.0" layoutY="188.0" prefWidth="150.0" />
-            <Text layoutX="27.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Reports:" />
-            <Button fx:id="viewbtn" layoutX="29.0" layoutY="220.0" mnemonicParsing="false" onAction="#reportHandler" text="View" />
-         </children></AnchorPane>
-   </right>
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="253.0" fitWidth="200.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/index.png" />
-               </image>
-            </ImageView>
-            <Hyperlink fx:id="mail" layoutX="82.0" layoutY="234.0" onAction="#readLatestMail" text="1 New Message" />
-         </children></AnchorPane>
-   </center>
-</BorderPane>
+      </VBox>
+   </children>
+</FlowPane>

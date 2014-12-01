@@ -29,6 +29,7 @@ public class ScreenController extends StackPane {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("view/" + path));         //load fxml
             Parent loadScreen = (Parent) loader.load();                //load scene
+            
             SetControlScreen myScreenController = (SetControlScreen) loader.getController();       //return screen controller
             myScreenController.setScreenParent(this);
             theScreens.put(screenName, loadScreen);

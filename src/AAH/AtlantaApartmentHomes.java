@@ -4,27 +4,29 @@
  * and open the template in the editor.
  */
 package AAH;
+
 import AAH.model.ScreenNameContainer;
+import java.net.URL;
 import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
  * This main class.
+ *
  * @author Kentaro
  */
 public class AtlantaApartmentHomes extends Application {
+
     private ScreenNameContainer snc = new ScreenNameContainer();
-    
+
     /**
-     * 
+     *
      * @param stage
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void start(Stage stage) throws Exception {
@@ -37,9 +39,12 @@ public class AtlantaApartmentHomes extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        
-       
-        
+
+//        URL resource = getClass().getResource("elevatormusic.mp3");
+//        Media media = new Media(resource.toString());
+//        MediaPlayer mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.play();
+
     }
 
     private void initialize(ScreenController main) {
@@ -54,6 +59,5 @@ public class AtlantaApartmentHomes extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }
