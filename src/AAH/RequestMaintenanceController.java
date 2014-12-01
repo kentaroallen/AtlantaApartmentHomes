@@ -108,6 +108,7 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
 
         System.out.println("Exit to home page");
         controller.setScreen(this.getHomepage());
+        populateOnceRM = true;
     }
 
     public void autoPopulate() {

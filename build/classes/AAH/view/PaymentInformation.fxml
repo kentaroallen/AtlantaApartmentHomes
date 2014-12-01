@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulatePI" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.PaymentInformationController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulatePI" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #989CA3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.PaymentInformationController">
    <children>
       <VBox prefHeight="413.0" prefWidth="620.0">
          <children>
@@ -31,7 +31,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="332.0" prefWidth="620.0" style="-fx-background-size: ;">
+            <AnchorPane prefHeight="332.0" prefWidth="620.0">
                <children>
                   <ImageView fitHeight="321.0" fitWidth="600.0" pickOnBounds="true">
                      <image>

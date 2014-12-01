@@ -24,7 +24,7 @@ public class AtlantaApartmentHomes extends Application {
     private ScreenNameContainer snc = new ScreenNameContainer();
 
     /**
-     *
+     * https://docs.google.com/document/d/1GHgOBdYnp0VR9j4evQbVS0C3GGKIxISOnbKHm7rs9O4/edit
      * @param stage
      * @throws Exception
      */

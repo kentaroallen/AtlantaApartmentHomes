@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulateService" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.ServiceReportController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulateService" prefHeight="346.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.ServiceReportController">
    <children>
       <VBox prefHeight="413.0" prefWidth="620.0">
          <children>
@@ -33,7 +33,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="332.0" prefWidth="620.0" style=": url(http://www.thestrandnyc.com/d/main/media/Interior/__thumbs_1200_700_crop/kdp18119.jpg);">
                <children>
-                  <ImageView fitHeight="321.0" fitWidth="600.0" pickOnBounds="true">
+                  <ImageView fitHeight="321.0" fitWidth="570.0" pickOnBounds="true">
                      <image>
                         <Image url="@../img/ServiceReport.jpg" />
                      </image>
@@ -58,17 +58,17 @@
                         <Font name="Calibri Light" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="296.0" layoutY="-12.0" prefHeight="52.0" prefWidth="132.0" text="Kentaro Allen" textAlignment="CENTER" textFill="WHITE">
+                  <Label layoutX="259.0" layoutY="-12.0" prefHeight="52.0" prefWidth="132.0" text="Kentaro Allen" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="142.0" layoutY="-12.0" prefHeight="52.0" prefWidth="114.0" text="Bhavya Garg" textAlignment="CENTER" textFill="WHITE">
+                  <Label layoutX="114.0" layoutY="-12.0" prefHeight="52.0" prefWidth="114.0" text="Bhavya Garg" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="450.0" layoutY="-12.0" prefHeight="52.0" prefWidth="150.0" text="Clarence Chang" textAlignment="CENTER" textFill="WHITE">
+                  <Label layoutX="405.0" layoutY="-12.0" prefHeight="52.0" prefWidth="150.0" text="Clarence Chang" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="22.0" />
                      </font>

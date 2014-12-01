@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulatePR" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.PayRentController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#autoPopulatePR" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #989CA3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AAH.PayRentController">
    <children>
       <VBox prefHeight="413.0" prefWidth="620.0">
          <children>
@@ -34,9 +34,9 @@
             </AnchorPane>
             <AnchorPane prefHeight="332.0" prefWidth="620.0" style=": ;">
                <children>
-                  <ImageView fitHeight="328.0" fitWidth="600.0" layoutY="-7.0" pickOnBounds="true">
+                  <ImageView fitHeight="328.0" fitWidth="600.0" layoutY="-3.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../img/PayRent.png" />
+                        <Image url="@../img/Pay_Rent.jpg" />
                      </image>
                   </ImageView>
                   <AnchorPane layoutX="14.0" layoutY="32.0" opacity="0.89" prefHeight="257.0" prefWidth="414.0" style="-fx-background-color: #B3B3B3; -fx-border-radius: 50px;">

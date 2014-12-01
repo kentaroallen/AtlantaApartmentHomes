@@ -179,6 +179,7 @@ public class HomepageController extends ScreenTemplate implements Initializable,
             popup.setTitle("Mail Box");
             popup.setScene(popup_scene);
             popup.show();
+            populateOnceHome = true;
 
         } catch (Exception e) {
             System.out.println("failure to open mailbox.");
@@ -191,7 +192,7 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     public void autoPopulateHome() {
         if (populateOnceHome) {
             System.out.println("Auto populated the home page");
-            String numberOfMessages = (CurrentUser.getUserType() == 2) ? "x" : ""+MailBoxSQLObject.getUnreadMessages(CurrentUser.getUsername()).size();
+            String numberOfMessages = (CurrentUser.getUserType() == 2) ? "0" : ""+MailBoxSQLObject.getUnreadMessages(CurrentUser.getUsername()).size();
             mail.setText(numberOfMessages + " unread messages");
             populateOnceHome = false;
         } else {
