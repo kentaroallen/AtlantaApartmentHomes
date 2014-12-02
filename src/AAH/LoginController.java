@@ -105,14 +105,20 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
             return;
         }
 
+        if ((CurrentUser.getUserType() == 1) && (!LoginSQLObject.movedIn(username) || ErrorCode.getCurrentError() != 0)) {
+
+            return;
+        }
+
         if (ErrorCode.currentError == 0) {
 
             System.out.println(CurrentUser.getUserType());
 
             if (CurrentUser.getUserType() != 0) {
-                controller.setScreen(this.getHomepage());
-                clearFields();
 
+
+                    controller.setScreen(this.getHomepage());
+                    clearFields();
             }
 
             else {

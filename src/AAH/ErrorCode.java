@@ -109,7 +109,7 @@ public class ErrorCode {
      18 : SQL Error getting User Type
      19 : SQL Error Validating Password
      20 : SQL Error Checking if Application is Filled Out
-     21 :
+     21 : Not after Move in Date
      22 :
      23 :
 
@@ -279,7 +279,7 @@ public class ErrorCode {
             case 20:
                 return "Login Error: Database Error Checking if Application is Filled Out!";
             case 21:
-                return "-";
+                return "Login Error: Apartment Allotted, but you have not moved in yet!";
             case 22:
                 return "-";
             case 23:
