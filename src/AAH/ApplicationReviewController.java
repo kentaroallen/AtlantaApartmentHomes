@@ -76,6 +76,11 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
 
         chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
 
+            if (chosenPerson[7].equals("Rejected")) {
+
+                return;
+            }
+
         if (ApplicationReviewSQLObject.applicantAllotedAlready(chosenPerson[0]) || ErrorCode.getCurrentError() != 0) {
 
             return;

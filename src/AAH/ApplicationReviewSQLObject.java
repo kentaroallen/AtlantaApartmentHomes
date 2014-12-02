@@ -20,7 +20,7 @@ public class ApplicationReviewSQLObject {
         ArrayList<String[]> out = new ArrayList<String[]>();
 
         /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
-        String applicationReviewStatement = "SELECT PR.Username, PR.DOB, PR.Gender, PR.Monthly_Income, PR.Category, PR.Preferred_Move_In_Date, PR.Preferred_Lease_Term, PR.App_Status FROM PROSPECTIVE_RESIDENT PR;";
+        String applicationReviewStatement = "SELECT PR.Username, PR.DOB, PR.Gender, PR.Monthly_Income, PR.Category, PR.Preferred_Move_In_Date, PR.Preferred_Lease_Term, PR.App_Status FROM PROSPECTIVE_RESIDENT PR ORDER BY PR.App_Status;";
         ResultSet rs = SQLConnector.runQuery(applicationReviewStatement);
 
         String[] temp;

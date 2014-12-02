@@ -11,6 +11,8 @@ import java.util.Date;
  */
 public class LoginSQLObject {
 
+    private static boolean multiAccess = true;
+
     public static void main(String[] args) throws Exception {
 
         System.out.println(userType("New001"));
@@ -163,7 +165,12 @@ public class LoginSQLObject {
 
     public static boolean movedIn(String user) {
 
-        String filledApplicationStatement = "SELECT DATEDIFF(CURDATE(), PR.Preferred_Move_In_Date) FROM PROSPECTIVE_RESIDENT PR WHERE PR.Username =  '"+user+"';";
+        if (multiAccess == true) {
+
+            return true;
+        }
+
+        String filledApplicationStatement = "SELECT DATEDIFF( CURDATE(), PR.Preferred_Move_In_Date) FROM PROSPECTIVE_RESIDENT PR WHERE PR.Username =  '"+user+"';";
 
         System.out.println(filledApplicationStatement);
 
