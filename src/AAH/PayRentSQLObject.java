@@ -89,7 +89,7 @@ public class PayRentSQLObject {
         System.out.println(daysBetween(payDate, lastDayOfMonth(payDate)));
 
 
-        return (int) ((amt/totalDaysInMonth)*daysBetween(payDate, lastDayOfMonth(payDate)));
+        return (int) ((amt/totalDaysInMonth)*(1 + daysBetween(payDate, lastDayOfMonth(payDate))));
 
     }
 
