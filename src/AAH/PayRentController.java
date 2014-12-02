@@ -217,6 +217,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
         }
 
         try {
+
             now = df.parse(datefield.getText().toString());
             System.out.println(now.toString());
             String mosRent = monthfield.getValue().toString();

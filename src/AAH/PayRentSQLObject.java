@@ -19,25 +19,32 @@ public class PayRentSQLObject {
     public static int amountOwed(String user, int apt_number, int baseRent, Date paymentDate, int pay_month, int pay_year) {
 
 
-        if ((paymentDate.getMonth() + 1) != pay_month || (paymentDate.getYear() + 1900) != pay_year) {//make sure we are only paying for the current month
+        /*if ((paymentDate.getMonth() + 1) != pay_month || (paymentDate.getYear() + 1900) != pay_year) {//make sure we are only paying for the current month
 
             System.out.println((paymentDate.getMonth()+1)+" "+(paymentDate.getYear()+1900)+"");
             return 0;
-        }
+        }*/
 
         int rent = baseRent;
 
+        //System.out.println(paymentDate.toString());
+
         String firstTimeStatement = "SELECT * FROM PAYS_RENT PR JOIN RESIDENT R ON PR.Apartment_Number = R.Apt_Number WHERE R.Username = '"+user+"' AND R.Apt_Number = '"+apt_number+"';";
+        String getMoveInDate = "SELECT Preferred_Move_In_Date FROM PROSPECTIVE_RESIDENT WHERE Username = '"+user+"';";
         System.out.println(firstTimeStatement);
+        System.out.println(getMoveInDate);
 
         try {
 
            ResultSet rs =  SQLConnector.runQuery(firstTimeStatement);
 
-            if ( (!rs.next()) && paymentDate.after(new Date(pay_year-1900, pay_month-1, 3))) {
+            if (!rs.next()) {
 
+                ResultSet rs2 = SQLConnector.runQuery(getMoveInDate);
+                rs2.next();
+                java.sql.Date moveIn = rs2.getDate("Preferred_Move_In_Date");
                 System.out.println("hit");
-                return proratedRent(paymentDate, baseRent);
+                return proratedRent(moveIn, baseRent);
             }
 
             else {
@@ -56,6 +63,7 @@ public class PayRentSQLObject {
         catch (Exception e) {
 
 
+            e.printStackTrace();
             ErrorCode.setCode(9);
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
@@ -63,6 +71,7 @@ public class PayRentSQLObject {
         }
 
     }
+
 
 
     public static int lateRent(int month, int year, Date payDate, int amt) {
@@ -100,8 +109,7 @@ public class PayRentSQLObject {
             SQLConnector.runUpdate(insertRentStatement);
         }
         catch (Exception e) {
-
-
+            
             ErrorCode.setCode(59);
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
@@ -147,6 +155,7 @@ public class PayRentSQLObject {
         }
         catch (Exception e) {
 
+            e.printStackTrace();
             ErrorCode.setCode(61);
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());

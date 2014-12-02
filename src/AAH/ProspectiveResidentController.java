@@ -75,19 +75,18 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
      * This will take in the username and password for sql retrieval.
      *
      * @param e the click button event that caused this.
-     *
+     * 
      * These params correspond to inputs from the UI.
      * @param name the name of the resident
      * @param month the month field for DOB
-     * @param year the year field for DOB
+     * @param year  the year field for DOB
      * @param day the day field for DOB
      * @param monthlyIncome the monthly income for resident
      * @param prevResidence string of the previous residence
      * @param apartmentCategory for example "1BR-1B" 1 bedroom 1 bath
-     * @param minimumRent int
+     * @param minimumRent int 
      * @param maximumRent int
-     * @param prefMoveInDate This is an array. [0] is year [1] is month [2] is
-     * day for the preferred move in date
+     * @param prefMoveInDate This is an array. [0] is year [1] is month [2] is day for the preferred move in date
      * @param lease this is how long the lease is
      * @param resGender this is the residents gender
      */
@@ -189,6 +188,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
             ProspectiveResidentSQLObject.insertProspectiveResident(CurrentUser.getUsername(), dob, name, gender, moveInDate, leaseValue, monthlyIncome, apartmentCategory, prevResidence, minimumRent, maximumRent);
         } catch (Exception x) {
 
+
             ErrorCode.setCode(10);
             System.out.println(ErrorCode.errorMessage());
             ErrorCode.errorPopUp();
@@ -220,6 +220,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
 
     }
 
+
     @Override
     /**
      * Placeholder method for correct operation.
@@ -244,6 +245,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         ObservableList<Integer> obListyears = FXCollections.observableArrayList(posYears);
 
         // HERE, WE GRAB OUR APARTMENT INFO
+
         String[] apartmentCat = availableApartmentCategories();
         String[] apartmentLease = availableApartmentLeaseTerms();
 
@@ -253,6 +255,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         }
 
         //WEEEEEEEEEEEE
+
         ArrayList<String> posCats = new ArrayList<String>();
         String[] types = apartmentCat;//{"1BR-1B", "1BR-2B", "2BR-1B", "2BR-1B"};
         posCats.addAll(Arrays.asList(types));
