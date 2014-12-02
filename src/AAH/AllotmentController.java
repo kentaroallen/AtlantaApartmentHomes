@@ -91,7 +91,7 @@ public class AllotmentController extends ScreenTemplate implements Initializable
             System.out.println();
 
             ApartmentAllotmentSQLObject.allotToResident(ApartmentAllotmentChoice.getApplicant(), Integer.parseInt(seperatedData[0]));
-            ReminderSQLObject.sendReminder(Integer.parseInt(seperatedData[0]), "Welcome!");
+            ReminderSQLObject.sendReminder(Integer.parseInt(seperatedData[0]), "Welcome to Atlanta Apartment Homes!\nWe're happy to have you here with us.\nHave a great day!");
 
             if (ErrorCode.currentError != 0) {
 
@@ -136,6 +136,7 @@ public class AllotmentController extends ScreenTemplate implements Initializable
         ErrorCode.setCode(0);
         ////////////////////
 
+        populateOnceAL = true;
         System.out.println("Cancel button clicked");
         controller.setScreen(this.getHomepage());
 
