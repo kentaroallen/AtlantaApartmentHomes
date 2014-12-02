@@ -81,6 +81,15 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
       /*  if(username != "donutresidentman"){
             PayRentController.aptfield.setText("1112");
         }*/
+        
+        if(username.length() > 15){
+            System.out.println("Username too long.");
+            return;
+        }
+        if(password.length() > 15){
+            System.out.println("Username too long.");
+            return;
+        }
 
         /*SQL logic here*/
         if (!LoginSQLObject.validateLogin(username, password)) {//don't log in if we can't.
