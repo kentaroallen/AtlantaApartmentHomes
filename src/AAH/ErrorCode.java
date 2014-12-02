@@ -281,9 +281,9 @@ public class ErrorCode {
             case 21:
                 return "Login Error: Apartment Allotted, but you have not moved in yet!";
             case 22:
-                return "-";
+                return "Login Error: Username too long";
             case 23:
-                return "-";
+                return "Login Error: Password too long. Passwords need to be\nless than 15 characters.";
             case 24:
                 return "Selection Error: No selection highlighted.";
             case 25:
@@ -291,9 +291,9 @@ public class ErrorCode {
             case 26:
                 return "Application Review Error: Error Checking for Apartment Allotment!";
             case 27:
-                return "-";
+                return "Input entry Error: One or more fields is too long or contain illegal characters.";
             case 28:
-                return "-";
+                return "Billionare Club Error: We do not accept trillionaires at our prestigious offerings.";
             case 29:
                 return "-";
             case 30:

@@ -84,10 +84,14 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         
         if(username.length() > 15){
             System.out.println("Username too long.");
+            ErrorCode.setCode(22);
+            ErrorCode.errorPopUp();
             return;
         }
         if(password.length() > 15){
             System.out.println("Username too long.");
+            ErrorCode.setCode(23);
+            ErrorCode.errorPopUp();
             return;
         }
 

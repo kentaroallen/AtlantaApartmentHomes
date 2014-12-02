@@ -64,7 +64,23 @@ public class NewUserRegController extends ScreenTemplate implements Initializabl
         confirm = confirmField.getText();
 
         /*SQL logic here*/
-
+        
+        if(username.length() > 15){
+            ErrorCode.setCode(22);
+            ErrorCode.errorPopUp();
+            return;
+        }
+        if(password.length() > 15){
+            ErrorCode.setCode(23);
+            ErrorCode.errorPopUp();
+            return;
+        }
+        if(confirm.length() > 15){
+            ErrorCode.setCode(23);
+            ErrorCode.errorPopUp();
+            return;
+        }
+        
         if (!password.equals(confirm)) {
 
             ErrorCode.setCode(2);
