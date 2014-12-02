@@ -130,9 +130,7 @@ public class PayRentSQLObject {
     }
 
     public static int daysBetween(Date d1, Date d2) {
-
-        int x = d2.getDate() - d1.getDate();
-        return (x > 0) ? x : 1;
+        return (d2.getDate() - d1.getDate());
     }
 
     public static boolean alreadyPaid(String user, int apt_number, int month, int year) {
