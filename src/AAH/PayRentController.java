@@ -93,7 +93,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
             int month = Integer.parseInt(mosRent);
             int year = Integer.parseInt(yearRent);
 
-            if (todaysDate.length() > 9) {
+            if (todaysDate.length() > 10) {
                 ErrorCode.setCode(42);
                 ErrorCode.errorPopUp();
             }
