@@ -135,7 +135,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
                 ErrorCode.errorPopUp();
                 return;
             }
-            if (prevResidence.length() > 15) {
+            if (prevResidence.length() > 80) {
                 ErrorCode.setCode(27);
                 ErrorCode.errorPopUp();
                 return;
