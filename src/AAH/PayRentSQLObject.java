@@ -37,12 +37,12 @@ public class PayRentSQLObject {
         try {
 
            ResultSet rs =  SQLConnector.runQuery(firstTimeStatement);
+            ResultSet rs2 = SQLConnector.runQuery(getMoveInDate);
+            rs2.next();
+            java.sql.Date moveIn = rs2.getDate("Preferred_Move_In_Date");
 
-            if (!rs.next()) {
+            if (!rs.next() && moveIn.after(new Date(pay_year-1900, pay_month-1, 7))) {
 
-                ResultSet rs2 = SQLConnector.runQuery(getMoveInDate);
-                rs2.next();
-                java.sql.Date moveIn = rs2.getDate("Preferred_Move_In_Date");
                 System.out.println("hit");
                 return proratedRent(moveIn, baseRent);
             }
@@ -109,7 +109,7 @@ public class PayRentSQLObject {
             SQLConnector.runUpdate(insertRentStatement);
         }
         catch (Exception e) {
-            
+
             ErrorCode.setCode(59);
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
