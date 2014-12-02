@@ -123,6 +123,33 @@ public class PaymentInformationController extends ScreenTemplate implements Init
         System.out.println(name + " " + card + " " + month + " "
                 + year + " " + cw);
 
+        if(name.length() > 30){
+            ErrorCode.setCode(64);
+            ErrorCode.errorPopUp();
+            return;
+        } 
+        if(card.length() != 16){
+            ErrorCode.setCode(65);
+            ErrorCode.errorPopUp();
+            return;
+        } 
+        if(month.length() > 2){
+            ErrorCode.setCode(71);
+            ErrorCode.errorPopUp();
+            return;
+        } 
+        if(year.length() > 4){
+            ErrorCode.setCode(72);
+            ErrorCode.errorPopUp();
+            return;
+        } 
+        if(cw.length() > 3){
+            ErrorCode.setCode(73);
+            ErrorCode.errorPopUp();
+            return;
+        } 
+        
+        
         if (name.equals("") || card.equals("") || month.equals("") || year.equals("") || cw.equals("")) {
             ErrorCode.setCode(47);
             ErrorCode.errorPopUp();

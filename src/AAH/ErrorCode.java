@@ -321,9 +321,9 @@ public class ErrorCode {
             case 41:
                 return "-";
             case 42:
-                return "-";
+                return "Entry Error: Date is not real.";
             case 43:
-                return "-";
+                return "Payment Error: Date is not a valid date.";
             case 44:
                 return "Payment Info Error: Database Error Inserting Payment Info!";
             case 45:
@@ -365,9 +365,9 @@ public class ErrorCode {
             case 63:
                 return "Rent Payment Error: Invalid Date!";
             case 64:
-                return "-";
+                return "Payment Info Error: Name is too long";
             case 65:
-                return "-";
+                return "Payment Info Error: Credit Card does not exist or is too long";
             case 66:
                 return "-";
             case 67:
@@ -379,11 +379,11 @@ public class ErrorCode {
             case 70:
                 return "Rent Reminder Error: Reminder Already Sent today for this Apartment!";
             case 71:
-                return "-";
+                return "Payment Info Error: Month entry too many characters.";
             case 72:
-                return "-";
+                return "Payment Info Error: Year entry too many characters.";
             case 73:
-                return "-";
+                return "Payment Info Error: CW entry too many characters.";
             case 74:
                 return "-";
             case 75:

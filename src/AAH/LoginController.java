@@ -106,6 +106,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         if ((CurrentUser.getUserType() == 0) && !LoginSQLObject.filledOutApplication(username)) {
 
             controller.setScreen(getProspective());
+            clearFields();
             return;
         }
 
@@ -117,7 +118,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         if (ErrorCode.currentError == 0) {
 
             System.out.println(CurrentUser.getUserType());
-
+            
             if (CurrentUser.getUserType() != 0) {
 
 
