@@ -303,9 +303,9 @@ public class ErrorCode {
             case 32:
                 return "Apartment Allotment Error: Database Error Creating Resident";
             case 33:
-                return "-";
+                return "Apartment Allotment Error: Applicant Already Alloted apartment.";
             case 34:
-                return "-";
+                return "Apartment Allotment Error: Rejected Applicant";
             case 35:
                 return "-";
             case 36:

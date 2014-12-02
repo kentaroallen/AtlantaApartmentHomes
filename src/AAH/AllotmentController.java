@@ -102,6 +102,12 @@ public class AllotmentController extends ScreenTemplate implements Initializable
         }
 
     }
+    public void backHandler(ActionEvent e) throws Exception{
+        ErrorCode.setCode(0);
+        controller.setScreen(this.getApplicationReview());
+        populateOnceAL = true;
+        
+    }
     /**
      * The auto population function. 
      */
