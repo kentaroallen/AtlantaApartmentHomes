@@ -125,7 +125,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
             String lease = leaseterm.getValue().toString();
             String resGender = genderbox.getValue().toString();
 
-            if (name.length() > 15) {
+            if (name.length() > 25) {
                 ErrorCode.setCode(27);
                 ErrorCode.errorPopUp();
                 return;
