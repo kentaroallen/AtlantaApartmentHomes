@@ -91,7 +91,7 @@ public class AllotmentController extends ScreenTemplate implements Initializable
             System.out.println();
 
             ApartmentAllotmentSQLObject.allotToResident(ApartmentAllotmentChoice.getApplicant(), Integer.parseInt(seperatedData[0]));
-            ReminderSQLObject.sendReminder(Integer.parseInt(seperatedData[0]), "Welcome to Atlanta Apartment Homes!\nWe're happy to have you here with us.\nHave a great day!");
+            ReminderSQLObject.sendReminder(Integer.parseInt(seperatedData[0]), "Welcome to Atlanta Apartment Homes!");
 
             if (ErrorCode.currentError != 0) {
 

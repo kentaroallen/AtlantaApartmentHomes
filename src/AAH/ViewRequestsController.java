@@ -80,51 +80,57 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
         ErrorCode.setCode(0);
         ////////////////////
 
-        String[] chosenPerson;
-        String[] resolvedPerson = new String[4];
-        int removeIndex;
-        System.out.println("Resolved handler clicked");
-        String rowValues = availtable.getSelectionModel().getSelectedItems().toString();
-        System.out.println(rowValues.length());
-        if (rowValues.length() > 3) { //2 is empty value
-            System.out.println("Length is : " + rowValues.length());
-            rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
+        try {
+            String[] chosenPerson;
+            String[] resolvedPerson = new String[4];
+            int removeIndex;
+            System.out.println("Resolved handler clicked");
+            String rowValues = availtable.getSelectionModel().getSelectedItems().toString();
+            System.out.println(rowValues.length());
+            if (rowValues.length() > 3) { //2 is empty value
+                System.out.println("Length is : " + rowValues.length());
+                rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
 
-            chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
+                chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
             /*[0] = date of request, [1] = apt no, [2] = issue*/
 
-            for (int i = 0; i < chosenPerson.length; i++) {
-                System.out.print(chosenPerson[i] + " ");
+                for (int i = 0; i < chosenPerson.length; i++) {
+                    System.out.print(chosenPerson[i] + " ");
 
-            }
-            removeIndex = availtable.getSelectionModel().getSelectedIndex();
-            tablePopulatoravail.remove(removeIndex);
-            ObservableList<Maintenance> obListavail = FXCollections.observableArrayList(tablePopulatoravail);
-            availtable.setItems(obListavail);
-            System.out.println();
+                }
+                removeIndex = availtable.getSelectionModel().getSelectedIndex();
+                tablePopulatoravail.remove(removeIndex);
+                ObservableList<Maintenance> obListavail = FXCollections.observableArrayList(tablePopulatoravail);
+                availtable.setItems(obListavail);
+                System.out.println();
 
-            //UPDATE CHOSEN PERSON IN THE DATABASE HERE//
-            ViewRequestsSQLObject.resolveRequest(Integer.parseInt(chosenPerson[1]), java.sql.Date.valueOf(chosenPerson[0]), chosenPerson[2]);
+                //UPDATE CHOSEN PERSON IN THE DATABASE HERE//
+                ViewRequestsSQLObject.resolveRequest(Integer.parseInt(chosenPerson[1]), java.sql.Date.valueOf(chosenPerson[0]), chosenPerson[2]);
 
-        ////////////////////////////////////////////
+                ////////////////////////////////////////////
 
             /*This populates the resolved table*/
-            tablePopulatorres.add(new Maintenance(chosenPerson[0], chosenPerson[1], chosenPerson[2], date));
-            ObservableList<Maintenance> obListres = FXCollections.observableArrayList(tablePopulatorres);
-            resolvedtable.setItems(obListres);
-            resolvedPerson[0] = chosenPerson[0];
-            resolvedPerson[1] = chosenPerson[1];
-            resolvedPerson[2] = chosenPerson[2];
-            resolvedPerson[3] = date;
-            for (int i = 0; i < resolvedPerson.length; i++) {
-                System.out.print(resolvedPerson[i] + " ");
-            }
-            System.out.println();
-        } else {
-            ErrorCode.setCode(24); //placeholde
-            ErrorCode.errorPopUp();
-            System.out.println(ErrorCode.errorMessage());
+                tablePopulatorres.add(new Maintenance(chosenPerson[0], chosenPerson[1], chosenPerson[2], date));
+                ObservableList<Maintenance> obListres = FXCollections.observableArrayList(tablePopulatorres);
+                resolvedtable.setItems(obListres);
+                resolvedPerson[0] = chosenPerson[0];
+                resolvedPerson[1] = chosenPerson[1];
+                resolvedPerson[2] = chosenPerson[2];
+                resolvedPerson[3] = date;
+                for (int i = 0; i < resolvedPerson.length; i++) {
+                    System.out.print(resolvedPerson[i] + " ");
+                }
+                System.out.println();
+            } else {
+                ErrorCode.setCode(24); //placeholde
+                ErrorCode.errorPopUp();
+                System.out.println(ErrorCode.errorMessage());
 
+            }
+        }
+        catch (Exception ex) {
+
+            return;
         }
 
     }

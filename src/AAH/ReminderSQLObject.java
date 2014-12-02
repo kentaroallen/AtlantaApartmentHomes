@@ -51,6 +51,7 @@ public class ReminderSQLObject {
 
         java.sql.Date now = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         String sendReminderStatement = "INSERT INTO REMINDER VALUES ( '"+apt_num+"', '"+now.toString()+"' , '"+message+"', 'Unread' );";
+        System.out.println(sendReminderStatement);
 
         try {
 
@@ -59,7 +60,7 @@ public class ReminderSQLObject {
 
         catch (Exception e) {
 
-
+            e.printStackTrace();
             ErrorCode.setCode(69);
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
