@@ -185,8 +185,8 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
             String gender = (resGender.equals("Male")) ? "M" : (resGender.equals("Female")) ? "F" : "N";
             /*Go to different screen here.*/
 
-            ProspectiveResidentSQLObject.insertProspectiveResident(CurrentUser.getUsername(), dob, name, gender, moveInDate, leaseValue, monthlyIncome, apartmentCategory, prevResidence, minimumRent, maximumRent);
             NewUserRegSQLObject.insertUser(CurrentUser.getUsername(), CurrentUser.getPassword());
+            ProspectiveResidentSQLObject.insertProspectiveResident(CurrentUser.getUsername(), dob, name, gender, moveInDate, leaseValue, monthlyIncome, apartmentCategory, prevResidence, minimumRent, maximumRent);
         } catch (Exception x) {
 
             ErrorCode.setCode(10);
