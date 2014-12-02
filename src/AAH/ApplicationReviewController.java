@@ -142,7 +142,13 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
         ////////////////////
 
         System.out.println("Exited application review screen");
-        controller.setScreen(this.getHomepage());
+        if (CurrentUser.getUserType() == 1) {
+            controller.setScreen(this.getHomepage());
+
+        } else {
+            controller.setScreen(this.getHomepageM());
+
+        }
         populateOnceApp = true;
     }
 

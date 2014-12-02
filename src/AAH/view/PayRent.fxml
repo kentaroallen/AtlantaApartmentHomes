@@ -49,7 +49,7 @@
                         <Label layoutX="17.0" layoutY="59.0" text="Date" />
                         <Label layoutX="16.0" layoutY="123.0" text="Apartment Number" />
                         <Label layoutX="213.0" layoutY="59.0" text="Rent for Month " />
-                        <TextField fx:id="datefield" layoutX="17.0" layoutY="80.0" prefHeight="25.0" onAction="#setAmountDue" prefWidth="167.0" />
+                        <TextField fx:id="datefield" layoutX="17.0" layoutY="80.0" onAction="#setAmountDue" prefHeight="25.0" prefWidth="167.0" />
                         <TextField fx:id="aptfield" editable="false" layoutX="18.0" layoutY="150.0" prefHeight="25.0" prefWidth="166.0" />
                         <ComboBox fx:id="monthfield" layoutX="213.0" layoutY="83.0" onAction="#setAmountDue" prefHeight="25.0" prefWidth="69.0" />
                         <ComboBox fx:id="yearfield" layoutX="298.0" layoutY="83.0" onAction="#setAmountDue" prefHeight="25.0" prefWidth="88.0" />
@@ -58,7 +58,7 @@
                         <Line endX="100.0" layoutX="199.0" layoutY="198.0" startX="-100.0" />
                         <Label layoutX="18.0" layoutY="215.0" text="Use Card:" />
                         <ComboBox fx:id="cardfield" layoutX="96.0" layoutY="213.0" prefHeight="25.0" prefWidth="176.0" />
-                        <Button layoutX="282.0" layoutY="210.0" mnemonicParsing="false" onAction="#exitHandler" text="Home" />
+                        <Button layoutX="282.0" layoutY="210.0" mnemonicParsing="false" onAction="#exitHandler" style="-fx-background-color: #66DB51;" text="Home" />
                         <Button fx:id="loginButton" layoutX="349.0" layoutY="210.0" mnemonicParsing="false" onAction="#payHandler" style="-fx-background-color: #66DB51;" text="Pay" />
                      </children>
                   </AnchorPane>

@@ -52,12 +52,17 @@ public class ThreeMonthReportController extends ScreenTemplate implements Initia
         ////////////////////
 
         System.out.println("close clicked");
-        controller.setScreen(this.getHomepage());
+        if (CurrentUser.getUserType() == 1) {
+            controller.setScreen(this.getHomepage());
+
+        } else {
+            controller.setScreen(this.getHomepageM());
+
+        }
     }
 
     /**
-     * Auto populate this 3 month report.
-     * Month --> Category --> Available
+     * Auto populate this 3 month report. Month --> Category --> Available
      */
     public void autoPopulateThree() {
 
@@ -67,26 +72,28 @@ public class ThreeMonthReportController extends ScreenTemplate implements Initia
             ArrayList<Report> tablePopulator = new ArrayList<Report>();
             ArrayList<ArrayList<String[]>> out = ThreeMonthReportSQLObject.getThreeMonthReport();
 
-            for (int month = 0; month < 3; month++)
-            {
+            for (int month = 0; month < 3; month++) {
                 String strMonth = "";
-                switch (month)
-                {
-                    case 0: strMonth = "August";
+                switch (month) {
+                    case 0:
+                        strMonth = "August";
                         break;
-                    case 1: strMonth = "September";
+                    case 1:
+                        strMonth = "September";
                         break;
-                    case 2: strMonth = "October";
+                    case 2:
+                        strMonth = "October";
                         break;
-                    default: strMonth = "Invalid Month";
+                    default:
+                        strMonth = "Invalid Month";
                         break;
                 }
-                for (int category = 0; category < out.get(month).size(); category++)
-                {
-                    if (category == 0)
+                for (int category = 0; category < out.get(month).size(); category++) {
+                    if (category == 0) {
                         tablePopulator.add(new Report(strMonth, ((out.get(month)).get(category))[0], ((out.get(month)).get(category))[1]));
-                    else
+                    } else {
                         tablePopulator.add(new Report("", ((out.get(month)).get(category))[0], ((out.get(month)).get(category))[1]));
+                    }
                 }
             }
 
@@ -101,10 +108,9 @@ public class ThreeMonthReportController extends ScreenTemplate implements Initia
 //            tablePopulator.add(new Report("October", "1BR-1B", "20"));
 //            tablePopulator.add(new Report("", "2BR-1B", "10"));
 //            tablePopulator.add(new Report("", "2BR-2B", "5"));
-
             ObservableList<Report> obList = FXCollections.observableArrayList(tablePopulator);
             tablefield.setItems(obList);
-            
+
             populateOnceT = false;
         } else {
             System.out.println("Prevented auto populate @ Three month report");

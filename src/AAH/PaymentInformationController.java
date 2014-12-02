@@ -76,7 +76,13 @@ public class PaymentInformationController extends ScreenTemplate implements Init
                 return;
             }
 
-            controller.setScreen(this.getHomepage());
+            if (CurrentUser.getUserType() == 1) {
+                controller.setScreen(this.getHomepage());
+                clearFields();
+            } else {
+                controller.setScreen(this.getHomepageM());
+                clearFields();
+            }
             populateOncePI = true;
         } catch (Exception nullInput) {
             ErrorCode.setCode(46);
@@ -92,10 +98,17 @@ public class PaymentInformationController extends ScreenTemplate implements Init
         ////////////////////
 
         System.out.println("Exit to home page");
-        controller.setScreen(this.getHomepage());
+        if (CurrentUser.getUserType() == 1) {
+            controller.setScreen(this.getHomepage());
+            clearFields();
+        } else {
+            controller.setScreen(this.getHomepageM());
+            clearFields();
+        }
         clearFields();
     }
-    public void clearFields(){
+
+    public void clearFields() {
         namefield.setText("");
         cardfield.setText("");
         monthfield.setText("");
@@ -121,35 +134,34 @@ public class PaymentInformationController extends ScreenTemplate implements Init
         String year = "20" + yearfield.getText();
         String cw = cwfield.getText();
         System.out.println(name + " " + card + " " + month + " "
-                + year + " " + cw);
+               + year + " " + cw);
 
-        if(name.length() > 30){
+        if (name.length() > 30) {
             ErrorCode.setCode(64);
             ErrorCode.errorPopUp();
             return;
-        } 
-        if(card.length() != 16){
+        }
+        if (card.length() != 16) {
             ErrorCode.setCode(65);
             ErrorCode.errorPopUp();
             return;
-        } 
-        if(month.length() > 2){
+        }
+        if (month.length() > 2) {
             ErrorCode.setCode(71);
             ErrorCode.errorPopUp();
             return;
-        } 
-        if(year.length() > 4){
+        }
+        if (year.length() > 4) {
             ErrorCode.setCode(72);
             ErrorCode.errorPopUp();
             return;
-        } 
-        if(cw.length() > 3){
+        }
+        if (cw.length() > 3) {
             ErrorCode.setCode(73);
             ErrorCode.errorPopUp();
             return;
-        } 
-        
-        
+        }
+
         if (name.equals("") || card.equals("") || month.equals("") || year.equals("") || cw.equals("")) {
             ErrorCode.setCode(47);
             ErrorCode.errorPopUp();
@@ -165,7 +177,13 @@ public class PaymentInformationController extends ScreenTemplate implements Init
 
                 return;
             }
-            controller.setScreen(this.getHomepage());
+            if (CurrentUser.getUserType() == 1) {
+                controller.setScreen(this.getHomepage());
+                clearFields();
+            } else {
+                controller.setScreen(this.getHomepageM());
+                clearFields();
+            }
             clearFields();
             populateOncePI = true;
         }
@@ -178,7 +196,7 @@ public class PaymentInformationController extends ScreenTemplate implements Init
              may want to delete from the database.*/
             System.out.println("auto populated payment information controller.");
 
-            ArrayList<String> posCards = payInfoCardNumbers() ;
+            ArrayList<String> posCards = payInfoCardNumbers();
 
             ObservableList<String> obListCards = FXCollections.observableArrayList(posCards);
             cardbox.setItems(obListCards);

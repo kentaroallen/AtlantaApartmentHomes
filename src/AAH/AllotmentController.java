@@ -97,7 +97,11 @@ public class AllotmentController extends ScreenTemplate implements Initializable
 
                 return;
             }
-            controller.setScreen(this.getHomepage());
+            if (CurrentUser.getUserType() == 1) {
+                    controller.setScreen(this.getHomepage());
+                } else {
+                    controller.setScreen(this.getHomepageM());
+                }
             populateOnceAL = true;
         }
 
@@ -144,7 +148,11 @@ public class AllotmentController extends ScreenTemplate implements Initializable
 
         populateOnceAL = true;
         System.out.println("Cancel button clicked");
-        controller.setScreen(this.getHomepage());
+        if (CurrentUser.getUserType() == 1) {
+                    controller.setScreen(this.getHomepage());
+                } else {
+                    controller.setScreen(this.getHomepageM());
+                }
 
     }
 

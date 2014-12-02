@@ -42,6 +42,8 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     private Hyperlink mail;
     @FXML
     private TextArea messagearea;
+    @FXML
+    private AnchorPane managepane;
   
 
     private boolean populateOnceHome = true;
