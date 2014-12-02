@@ -92,7 +92,7 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
                 rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
 
                 chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
-            /*[0] = date of request, [1] = apt no, [2] = issue*/
+                /*[0] = date of request, [1] = apt no, [2] = issue*/
 
                 for (int i = 0; i < chosenPerson.length; i++) {
                     System.out.print(chosenPerson[i] + " ");
@@ -109,7 +109,7 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
 
                 ////////////////////////////////////////////
 
-            /*This populates the resolved table*/
+                /*This populates the resolved table*/
                 tablePopulatorres.add(new Maintenance(chosenPerson[0], chosenPerson[1], chosenPerson[2], date));
                 ObservableList<Maintenance> obListres = FXCollections.observableArrayList(tablePopulatorres);
                 resolvedtable.setItems(obListres);
@@ -127,8 +127,7 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
                 System.out.println(ErrorCode.errorMessage());
 
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
 
             return;
         }
@@ -141,7 +140,13 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
         ErrorCode.setCode(0);
         ////////////////////
 
-        controller.setScreen(this.getHomepage());
+        if (CurrentUser.getUserType() == 1) {
+            controller.setScreen(this.getHomepage());
+
+        } else {
+            controller.setScreen(this.getHomepageM());
+
+        }
         System.out.println("Home button clicked.");
     }
 

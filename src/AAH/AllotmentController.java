@@ -97,10 +97,20 @@ public class AllotmentController extends ScreenTemplate implements Initializable
 
                 return;
             }
-            controller.setScreen(this.getHomepage());
+            if (CurrentUser.getUserType() == 1) {
+                    controller.setScreen(this.getHomepage());
+                } else {
+                    controller.setScreen(this.getHomepageM());
+                }
             populateOnceAL = true;
         }
 
+    }
+    public void backHandler(ActionEvent e) throws Exception{
+        ErrorCode.setCode(0);
+        controller.setScreen(this.getApplicationReview());
+        populateOnceAL = true;
+        
     }
     /**
      * The auto population function. 
@@ -138,7 +148,11 @@ public class AllotmentController extends ScreenTemplate implements Initializable
 
         populateOnceAL = true;
         System.out.println("Cancel button clicked");
-        controller.setScreen(this.getHomepage());
+        if (CurrentUser.getUserType() == 1) {
+                    controller.setScreen(this.getHomepage());
+                } else {
+                    controller.setScreen(this.getHomepageM());
+                }
 
     }
 

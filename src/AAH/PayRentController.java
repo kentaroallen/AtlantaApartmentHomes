@@ -93,8 +93,14 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
             int month = Integer.parseInt(mosRent);
             int year = Integer.parseInt(yearRent);
 
+            if (todaysDate.length() > 9) {
+                ErrorCode.setCode(42);
+                ErrorCode.errorPopUp();
+            }
 
             if (!isDateValid(todaysDate)) {
+                ErrorCode.setCode(43);
+                ErrorCode.errorPopUp();
                 return;
             }
 
@@ -107,8 +113,13 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
                 return;
             }
             /*Go to different screen here.*/
-            controller.setScreen(this.getHomepage());
-            clearFields();
+            if (CurrentUser.getUserType() == 1) {
+                controller.setScreen(this.getHomepage());
+                clearFields();
+            } else {
+                controller.setScreen(this.getHomepageM());
+                clearFields();
+            }
             populateOncePR = true;
         } catch (Exception nullInput) {
             ErrorCode.setCode(10);
@@ -125,10 +136,16 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
 
         System.out.println("Exit to home page");
         populateOncePR = true;
-        controller.setScreen(this.getHomepage());
-        clearFields();
+        if (CurrentUser.getUserType() == 1) {
+            controller.setScreen(this.getHomepage());
+            clearFields();
+        } else {
+            controller.setScreen(this.getHomepageM());
+            clearFields();
+        }
     }
-    public void clearFields(){
+
+    public void clearFields() {
         aptfield.setText("");
         monthfield.setValue("");
         yearfield.setValue("");
@@ -213,7 +230,6 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
 
     }
 
-
     public static ArrayList<String> payInfoCardNumbers() {
 
         ArrayList<String> out = new ArrayList<String>();
@@ -240,8 +256,7 @@ public class PayRentController extends ScreenTemplate implements Initializable, 
             ErrorCode.setCode(63);
             ErrorCode.errorPopUp();
             return false;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
 
             ErrorCode.setCode(63);
             ErrorCode.errorPopUp();

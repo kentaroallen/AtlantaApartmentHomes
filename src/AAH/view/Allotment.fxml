@@ -64,8 +64,9 @@
                               <TableColumn fx:id="availcol" prefWidth="155.0" text="Avail. Date" />
                            </columns>
                         </TableView>
-                        <Button fx:id="cancelbutton" layoutX="358.0" layoutY="187.0" mnemonicParsing="false" onAction="#cancelHandler" text="Cancel" />
+                        <Button fx:id="cancelbutton" layoutX="318.0" layoutY="187.0" mnemonicParsing="false" onAction="#cancelHandler" style="-fx-background-color: #6BCEFF;" text="Cancel" />
                         <Button fx:id="assignbutton" layoutX="428.0" layoutY="187.0" mnemonicParsing="false" onAction="#assignHandler" style="-fx-background-color: #6BCEFF;" text="Assign Apartment" />
+                        <Button layoutX="376.0" layoutY="187.0" mnemonicParsing="false" onAction="#backHandler" style="-fx-background-color: #6BCEFF;" text="Back" />
                      </children>
                   </AnchorPane>
                </children>

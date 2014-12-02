@@ -67,7 +67,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
 
     public boolean allSet() {
 
-        return (!( (prefdate.getValue() == null) || (usernameField.getText() == null) || (usernameField.getText() == "") ));
+        return (!((prefdate.getValue() == null) || (usernameField.getText() == null) || (usernameField.getText() == "")));
     }
 
     @FXML
@@ -75,18 +75,19 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
      * This will take in the username and password for sql retrieval.
      *
      * @param e the click button event that caused this.
-     * 
+     *
      * These params correspond to inputs from the UI.
      * @param name the name of the resident
      * @param month the month field for DOB
-     * @param year  the year field for DOB
+     * @param year the year field for DOB
      * @param day the day field for DOB
      * @param monthlyIncome the monthly income for resident
      * @param prevResidence string of the previous residence
      * @param apartmentCategory for example "1BR-1B" 1 bedroom 1 bath
-     * @param minimumRent int 
+     * @param minimumRent int
      * @param maximumRent int
-     * @param prefMoveInDate This is an array. [0] is year [1] is month [2] is day for the preferred move in date
+     * @param prefMoveInDate This is an array. [0] is year [1] is month [2] is
+     * day for the preferred move in date
      * @param lease this is how long the lease is
      * @param resGender this is the residents gender
      */
@@ -124,6 +125,33 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
             String lease = leaseterm.getValue().toString();
             String resGender = genderbox.getValue().toString();
 
+            if (name.length() > 15) {
+                ErrorCode.setCode(27);
+                ErrorCode.errorPopUp();
+                return;
+            }
+            if (monthlyIncome > 1000000000) {   /*We are the billionaries only club, sorry lame-o trillionaires*/
+                ErrorCode.setCode(28);
+                ErrorCode.errorPopUp();
+                return;
+            }
+            if (prevResidence.length() > 15) {
+                ErrorCode.setCode(27);
+                ErrorCode.errorPopUp();
+                return;
+            }
+            if (minimumRent > 1000000000) {
+                ErrorCode.setCode(28);
+                ErrorCode.errorPopUp();
+                return;
+            }
+            if (maximumRent > 1000000000) {
+                ErrorCode.setCode(28);
+                ErrorCode.errorPopUp();
+                return;
+            }
+            
+
             if (maximumRent <= minimumRent) {
 
                 ErrorCode.setCode(14);
@@ -148,20 +176,18 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
                 return;
             }
 
-            System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " " +
-                    prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
+            System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " "
+                   + prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
 
             int leaseValue = Integer.parseInt(lease);
-            Date dob = new Date(year-1900, Integer.parseInt(month)-1, day);
-            Date moveInDate = new Date(Integer.parseInt(prefMoveInDate[0])-1900, Integer.parseInt(prefMoveInDate[1])-1, Integer.parseInt(prefMoveInDate[2]));
+            Date dob = new Date(year - 1900, Integer.parseInt(month) - 1, day);
+            Date moveInDate = new Date(Integer.parseInt(prefMoveInDate[0]) - 1900, Integer.parseInt(prefMoveInDate[1]) - 1, Integer.parseInt(prefMoveInDate[2]));
             String gender = (resGender.equals("Male")) ? "M" : (resGender.equals("Female")) ? "F" : "N";
-        /*Go to different screen here.*/
+            /*Go to different screen here.*/
 
-            NewUserRegSQLObject.insertUser(CurrentUser.getUsername(), CurrentUser.getPassword());
             ProspectiveResidentSQLObject.insertProspectiveResident(CurrentUser.getUsername(), dob, name, gender, moveInDate, leaseValue, monthlyIncome, apartmentCategory, prevResidence, minimumRent, maximumRent);
-        }
-
-        catch (Exception x) {
+            NewUserRegSQLObject.insertUser(CurrentUser.getUsername(), CurrentUser.getPassword());
+        } catch (Exception x) {
 
             ErrorCode.setCode(10);
             System.out.println(ErrorCode.errorMessage());
@@ -172,8 +198,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         if (ErrorCode.getCurrentError() == 0) {
             controller.setScreen(this.getLogin());
             clearFields();
-        }
-        else {
+        } else {
 
             System.out.println(ErrorCode.errorMessage());
         }
@@ -192,9 +217,8 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         maxRent.setText("");
         leaseterm.setValue("");
         genderbox.setValue("");
-        
-    }
 
+    }
 
     @Override
     /**
@@ -220,7 +244,6 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         ObservableList<Integer> obListyears = FXCollections.observableArrayList(posYears);
 
         // HERE, WE GRAB OUR APARTMENT INFO
-
         String[] apartmentCat = availableApartmentCategories();
         String[] apartmentLease = availableApartmentLeaseTerms();
 
@@ -230,7 +253,6 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
         }
 
         //WEEEEEEEEEEEE
-
         ArrayList<String> posCats = new ArrayList<String>();
         String[] types = apartmentCat;//{"1BR-1B", "1BR-2B", "2BR-1B", "2BR-1B"};
         posCats.addAll(Arrays.asList(types));

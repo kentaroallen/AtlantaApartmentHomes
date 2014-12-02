@@ -65,7 +65,6 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
      * @param e the click button event that caused this.
      */
     public void loginHandler(ActionEvent e) throws Exception {
-    
 
         /////////////////////
         ErrorCode.setCode(0);
@@ -75,12 +74,24 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         String password;
         username = usernameField.getText();
         password = passwordField.getText();
-        
+
         /*This is where you should probably
-        set the aptfield problem*/
-      /*  if(username != "donutresidentman"){
-            PayRentController.aptfield.setText("1112");
-        }*/
+         set the aptfield problem*/
+        /*  if(username != "donutresidentman"){
+         PayRentController.aptfield.setText("1112");
+         }*/
+        if (username.length() > 15) {
+            System.out.println("Username too long.");
+            ErrorCode.setCode(22);
+            ErrorCode.errorPopUp();
+            return;
+        }
+        if (password.length() > 15) {
+            System.out.println("Username too long.");
+            ErrorCode.setCode(23);
+            ErrorCode.errorPopUp();
+            return;
+        }
 
         /*SQL logic here*/
         if (!LoginSQLObject.validateLogin(username, password)) {//don't log in if we can't.
@@ -93,6 +104,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
         if ((CurrentUser.getUserType() == 0) && !LoginSQLObject.filledOutApplication(username)) {
 
             controller.setScreen(getProspective());
+            clearFields();
             return;
         }
 
@@ -107,12 +119,14 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
 
             if (CurrentUser.getUserType() != 0) {
 
-
+                if (CurrentUser.getUserType() == 1) {
                     controller.setScreen(this.getHomepage());
                     clearFields();
-            }
-
-            else {
+                } else {
+                    controller.setScreen(this.getHomepageM());
+                    clearFields();
+                }
+            } else {
 
                 prospectivePopUp();
                 System.out.println("Application Under Review.");
@@ -125,13 +139,14 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
 
         /*Go to different screen here.*/
     }
-    public void clearFields(){
+
+    public void clearFields() {
         usernameField.setText("");
         passwordField.setText("");
-        
+
     }
 
-    public static void prospectivePopUp(){
+    public static void prospectivePopUp() {
         Stage popup = new Stage();
         HBox popup_hbox = new HBox();
         Scene popup_scene = new Scene(popup_hbox, 300, 100);
@@ -155,7 +170,7 @@ public class LoginController extends ScreenTemplate implements Initializable, Se
      */
     public void initialize(URL url, ResourceBundle rb) {
         this.setTitleLabel(this.getLogin());
-        
+
     }
 
     @Override

@@ -45,7 +45,7 @@
                               <Font name="Calibri Bold" size="22.0" />
                            </font>
                         </Label>
-                        <Button fx:id="nextbutton" layoutX="525.0" layoutY="250.0" mnemonicParsing="false" onAction="#nextHandler" text="Next" />
+                        <Button fx:id="nextbutton" layoutX="525.0" layoutY="250.0" mnemonicParsing="false" onAction="#nextHandler" style="-fx-background-color: #6BCEFF;" text="Next" />
                         <TableView fx:id="tablefield" layoutY="44.0" prefHeight="200.0" prefWidth="591.0">
                            <columns>
                               <TableColumn fx:id="namecol" prefWidth="71.0" text="Name" />
@@ -58,7 +58,7 @@
                               <TableColumn fx:id="approvalcol" prefWidth="91.0" text="Approval" />
                            </columns>
                         </TableView>
-                        <Button layoutX="459.0" layoutY="250.0" mnemonicParsing="false" onAction="#exitHandler" text="Home" />
+                        <Button layoutX="459.0" layoutY="250.0" mnemonicParsing="false" onAction="#exitHandler" style="-fx-background-color: #6BCEFF;" text="Home" />
                      </children>
                   </AnchorPane>
                </children>

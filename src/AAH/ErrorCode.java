@@ -281,9 +281,9 @@ public class ErrorCode {
             case 21:
                 return "Login Error: Apartment Allotted, but you have not moved in yet!";
             case 22:
-                return "-";
+                return "Login Error: Username too long";
             case 23:
-                return "-";
+                return "Login Error: Password too long. Passwords need to be\nless than 15 characters.";
             case 24:
                 return "Selection Error: No selection highlighted.";
             case 25:
@@ -291,9 +291,9 @@ public class ErrorCode {
             case 26:
                 return "Application Review Error: Error Checking for Apartment Allotment!";
             case 27:
-                return "-";
+                return "Input entry Error: One or more fields is too long or contain illegal characters.";
             case 28:
-                return "-";
+                return "Billionare Club Error: We do not accept trillionaires at our prestigious offerings.";
             case 29:
                 return "-";
             case 30:
@@ -303,9 +303,9 @@ public class ErrorCode {
             case 32:
                 return "Apartment Allotment Error: Database Error Creating Resident";
             case 33:
-                return "-";
+                return "Apartment Allotment Error: Applicant Already Alloted apartment.";
             case 34:
-                return "-";
+                return "Apartment Allotment Error: Rejected Applicant";
             case 35:
                 return "-";
             case 36:
@@ -321,9 +321,9 @@ public class ErrorCode {
             case 41:
                 return "-";
             case 42:
-                return "-";
+                return "Entry Error: Date is not real.";
             case 43:
-                return "-";
+                return "Payment Error: Date is not a valid date.";
             case 44:
                 return "Payment Info Error: Database Error Inserting Payment Info!";
             case 45:
@@ -365,9 +365,9 @@ public class ErrorCode {
             case 63:
                 return "Rent Payment Error: Invalid Date!";
             case 64:
-                return "-";
+                return "Payment Info Error: Name is too long";
             case 65:
-                return "-";
+                return "Payment Info Error: Credit Card does not exist or is too long";
             case 66:
                 return "-";
             case 67:
@@ -379,11 +379,11 @@ public class ErrorCode {
             case 70:
                 return "Rent Reminder Error: Reminder Already Sent today for this Apartment!";
             case 71:
-                return "-";
+                return "Payment Info Error: Month entry too many characters.";
             case 72:
-                return "-";
+                return "Payment Info Error: Year entry too many characters.";
             case 73:
-                return "-";
+                return "Payment Info Error: CW entry too many characters.";
             case 74:
                 return "-";
             case 75:

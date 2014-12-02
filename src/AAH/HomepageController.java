@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -41,6 +42,9 @@ public class HomepageController extends ScreenTemplate implements Initializable,
     private Hyperlink mail;
     @FXML
     private TextArea messagearea;
+    @FXML
+    private AnchorPane managepane;
+  
 
     private boolean populateOnceHome = true;
 

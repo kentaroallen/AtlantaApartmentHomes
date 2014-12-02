@@ -83,7 +83,13 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
                 /*From here this is guranteed to have correct sql input.*/
                 RequestMaintenanceSQLObject.insertMaintenanceRequest(CurrentUser.getApartmentNumber(), issueType);
                 /*Ends the area of where SQL input is guranteed.*/
-                controller.setScreen(this.getHomepage());
+                if (CurrentUser.getUserType() == 1) {
+                    controller.setScreen(this.getHomepage());
+                    clearFields();
+                } else {
+                    controller.setScreen(this.getHomepageM());
+                    clearFields();
+                }
                 populateOnceRM = true;
             } else {
                 ErrorCode.setCode(10);
@@ -100,7 +106,8 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
 
         //
     }
-    public void clearFields(){
+
+    public void clearFields() {
         aptfield.setText("");
         issuebox.setValue("");
     }
@@ -110,9 +117,14 @@ public class RequestMaintenanceController extends ScreenTemplate implements Init
         ErrorCode.setCode(0);
         ////////////////////
 
-
         System.out.println("Exit to home page");
-        controller.setScreen(this.getHomepage());
+        if (CurrentUser.getUserType() == 1) {
+            controller.setScreen(this.getHomepage());
+            clearFields();
+        } else {
+            controller.setScreen(this.getHomepageM());
+            clearFields();
+        }
         clearFields();
         populateOnceRM = true;
     }

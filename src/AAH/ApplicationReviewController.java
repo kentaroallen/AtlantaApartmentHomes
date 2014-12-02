@@ -69,53 +69,58 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
         /////////////////////
         ErrorCode.setCode(0);
         ////////////////////
-        try{
-        String[] chosenPerson;
-        String rowValues = tablefield.getSelectionModel().getSelectedItems().toString();
-        rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
+        try {
+            String[] chosenPerson;
+            String rowValues = tablefield.getSelectionModel().getSelectedItems().toString();
+            rowValues = rowValues.substring(1, rowValues.length() - 1); /*Removes the [ ] around the string*/
 
-        chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
+            chosenPerson = rowValues.split(","); /*Comma seperated value retrieval*/
 
             if (chosenPerson[7].equals("Rejected")) {
-
+                ErrorCode.setCode(34);
+                ErrorCode.errorPopUp();
                 return;
             }
 
-        if (ApplicationReviewSQLObject.applicantAllotedAlready(chosenPerson[0]) || ErrorCode.getCurrentError() != 0) {
-
-            return;
-        }
-
-        ApartmentAllotmentChoice.setApplicant(chosenPerson[0], Integer.parseInt(chosenPerson[3]), "2B");
-        /*If the length of the selection was empty set error, otherwise continue*/
-        if (chosenPerson.length < 2) {
-            ErrorCode.setCode(24);
-            ErrorCode.errorPopUp();
-            System.out.println(ErrorCode.errorMessage());
-        } else {
-            for (int i = 0; i < chosenPerson.length; i++) {
-                System.out.print(chosenPerson[i] + " ");
-
+            if (ApplicationReviewSQLObject.applicantAllotedAlready(chosenPerson[0]) || ErrorCode.getCurrentError() != 0) {
+                ErrorCode.setCode(33);
+                ErrorCode.errorPopUp();
+                return;
             }
-            System.out.println();
 
-            controller.setScreen(this.getAllotment());
-        }
-        }catch(Exception ea){
+            ApartmentAllotmentChoice.setApplicant(chosenPerson[0], Integer.parseInt(chosenPerson[3]), "2B");
+            /*If the length of the selection was empty set error, otherwise continue*/
+            if (chosenPerson.length < 2) {
+                ErrorCode.setCode(24);
+                ErrorCode.errorPopUp();
+                System.out.println(ErrorCode.errorMessage());
+            } else {
+                for (int i = 0; i < chosenPerson.length; i++) {
+                    System.out.print(chosenPerson[i] + " ");
+
+                }
+                System.out.println();
+
+                controller.setScreen(this.getAllotment());
+                populateOnceApp = true;
+            }
+        } catch (Exception ea) {
             ErrorCode.setCode(24);
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
         }
 
     }
+
     /**
      * Auto population happens here
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     public void autoPopulateApp() throws Exception {
         if (populateOnceApp) {
             System.out.println("Auto populated application review");
-            
+
             ArrayList<Person> tablePopulator = new ArrayList<Person>();
             for (String[] s : ApplicationReviewSQLObject.getApplications()) {
 
@@ -123,7 +128,7 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
             }
             ObservableList<Person> obList = FXCollections.observableArrayList(tablePopulator);
             tablefield.setItems(obList);
-            
+
             populateOnceApp = false;
         } else {
             System.out.println("Prevented auto populate @ application review");
@@ -137,7 +142,13 @@ public class ApplicationReviewController extends ScreenTemplate implements Initi
         ////////////////////
 
         System.out.println("Exited application review screen");
-        controller.setScreen(this.getHomepage());
+        if (CurrentUser.getUserType() == 1) {
+            controller.setScreen(this.getHomepage());
+
+        } else {
+            controller.setScreen(this.getHomepageM());
+
+        }
         populateOnceApp = true;
     }
 

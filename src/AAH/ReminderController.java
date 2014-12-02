@@ -40,6 +40,7 @@ public class ReminderController extends ScreenTemplate implements Initializable,
     @FXML
     private TextArea messagearea;
     private boolean populateOnceRem = true;
+
     /**
      * Initializes the controller class.
      */
@@ -65,9 +66,17 @@ public class ReminderController extends ScreenTemplate implements Initializable,
 
         ReminderSQLObject.sendReminder(Integer.parseInt(aptnum), outputMessage);
 
-        if (ErrorCode.getCurrentError() != 0) { return; }
+        if (ErrorCode.getCurrentError() != 0) {
+            return;
+        }
 
-        controller.setScreen(this.getHomepage());
+        if (CurrentUser.getUserType() == 1) {
+            controller.setScreen(this.getHomepage());
+
+        } else {
+            controller.setScreen(this.getHomepageM());
+
+        }
         populateOnceRem = true;
     }
 
@@ -84,20 +93,25 @@ public class ReminderController extends ScreenTemplate implements Initializable,
         ////////////////////
 
         System.out.println("Cancel hit");
-        controller.setScreen(this.getHomepage());
+        if (CurrentUser.getUserType() == 1) {
+            controller.setScreen(this.getHomepage());
+
+        } else {
+            controller.setScreen(this.getHomepageM());
+
+        }
         populateOnceRem = true;
     }
 
     public void autoPopulateRem() {
-        if(populateOnceRem) {
+        if (populateOnceRem) {
 
             System.out.println("Auto populated reminder controller.");
             Date now = Calendar.getInstance().getTime();
 
-            System.out.println((now.getMonth()+1) + "");
-            System.out.println((now.getYear()+1900) + "");
+            System.out.println((now.getMonth() + 1) + "");
+            System.out.println((now.getYear() + 1900) + "");
             ArrayList<String> delinquentApts = ReminderSQLObject.defaultedApartments(now.getMonth() + 1, now.getYear() + 1900);
-
 
             ObservableList<String> obListDelinquents = FXCollections.observableArrayList(delinquentApts);
             aptnobox.setItems(obListDelinquents);
