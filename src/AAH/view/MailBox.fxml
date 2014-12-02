@@ -54,6 +54,9 @@
                         <Button fx:id="readmail" layoutX="192.0" layoutY="150.0" mnemonicParsing="false" onAction="#readMessage" style="-fx-background-color: #B6D5F0;" text=" Read " />
                         <TextArea fx:id="messagearea" editable="false" layoutX="255.0" layoutY="41.0" prefHeight="96.0" prefWidth="284.0" promptText="No mail selected." />
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                </children>
             </AnchorPane>

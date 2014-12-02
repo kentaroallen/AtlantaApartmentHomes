@@ -61,6 +61,9 @@
                         <Button layoutX="282.0" layoutY="210.0" mnemonicParsing="false" onAction="#exitHandler" style="-fx-background-color: #66DB51;" text="Home" />
                         <Button fx:id="loginButton" layoutX="349.0" layoutY="210.0" mnemonicParsing="false" onAction="#payHandler" style="-fx-background-color: #66DB51;" text="Pay" />
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                </children>
             </AnchorPane>

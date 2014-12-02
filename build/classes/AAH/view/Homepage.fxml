@@ -75,6 +75,9 @@
                            </image>
                         </ImageView>
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                   <AnchorPane id="managepane" layoutX="332.0" layoutY="43.0" opacity="0.69" prefHeight="250.0" prefWidth="221.0" style="-fx-background-color: #E6EBE6; -fx-border-radius: 50px;" visible="false">
                      <children>

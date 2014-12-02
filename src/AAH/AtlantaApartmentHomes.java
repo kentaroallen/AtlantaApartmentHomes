@@ -41,7 +41,7 @@ public class AtlantaApartmentHomes extends Application {
         stage.setScene(scene);
         stage.show();
         /*Singleton init*/
-        //elevator = MusicPlayerController.getInstance();
+        elevator = MusicPlayerController.getInstance();
 
     }
 

@@ -176,7 +176,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
                 return;
             }
 
-            System.out.println("Name: " + name + "month " + month + year + day + monthlyIncome + " "
+            System.out.println("Name: " + name + " month " + month + year + day + monthlyIncome + " "
                    + prevResidence + apartmentCategory + " " + minimumRent + " " + prefMoveInDate.length + " " + lease + resGender + " " + minimumRent + maximumRent);
 
             int leaseValue = Integer.parseInt(lease);
@@ -238,7 +238,7 @@ public class ProspectiveResidentController extends ScreenTemplate implements Ini
 
         ObservableList<Integer> obListdays = FXCollections.observableArrayList(posDays);
         ArrayList<Integer> posYears = new ArrayList<Integer>();
-        for (int i = 1900; i < 2015; i++) {
+        for (int i = 2015; i > 1899; i--) {
             posYears.add(i);
         }
         ObservableList<Integer> obListyears = FXCollections.observableArrayList(posYears);

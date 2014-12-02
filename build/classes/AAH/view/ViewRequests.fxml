@@ -58,10 +58,13 @@
                         </TableView>
                         <Text layoutX="34.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Requests:" />
                         <Text layoutX="34.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Resolved:" />
-                        <Button fx:id="homebutton" layoutX="478.0" layoutY="181.0" mnemonicParsing="false" onAction="#homeHandler" prefHeight="25.0" prefWidth="65.0" text="Home" />
+                        <Button fx:id="homebutton" layoutX="478.0" layoutY="181.0" mnemonicParsing="false" onAction="#homeHandler" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #24E5FF;" text="Home" />
                         <Text layoutX="493.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
                         <Label fx:id="currentdate" layoutX="493.0" layoutY="99.0" text="Label" />
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                </children>
             </AnchorPane>

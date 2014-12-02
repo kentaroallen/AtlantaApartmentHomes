@@ -48,6 +48,9 @@
                            </columns>
                         </TableView>
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                </children>
             </AnchorPane>

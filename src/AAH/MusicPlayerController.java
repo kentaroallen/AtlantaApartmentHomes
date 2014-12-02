@@ -14,16 +14,24 @@ import javafx.scene.media.MediaPlayer;
  * @author Kentaro
  */
 public class MusicPlayerController {
+
     private static MusicPlayerController mpc = null;
-    
-    protected MusicPlayerController(){
-        URL resource = getClass().getResource("elevatormusic.mp3");
-        Media media = new Media(resource.toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+
+    protected MusicPlayerController() {
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                URL resource = getClass().getResource("elevatormusic.mp3");
+                Media media = new Media(resource.toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.play();
+            }
+        });
+        t.start();
+
     }
-    public static MusicPlayerController getInstance(){
-        if(mpc == null){
+
+    public static MusicPlayerController getInstance() {
+        if (mpc == null) {
             mpc = new MusicPlayerController();
         }
         return mpc;

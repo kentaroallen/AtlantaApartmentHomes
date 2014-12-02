@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -37,6 +38,9 @@
             <Hyperlink fx:id="newuser" layoutX="137.0" layoutY="223.0" onAction="#newUserHandler" text="New User?" textFill="#2054d6" />
             <Button fx:id="loginButton" layoutX="86.0" layoutY="192.0" mnemonicParsing="false" onAction="#loginHandler" style="-fx-background-color: #24E5FF;" text="Login" />
          </children>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Pane>
    </children>
 </AnchorPane>

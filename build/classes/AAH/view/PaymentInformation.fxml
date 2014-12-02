@@ -59,9 +59,12 @@
                         <TextField fx:id="yearfield" layoutX="65.0" layoutY="195.0" prefHeight="25.0" prefWidth="36.0" promptText="YY" />
                         <Text layoutX="146.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CW:" />
                         <TextField fx:id="cwfield" layoutX="116.0" layoutY="195.0" prefHeight="25.0" prefWidth="87.0" />
-                        <Button layoutX="71.0" layoutY="237.0" mnemonicParsing="false" onAction="#exitHandler" text="Home" />
-                        <Button layoutX="147.0" layoutY="237.0" mnemonicParsing="false" onAction="#saveHandler" style="-fx-background-color: #2B9E34;" text="Save" />
+                        <Button layoutX="71.0" layoutY="237.0" mnemonicParsing="false" onAction="#exitHandler" style="-fx-background-color: #24E5FF;" text="Home" />
+                        <Button layoutX="147.0" layoutY="237.0" mnemonicParsing="false" onAction="#saveHandler" style="-fx-background-color: #24E5FF;" text="Save" />
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                   <AnchorPane layoutX="362.0" layoutY="24.0" opacity="0.83" prefHeight="181.0" prefWidth="221.0" style="-fx-background-color: #F73B3B; -fx-border-radius: 50px;">
                      <children>
@@ -75,8 +78,11 @@
                               <Font name="System Bold" size="15.0" />
                            </font></Text>
                         <ComboBox fx:id="cardbox" layoutX="14.0" layoutY="84.0" prefHeight="25.0" prefWidth="174.0" />
-                        <Button layoutX="125.0" layoutY="125.0" mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
+                        <Button layoutX="125.0" layoutY="125.0" mnemonicParsing="false" onAction="#deleteHandler" style="-fx-background-color: #24E5FF;" text="Delete" />
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                </children>
             </AnchorPane>

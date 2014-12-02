@@ -103,6 +103,9 @@
                            </cursor>
                         </ComboBox>
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                </children>
             </AnchorPane>

@@ -68,6 +68,9 @@
                         <Button fx:id="assignbutton" layoutX="428.0" layoutY="187.0" mnemonicParsing="false" onAction="#assignHandler" style="-fx-background-color: #6BCEFF;" text="Assign Apartment" />
                         <Button layoutX="376.0" layoutY="187.0" mnemonicParsing="false" onAction="#backHandler" style="-fx-background-color: #6BCEFF;" text="Back" />
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                </children>
             </AnchorPane>

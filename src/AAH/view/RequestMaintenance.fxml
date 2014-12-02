@@ -58,6 +58,9 @@
                         </Label>
                         <Button layoutX="35.0" layoutY="179.0" mnemonicParsing="false" onAction="#exitHandler" style="-fx-background-color: #11CBF5;" text="Home" />
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                </children>
             </AnchorPane>

@@ -63,6 +63,9 @@
                         <DatePicker fx:id="prefdate" layoutX="252.0" layoutY="154.0" prefHeight="25.0" prefWidth="158.0" />
                         <Label layoutX="251.0" layoutY="131.0" text="Preferred Move In Date::" />
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                </children>
             </AnchorPane>

@@ -59,8 +59,11 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Text>
-                        <Button fx:id="cancelbutton" layoutX="106.0" layoutY="232.0" mnemonicParsing="false" onAction="#cancelHandler" text="Cancel" />
+                        <Button fx:id="cancelbutton" layoutX="106.0" layoutY="232.0" mnemonicParsing="false" onAction="#cancelHandler" style="-fx-background-color: #11CBF5;" text="Cancel" />
                      </children>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
                   </AnchorPane>
                </children>
             </AnchorPane>
