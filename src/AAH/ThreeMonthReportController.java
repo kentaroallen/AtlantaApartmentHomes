@@ -65,17 +65,42 @@ public class ThreeMonthReportController extends ScreenTemplate implements Initia
             System.out.println("Auto populated @ Three month report");
 
             ArrayList<Report> tablePopulator = new ArrayList<Report>();
-            tablePopulator.add(new Report("August", "1BR-1B", "20"));
-            tablePopulator.add(new Report("", "2BR-1B", "10"));
-            tablePopulator.add(new Report("", "2BR-2B", "5"));
+            ArrayList<ArrayList<String[]>> out = ThreeMonthReportSQLObject.getThreeMonthReport();
 
-            tablePopulator.add(new Report("September", "1BR-1B", "20"));
-            tablePopulator.add(new Report("", "2BR-1B", "10"));
-            tablePopulator.add(new Report("", "2BR-2B", "5"));
+            for (int month = 0; month < 3; month++)
+            {
+                String strMonth = "";
+                switch (month)
+                {
+                    case 0: strMonth = "August";
+                        break;
+                    case 1: strMonth = "September";
+                        break;
+                    case 2: strMonth = "October";
+                        break;
+                    default: strMonth = "Invalid Month";
+                        break;
+                }
+                for (int category = 0; category < out.get(month).size(); category++)
+                {
+                    if (category == 0)
+                        tablePopulator.add(new Report(strMonth, ((out.get(month)).get(category))[0], ((out.get(month)).get(category))[1]));
+                    else
+                        tablePopulator.add(new Report("", ((out.get(month)).get(category))[0], ((out.get(month)).get(category))[1]));
+                }
+            }
 
-            tablePopulator.add(new Report("October", "1BR-1B", "20"));
-            tablePopulator.add(new Report("", "2BR-1B", "10"));
-            tablePopulator.add(new Report("", "2BR-2B", "5"));
+//            tablePopulator.add(new Report("August", "1BR-1B", "20"));
+//            tablePopulator.add(new Report("", "2BR-1B", "10"));
+//            tablePopulator.add(new Report("", "2BR-2B", "5"));
+//
+//            tablePopulator.add(new Report("September", "1BR-1B", "20"));
+//            tablePopulator.add(new Report("", "2BR-1B", "10"));
+//            tablePopulator.add(new Report("", "2BR-2B", "5"));
+//
+//            tablePopulator.add(new Report("October", "1BR-1B", "20"));
+//            tablePopulator.add(new Report("", "2BR-1B", "10"));
+//            tablePopulator.add(new Report("", "2BR-2B", "5"));
 
             ObservableList<Report> obList = FXCollections.observableArrayList(tablePopulator);
             tablefield.setItems(obList);
