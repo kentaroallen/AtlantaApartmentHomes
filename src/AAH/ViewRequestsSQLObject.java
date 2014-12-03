@@ -51,7 +51,7 @@ public class ViewRequestsSQLObject {
             String[] temp;
             while (rs.next()) {
 
-                temp = new String[] {rs.getString("Apt_Number"), rs.getString("Date_Request"), rs.getString("Issue_Type")};
+                temp = new String[] {rs.getString("Apt_Number"), rs.getString("Date_Request"), rs.getString("Issue_Type"), rs.getString("Date_Resolved")};
                 out.add(temp);
             }
         }

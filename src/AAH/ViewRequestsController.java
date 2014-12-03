@@ -150,12 +150,13 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
             /*Reload the tables with data again.*/
             for (String[] s : ViewRequestsSQLObject.getUnresolvedRequests()) {
 
+                System.out.println("GOT HERE BITCH");
                 tablePopulatoravail.add(new Maintenance(s[1], s[0], s[2], ""));
             }
             availtable.setItems(obListavail);
             for (String[] s : ViewRequestsSQLObject.getResolvedRequests()) {
 
-                tablePopulatorres.add(new Maintenance(s[1], s[0], s[2], ""));
+                tablePopulatorres.add(new Maintenance(s[1], s[0], s[2], s[3]));
             }
             resolvedtable.setItems(obListres);
 
