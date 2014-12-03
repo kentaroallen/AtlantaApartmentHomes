@@ -60,6 +60,8 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
     @FXML
     private Label currentdate;
 
+    private boolean autoPopulateOnce = true;
+
     ArrayList<Maintenance> tablePopulatoravail = new ArrayList<Maintenance>();
     ArrayList<Maintenance> tablePopulatorres = new ArrayList<Maintenance>();
     Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
@@ -134,6 +136,36 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
 
     }
 
+    public void autoPopulateView() {
+        if (autoPopulateOnce) {
+            System.out.println("Auto populated view maintenance requests");
+            ObservableList<Maintenance> obListavail = FXCollections.observableArrayList(tablePopulatoravail);
+            ObservableList<Maintenance> obListres = FXCollections.observableArrayList(tablePopulatorres);
+            /*Clear table's prior to reloading so that duplicates are eliminated.*/
+            tablePopulatoravail.clear();
+            tablePopulatorres.clear();
+            availtable.setItems(obListavail);
+            resolvedtable.setItems(obListres);
+            
+            /*Reload the tables with data again.*/
+            for (String[] s : ViewRequestsSQLObject.getUnresolvedRequests()) {
+
+                tablePopulatoravail.add(new Maintenance(s[1], s[0], s[2], ""));
+            }
+            availtable.setItems(obListavail);
+            for (String[] s : ViewRequestsSQLObject.getResolvedRequests()) {
+
+                tablePopulatorres.add(new Maintenance(s[1], s[0], s[2], ""));
+            }
+            resolvedtable.setItems(obListres);
+
+            autoPopulateOnce = false;
+        } else {
+            System.out.println("Prevented auto populate on view maintenance requests.");
+        }
+
+    }
+
     public void homeHandler(ActionEvent e) throws IOException {
 
         /////////////////////
@@ -142,9 +174,10 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
 
         if (CurrentUser.getUserType() == 1) {
             controller.setScreen(this.getHomepage());
-
+            autoPopulateOnce = true;
         } else {
             controller.setScreen(this.getHomepageM());
+            autoPopulateOnce = true;
 
         }
         System.out.println("Home button clicked.");
@@ -164,15 +197,7 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
         //tablePopulatoravail.add(new Maintenance("01/01/1900", "1321", "Just come now", ""));
         //tablePopulatoravail.add(new Maintenance("10/21/2000", "1511", "Broken Appliances", ""));
         //tablePopulatoravail.add(new Maintenance("05/30/2014", "1634", "Leak", ""));
-        for (String[] s : ViewRequestsSQLObject.getUnresolvedRequests()) {
-
-            tablePopulatoravail.add(new Maintenance(s[1], s[0], s[2], ""));
-        }
-
-        ObservableList<Maintenance> obListavail = FXCollections.observableArrayList(tablePopulatoravail);
-        availtable.setItems(obListavail);
         /*End of populating the table.*/
-
         datereqrescol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("date"));
         aptnorescol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("apartment"));
         issuerescol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("issue"));
@@ -182,15 +207,8 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
         /*Date, Apartment Num, Issue*/
         //tablePopulatorres.add(new Maintenance("01/01/1900", "1321", "Just come now", "01/02/1900"));
         //tablePopulatorres.add(new Maintenance("10/21/2000", "1511", "Broken Appliances", "12/22/2000"));
-        for (String[] s : ViewRequestsSQLObject.getResolvedRequests()) {
 
-            tablePopulatorres.add(new Maintenance(s[1], s[0], s[2], ""));
-        }
-
-        ObservableList<Maintenance> obListres = FXCollections.observableArrayList(tablePopulatorres);
-        resolvedtable.setItems(obListres);
         /*End of populating the table.*/
-
         currentdate.setText(date);
         this.setTitleLabel(this.getLogin());
     }
