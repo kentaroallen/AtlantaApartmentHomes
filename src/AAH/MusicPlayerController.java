@@ -18,6 +18,17 @@ public class MusicPlayerController {
     private static MusicPlayerController mpc = null;
 
     protected MusicPlayerController() {
+        playMusic();
+    }
+
+    public static MusicPlayerController getInstance() {
+        if (mpc == null) {
+            mpc = new MusicPlayerController();
+        }
+        return mpc;
+    }
+
+    public static void playMusic() {
         Thread t = new Thread(new Runnable() {
             public void run() {
                 URL resource = getClass().getResource("elevatormusic.mp3");
@@ -27,13 +38,5 @@ public class MusicPlayerController {
             }
         });
         t.start();
-
-    }
-
-    public static MusicPlayerController getInstance() {
-        if (mpc == null) {
-            mpc = new MusicPlayerController();
-        }
-        return mpc;
     }
 }
