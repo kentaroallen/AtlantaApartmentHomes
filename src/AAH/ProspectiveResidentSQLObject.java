@@ -29,7 +29,9 @@ public class ProspectiveResidentSQLObject {
     public static ArrayList<String> getAvailableApartmentCategories() {
 
         ArrayList<String> out = new ArrayList<String>();
-        String categoryStatement = "SELECT DISTINCT A.Category FROM APARTMENT A WHERE A.Available_On >= CURDATE()";
+        String categoryStatement = "SELECT DISTINCT A.Category FROM APARTMENT A\n" +
+                "WHERE A.Apt_Number NOT IN\n" +
+                "(SELECT Apt.Apt_Number FROM APARTMENT Apt NATURAL JOIN RESIDENT);";
 
         try {
             ResultSet rs = SQLConnector.runQuery(categoryStatement);
@@ -53,7 +55,9 @@ public class ProspectiveResidentSQLObject {
     public static ArrayList<String> getAvailableApartmentLeaseTerms() throws Exception {
 
         ArrayList<String> out = new ArrayList<String>();
-        String categoryStatement = "SELECT DISTINCT A.Lease_Term FROM APARTMENT A WHERE A.Available_On >= CURDATE() ORDER BY A.Lease_Term ASC";
+        String categoryStatement = "SELECT DISTINCT A.Lease_Term FROM APARTMENT A\n" +
+                "WHERE A.Apt_Number NOT IN\n" +
+                "(SELECT Apt.Apt_Number FROM APARTMENT Apt NATURAL JOIN RESIDENT) ORDER BY A.Lease_Term ASC;";
 
         try {
             ResultSet rs = SQLConnector.runQuery(categoryStatement);
