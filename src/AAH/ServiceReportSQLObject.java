@@ -20,7 +20,7 @@ public class ServiceReportSQLObject {
         out.add(new ArrayList<String[]>()); //adding month 2
         out.add(new ArrayList<String[]>()); //adding month 3
 
-        String serviceRequestReportStatement = "SELECT MONTH( MR.Date_Request ) , MR.Issue_Type, AVG( DATEDIFF( MR.Date_Resolved, MR.Date_Request ) ) \n" +
+        String serviceRequestReportStatement = "SELECT MONTH( MR.Date_Request ) , MR.Issue_Type, AVG( DATEDIFF( MR.Date_Resolved, MR.Date_Request ) + 1 ) \n" +
                 "FROM MAINTENANCE_REQUEST AS MR\n" +
                 "WHERE (\n" +
                 "MONTH( MR.Date_Request ) =8\n" +
