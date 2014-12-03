@@ -13,6 +13,7 @@ public class PayRentSQLObject {
 
     public static void main(String[] args) {
 
+        proratedRent(new Date(2014-1900, 12-1, 17), 400);
     }
 
 
@@ -56,7 +57,6 @@ public class PayRentSQLObject {
                     return lateRent(pay_month, pay_year, paymentDate, baseRent);
                 }
 
-                System.out.println(baseRent);
                 return baseRent;
             }
         }
@@ -76,21 +76,49 @@ public class PayRentSQLObject {
 
     public static int lateRent(int month, int year, Date payDate, int amt) {
 
-        int daysLate = daysBetween(new Date(year, month, 3), payDate);
-        return (amt + 50*daysLate);
+        java.sql.Date dueDate = new java.sql.Date(year-1900, month-1, 3);
+        java.sql.Date payDateSQL = new java.sql.Date(payDate.getTime());
+
+        String lateRentStatement = "SELECT (DATEDIFF('"+payDateSQL+"', '"+dueDate+"' ) + 1)*50 + '"+amt+"';";
+
+        System.out.println(lateRentStatement);
+        try {
+
+            ResultSet rs = SQLConnector.runQuery(lateRentStatement);
+            rs.next();
+            return rs.getInt(1);
+        }
+
+        catch (Exception e) {
+
+            System.out.println(lateRentStatement);
+            int daysLate = daysBetween(new Date(year, month, 3), payDate);
+            return (amt + 50 * daysLate);
+        }
     }
 
     public static int proratedRent(Date payDate, int amt) {
 
 
-        System.out.println(lastDayOfMonth(payDate).toString());
+
         double totalDaysInMonth = lastDayOfMonth(payDate).getDate();
-        System.out.println(totalDaysInMonth);
-        System.out.println(daysBetween(payDate, lastDayOfMonth(payDate)));
 
+        java.sql.Date payDateSQL = new java.sql.Date(payDate.getTime());
 
-        return (int) ((amt/totalDaysInMonth)*(1 + daysBetween(payDate, lastDayOfMonth(payDate))));
+        String prorateStatement = "SELECT (DATEDIFF(LAST_DAY('"+payDateSQL+"'), '"+payDateSQL+"' ) + 1)*('"+amt+"'/DAY(LAST_DAY('"+payDateSQL+"')));";
+        System.out.println(prorateStatement);
 
+        try {
+
+            ResultSet rs = SQLConnector.runQuery(prorateStatement);
+            rs.next();
+            return rs.getInt(1);
+        }
+
+        catch (Exception e) {
+
+            return (int) ((amt/totalDaysInMonth)*(1 + daysBetween(payDate, lastDayOfMonth(payDate))));
+        }
     }
 
     public static void payRent(String user, String credit_card, int apt_num, int month, int year, Date payDate, int amt) {

@@ -87,7 +87,7 @@ public class ApartmentAllotmentSQLObject {
         ArrayList<String[]> out = new ArrayList<String[]>();
 
         /*Name, DOB, Gender, Income, Apt Type, Pref Date, Lease Term, Approval*/
-        String matchingApartmentsStatement = "SELECT * FROM APARTMENT A, PROSPECTIVE_RESIDENT PR WHERE PR.Username = '"+user+"' AND PR.Category = A.Category AND PR.Monthly_Income > 3*A.Rent AND PR.Preferred_Move_In_Date > A.Available_On AND A.Rent > PR.Min_Rent AND A.Rent < PR.Max_Rent AND A.Lease_Term >= PR.Preferred_Lease_Term;";
+        String matchingApartmentsStatement = "SELECT * FROM APARTMENT A, PROSPECTIVE_RESIDENT PR WHERE PR.Username = '"+user+"' AND PR.Category = A.Category AND PR.Monthly_Income > 3*A.Rent AND PR.Preferred_Move_In_Date >= A.Available_On AND A.Rent >= PR.Min_Rent AND A.Rent <= PR.Max_Rent AND A.Lease_Term >= PR.Preferred_Lease_Term;";
         System.out.println(matchingApartmentsStatement);
         ResultSet rs = null;
 

@@ -91,7 +91,7 @@ public class PaymentInformationSQLObject {
         }
         catch (Exception e) {
 
-
+            e.printStackTrace();
             ErrorCode.setCode(45);
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
@@ -119,6 +119,7 @@ public class PaymentInformationSQLObject {
         }
         catch (Exception e) {
 
+            e.printStackTrace();
             ErrorCode.setCode(45);
             ErrorCode.errorPopUp();
             System.out.println(ErrorCode.errorMessage());
