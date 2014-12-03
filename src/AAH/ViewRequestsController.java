@@ -146,7 +146,7 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
             tablePopulatorres.clear();
             availtable.setItems(obListavail);
             resolvedtable.setItems(obListres);
-            
+
             /*Reload the tables with data again.*/
             for (String[] s : ViewRequestsSQLObject.getUnresolvedRequests()) {
 
@@ -203,6 +203,20 @@ public class ViewRequestsController extends ScreenTemplate implements Initializa
         issuerescol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("issue"));
         daterescol.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("resolvedDate"));
 
+        for (String[] s : ViewRequestsSQLObject.getUnresolvedRequests()) {
+
+            tablePopulatoravail.add(new Maintenance(s[1], s[0], s[2], ""));
+        }
+        ObservableList<Maintenance> obListavail = FXCollections.observableArrayList(tablePopulatoravail);
+
+        availtable.setItems(obListavail);
+
+        for (String[] s : ViewRequestsSQLObject.getResolvedRequests()) {
+
+            tablePopulatorres.add(new Maintenance(s[1], s[0], s[2], ""));
+        }
+        ObservableList<Maintenance> obListres = FXCollections.observableArrayList(tablePopulatorres);
+        resolvedtable.setItems(obListres);
         /*This populates the table.*/
         /*Date, Apartment Num, Issue*/
         //tablePopulatorres.add(new Maintenance("01/01/1900", "1321", "Just come now", "01/02/1900"));
