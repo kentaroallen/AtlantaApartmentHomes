@@ -38,6 +38,7 @@ public class AtlantaApartmentHomes extends Application {
 
         root.getChildren().add(main);
         Scene scene = new Scene(root);
+        stage.setTitle("Atlanta Apartment Homes");
         stage.setScene(scene);
         stage.show();
         /*Singleton init*/
